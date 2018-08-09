@@ -1,4 +1,4 @@
-{% extends ('@Capsule/index.html.twig') %}
+{% extends ('@AplabAdmin/index.html.twig') %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/static/cms/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('/static/cms/build.css') }}">
@@ -6,7 +6,7 @@
 {% block javascripts %}
     <script src="{{ asset('static/cms/build.js') }}"></script>
 {% endblock %}
-{% block body_classes %}{{ CapsuleCmsUiDataTransmitter.getBodyClasses() }}{% endblock %}
+{% block body_classes %}{{ UiDataTransmitter.getBodyClasses() }}{% endblock %}
 {% block body %}
     <div id="capsule-cms-sidebar">
         {% block sidebar %}

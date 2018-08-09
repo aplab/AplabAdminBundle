@@ -9,7 +9,7 @@
 namespace Aplab\AplabAdminBundle\Util;
 
 
-class CapsuleCmsUiDataTransmitter
+class UiDataTransmitter
 {
     const COOKIE_KEY = 'capsule-cms-data';
 
@@ -50,7 +50,7 @@ class CapsuleCmsUiDataTransmitter
 
     /**
      * @param mixed $sidebarPin
-     * @return CapsuleCmsUiDataTransmitter
+     * @return UiDataTransmitter
      */
     public function setSidebarPin($sidebarPin)
     {
@@ -68,7 +68,7 @@ class CapsuleCmsUiDataTransmitter
 
     /**
      * @param mixed $sidebarOpen
-     * @return CapsuleCmsUiDataTransmitter
+     * @return UiDataTransmitter
      */
     public function setSidebarOpen($sidebarOpen)
     {
