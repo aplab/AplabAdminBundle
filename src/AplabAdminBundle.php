@@ -9,6 +9,8 @@
 namespace Aplab\AplabAdminBundle;
 
 
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
 class AplabAdminBundle extends Bundle
 {
 
