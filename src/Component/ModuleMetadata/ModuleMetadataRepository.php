@@ -6,7 +6,7 @@
  * Time: 17:18
  */
 
-namespace Capsule\Component\ModuleMetadata;
+namespace Aplab\AplabAdminBundle\Component\ModuleMetadata;
 
 
 use Doctrine\Common\Annotations\Reader;

@@ -6,7 +6,7 @@
  * Time: 10:46
  */
 
-namespace Capsule\Component\DataTableView;
+namespace Aplab\AplabAdminBundle\Component\DataTableView;
 
 
 class DataTableCell

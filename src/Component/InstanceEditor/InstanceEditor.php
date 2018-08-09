@@ -6,7 +6,7 @@
  * Time: 10:57
  */
 
-namespace Capsule\Component\InstanceEditor;
+namespace Aplab\AplabAdminBundle\Component\InstanceEditor;
 
 
 class InstanceEditor

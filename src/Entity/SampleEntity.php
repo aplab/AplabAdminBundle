@@ -6,7 +6,7 @@
  * Time: 16:01
  */
 
-namespace Capsule\Entity;
+namespace Aplab\AplabAdminBundle\Entity;
 
 use Capsule\Component\ModuleMetadata as Capsule;
 use Doctrine\ORM\Mapping as ORM;

@@ -6,7 +6,7 @@
  * Time: 12:09
  */
 
-namespace Capsule\Util;
+namespace Aplab\AplabAdminBundle\Util;
 
 
 class Path

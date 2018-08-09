@@ -6,7 +6,7 @@
  * Time: 10:58
  */
 
-namespace Capsule\Component\InstanceEditor\FieldType;
+namespace Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType;
 
 
 interface FieldTypeInterface

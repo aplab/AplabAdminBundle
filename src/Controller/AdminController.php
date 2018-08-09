@@ -6,7 +6,7 @@
  * Time: 10:31
  */
 
-namespace Capsule\Controller;
+namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Capsule\Util\CapsuleCmsUiDataTransmitter;

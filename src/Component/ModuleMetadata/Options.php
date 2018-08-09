@@ -6,7 +6,7 @@
  * Time: 0:07
  */
 
-namespace Capsule\Component\ModuleMetadata;
+namespace Aplab\AplabAdminBundle\Component\ModuleMetadata;
 
 
 use Doctrine\ORM\Mapping\Annotation;

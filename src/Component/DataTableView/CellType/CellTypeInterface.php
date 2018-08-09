@@ -6,7 +6,7 @@
  * Time: 10:48
  */
 
-namespace Capsule\Component\DataTableView\CellType;
+namespace Aplab\AplabAdminBundle\Component\DataTableView\CellType;
 
 
 interface CellTypeInterface

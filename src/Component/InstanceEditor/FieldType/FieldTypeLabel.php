@@ -6,7 +6,7 @@
  * Time: 10:59
  */
 
-namespace Capsule\Component\InstanceEditor\FieldType;
+namespace Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType;
 
 
 class FieldTypeLabel extends FieldTypeAbstract

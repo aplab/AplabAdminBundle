@@ -6,7 +6,7 @@
  * Time: 10:52
  */
 
-namespace Capsule\Component\DataTableView\CellType;
+namespace Aplab\AplabAdminBundle\Component\DataTableView\CellType;
 
 
 class CellTypeText extends CellTypeAbstract

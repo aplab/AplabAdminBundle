@@ -6,7 +6,7 @@
  * Time: 10:49
  */
 
-namespace Capsule\Component\DataTableView\CellType;
+namespace Aplab\AplabAdminBundle\Component\DataTableView\CellType;
 
 
 abstract class CellTypeAbstract implements CellTypeInterface

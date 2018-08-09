@@ -6,7 +6,7 @@
  * Time: 14:12
  */
 
-namespace Capsule\Component\ModuleMetadata;
+namespace Aplab\AplabAdminBundle\Component\ModuleMetadata;
 
 use Doctrine\Common\Annotations\Annotation\Attribute;
 use Doctrine\Common\Annotations\Annotation\Attributes;
