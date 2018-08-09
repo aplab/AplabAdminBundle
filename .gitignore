@@ -16,6 +16,6 @@
 ###< symfony/web-server-bundle ###
 /.idea/
 
-/src/Resources/public/admin/node_modules/
-/src/Resources/public/website/node_modules/
+/src/Resources/static/admin/node_modules/
+/src/Resources/static/website/node_modules/
 
