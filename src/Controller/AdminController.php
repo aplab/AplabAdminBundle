@@ -26,6 +26,6 @@ class AdminController extends Controller
      */
     public function desktop()
     {
-        return $this->render('@Capsule/admin.html.twig', get_defined_vars());
+        return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }
