@@ -22,5 +22,11 @@
         "psr-4": {
             "Aplab\\AplabAdminBundle\\": "src/"
         }
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        }
     }
 }
