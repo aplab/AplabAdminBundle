@@ -1,0 +1,15 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: polyanin
+ * Date: 02.08.2018
+ * Time: 10:58
+ */
+
+namespace Capsule\Component\InstanceEditor\FieldType;
+
+
+interface FieldTypeInterface
+{
+
+}
