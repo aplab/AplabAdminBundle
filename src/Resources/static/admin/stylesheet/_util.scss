@@ -1,0 +1,15 @@
+@for $i from 0 through 600 {
+    .w#{$i} {
+        width: 1px * $i;
+    }
+    .wm#{$i} {
+        min-width: 1px * $i;
+    }
+    .wx#{$i} {
+        max-width: 1px * $i;
+    }
+}
+
+.sf-dump {
+    z-index: 0 !important;
+}

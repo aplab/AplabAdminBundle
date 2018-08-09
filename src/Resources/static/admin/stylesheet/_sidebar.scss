@@ -1,0 +1,106 @@
+#capsule-cms-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    right: auto;
+    background: $sidebar-background-color none repeat scroll 0 0;
+    -webkit-transition: width 0.15s ease 0s;
+    -o-transition: width 0.15s ease 0s;
+    transition: width 0.15s ease 0s;
+    overflow: hidden;
+    z-index: 300;
+    color: #fff;
+    padding-top: $navbar-height;
+}
+
+.capsule-cms-sidebar-open {
+    #capsule-cms-sidebar {
+        max-width: $sidebar-max-width;
+        width: 100%;
+    }
+    @media (min-width: $sidebar-max-width) {
+        #capsule-cms-sidebar {
+            max-width: $sidebar-max-width;
+            width: $sidebar-max-width;
+        }
+    }
+}
+
+#capsule-cms-sidebar-buttons {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: auto;
+    width: auto;
+    height: 50px;
+    //background: #ccc;
+}
+
+#capsule-cms-sidebar-button-close {
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    line-height: 49px;
+    text-align: center;
+    display: block;
+    outline-style: none;
+    cursor: pointer;
+}
+
+#capsule-cms-sidebar-button-toggle-pin {
+    right: 0;
+    top: 0;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    line-height: 49px;
+    text-align: center;
+    display: block;
+    outline-style: none;
+    cursor: pointer;
+    transition: transform 0.15s ease 0s;
+}
+
+
+.capsule-cms-sidebar-pin {
+    #capsule-cms-sidebar-button-toggle-pin {
+        transform: rotate(90deg);
+    }
+}
+.capsule-cms-sidebar-pin.capsule-cms-sidebar-open {
+    #capsule-cms-content {
+        left: $sidebar-max-width;
+    }
+}
+
+.capsule-cms-sidebar-open {
+    #capsule-cms-open-sidebar {
+        display: none;
+    }
+}
+
+@media (max-width: $allow-sidebar-pin-width) {
+    #capsule-cms-sidebar-button-toggle-pin {
+        display: none;
+    }
+    .capsule-cms-sidebar-pin.capsule-cms-sidebar-open {
+        #capsule-cms-content {
+            left: 0;
+        }
+    }
+}
