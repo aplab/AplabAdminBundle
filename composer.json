@@ -1,0 +1,26 @@
+{
+    "name": "aplab/aplab-admin-bundle",
+    "description": "Admin panel symfony-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "polyanin",
+            "email": "polyanin@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2.0",
+        "symfony/flex": "^1.0",
+        "symfony/framework-bundle": "^4.1",
+        "sensio/framework-extra-bundle": "^5.2",
+        "symfony/yaml": "^4.1",
+        "symfony/asset": "^4.1",
+        "symfony/twig-bundle": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aplab\\AplabAdminBundle\\": "src/"
+        }
+    }
+}
