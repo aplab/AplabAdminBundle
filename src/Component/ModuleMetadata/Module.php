@@ -14,7 +14,7 @@ use Doctrine\Common\Annotations\Annotation\Target;
 
 /**
  * Class Module
- * @package Capsule\Annotation\Module
+ * @package Aplab\AplabAdminBundle\Annotation\Module
  * @Annotation
  * @Target({"CLASS"})
  * @Attributes({

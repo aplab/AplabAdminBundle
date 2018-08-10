@@ -16,14 +16,14 @@ use Doctrine\ORM\Mapping\Annotation;
 
 /**
  * Class Cell
- * @package Capsule\Annotation\Module
+ * @package Aplab\AplabAdminBundle\Annotation\Module
  * @Annotation
  * @Target({"ANNOTATION"})
  * @Attributes({
  *      @Attribute("width", type="integer", required=true),
  *      @Attribute("order", type="integer", required=true),
  *      @Attribute("type", type="string", required=true),
- *      @Attribute("options", type="Capsule\Component\ModuleMetadata\Options", required=false),
+ *      @Attribute("options", type="Aplab\AplabAdminBundle\Component\ModuleMetadata\Options", required=false),
  *     })
  */
 class Cell implements Annotation

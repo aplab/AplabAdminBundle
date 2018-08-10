@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\Annotation;
 
 /**
  * Class Options
- * @package Capsule\Component\ModuleMetadata
+ * @package Aplab\AplabAdminBundle\Component\ModuleMetadata
  * @Annotation
  * @Target({"ANNOTATION"})
  */

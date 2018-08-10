@@ -9,14 +9,14 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
-use Capsule\Util\CapsuleCmsUiDataTransmitter;
+use Aplab\AplabAdminBundle\Util\Aplab\AplabAdminBundleCmsUiDataTransmitter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class AdminController
- * @package Capsule\Controller
+ * @package Aplab\AplabAdminBundle\Controller
  * @Route("/admin", name="admin_")
  */
 class AdminController extends Controller

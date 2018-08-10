@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping\Annotation;
 
 /**
  * Class Property
- * @package Capsule\Annotation\Module
+ * @package Aplab\AplabAdminBundle\Annotation\Module
  * @Annotation
  * @Target({"PROPERTY"})
  * @Attributes({
@@ -25,8 +25,8 @@ use Doctrine\ORM\Mapping\Annotation;
  *   @Attribute("help", type = "string", required=false),
  *   @Attribute("comment", type = "string", required=false),
  *   @Attribute("label", type = "string", required=false),
- *   @Attribute("cell", type = "array<Capsule\Component\ModuleMetadata\Cell>", required=true),
- *   @Attribute("widget", type = "array<Capsule\Component\ModuleMetadata\Widget>", required=true),
+ *   @Attribute("cell", type = "array<Aplab\AplabAdminBundle\Component\ModuleMetadata\Cell>", required=true),
+ *   @Attribute("widget", type = "array<Aplab\AplabAdminBundle\Component\ModuleMetadata\Widget>", required=true),
  * })
  */
 class Property implements Annotation
