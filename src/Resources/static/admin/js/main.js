@@ -114,7 +114,7 @@ $(document).ready(function () {
     };
 
     /**
-     * Call initialization
+     * Call initialization.
      */
-    CapsuleCms.init();
+    CapsuleCms.init(/** test */);
 });
