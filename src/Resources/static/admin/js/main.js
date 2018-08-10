@@ -116,5 +116,5 @@ $(document).ready(function () {
     /**
      * Call initialization.
      */
-    CapsuleCms.init(/** test 2 */);
+    CapsuleCms.init(/** test 6 */);
 });
