@@ -17,9 +17,10 @@ services:
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    Aplab\AplabAdminBundle\:
-        resource: '../../*'
-        exclude: '../../{Entity,Migrations,Tests,Kernel.php,Component}'
+    Aplab\AplabAdminBundle\Util\:
+        resource: '../../Util'
+#        exclude: '../../{Entity,Migrations,Tests,Kernel.php,Component}'
+#        exclude: '../../{Entity,Migrations,Tests,Kernel.php,Component}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -32,3 +33,4 @@ services:
 
 #    CapsuleCmsUiDataTransmitter:
 #        class: Capsule\Util\CapsuleCmsUiDataTransmitter
+#

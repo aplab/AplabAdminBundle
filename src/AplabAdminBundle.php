@@ -9,6 +9,7 @@
 namespace Aplab\AplabAdminBundle;
 
 
+use Aplab\AplabAdminBundle\DependencyInjection\AplabAdminBundleExtension;
 use Aplab\AplabAdminBundle\Util\UiDataTransmitter;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -21,5 +22,16 @@ class AplabAdminBundle extends Bundle
             'UiDataTransmitter', new UiDataTransmitter
         );
     }
+//
+//    /**
+//     * Overridden to allow for the custom extension alias.
+//     */
+//    public function getContainerExtension()
+//    {
+//        if (null === $this->extension) {
+//            $this->extension = new AplabAdminBundleExtension;
+//        }
+//        return $this->extension;
+//    }
 
 }

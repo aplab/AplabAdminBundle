@@ -9,9 +9,8 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
-use Aplab\AplabAdminBundle\Util\Aplab\AplabAdminBundleCmsUiDataTransmitter;
+use Aplab\AplabAdminBundle\Util\Path;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -24,7 +23,7 @@ class AdminController extends Controller
     /**
      * @Route("/", name="desktop")
      */
-    public function desktop()
+    public function desktop(Path $path)
     {
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
