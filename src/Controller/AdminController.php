@@ -9,6 +9,7 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
+use Aplab\AplabAdminBundle\Service\DummyService;
 use Aplab\AplabAdminBundle\Util\Path;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +24,7 @@ class AdminController extends Controller
     /**
      * @Route("/", name="desktop")
      */
-    public function desktop(Path $path)
+    public function desktop(Path $path, DummyService $service)
     {
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
