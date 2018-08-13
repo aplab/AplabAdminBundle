@@ -21,5 +21,8 @@
         "psr-4": {
             "Aplab\\AplabAdminBundle\\": "src/"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.1"
     }
 }
