@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('aplab_admin');
-
+        $rootNode->children()->variableNode('test')->end()->end();
         return $treeBuilder;
     }
 }

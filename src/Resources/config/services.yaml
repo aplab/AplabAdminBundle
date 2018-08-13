@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    mainmenu.structurelocation: './'
+
 
 services:
     # default configuration for services in *this* file
@@ -30,6 +32,9 @@ services:
     Aplab\AplabAdminBundle\Service\:
         resource: '../../Service'
 
+    Aplab\AplabAdminBundle\Service\MainMenu:
+        arguments: ['%mainmenu.structurelocation%']
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Aplab\AplabAdminBundle\Controller\:
@@ -42,3 +47,4 @@ services:
 #    CapsuleCmsUiDataTransmitter:
 #        class: Capsule\Util\CapsuleCmsUiDataTransmitter
 #
+

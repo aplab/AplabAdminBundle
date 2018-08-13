@@ -26,18 +26,20 @@ class AplabAdminExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-
+        dump($configs);
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');
-
         $configuration = $this->getConfiguration($configs, $container);
+        $config = $this->processConfiguration($configuration, $configs);
+        dd($config);
+
 
     }
 
-//    public function getAlias()
-//    {
-//        return 'aplab_admin_bundle';
-//    }
+    public function getAlias()
+    {
+        return 'aplab_admin';
+    }
 
 
 }
