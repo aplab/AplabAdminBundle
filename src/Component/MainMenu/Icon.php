@@ -11,6 +11,10 @@ namespace Aplab\AplabAdminBundle\Component\MainMenu;
 
 use http\Exception\RuntimeException;
 
+/**
+ * Class Icon
+ * @package Aplab\AplabAdminBundle\Component\MainMenu
+ */
 class Icon
 {
     /**
@@ -38,16 +42,34 @@ class Icon
     protected $order;
 
     /**
-     * Icon constructor.
-     * @param string $icon
-     * @param string $id
-     * @param int $order
-     * @param string $color
+     * @var static[]
      */
-    public function __construct($icon, $id, $order, $color)
+    private static $instances = [];
+
+    /**
+     * @param string $id
+     * @return Icon|null
+     */
+    public static function getInstance(string $id)
     {
-        $this->icon = $icon;
+        return static::$instances[$id] ?? null;
+    }
+
+    /**
+     * Icon constructor.
+     * @param string $id
+     * @param string $icon
+     * @param int $order
+     * @param null|string $color
+     * @throws Exception
+     */
+    public function __construct(string $id, string $icon, int $order, ?string $color)
+    {
+        if (array_key_exists($id, static::$instances)) {
+            throw new Exception('Icon id already exists: ' . $id);
+        }
         $this->id = $id;
+        $this->icon = $icon;
         $this->order = $order;
         $this->color = $color;
     }
@@ -61,10 +83,10 @@ class Icon
     }
 
     /**
-     * @param string $id
      * @return void
+     * @noinspection PhpUnusedParameterInspection
      */
-    public function setId(string $id)
+    public function setId()
     {
         throw new RuntimeException('Readonly property');
     }
