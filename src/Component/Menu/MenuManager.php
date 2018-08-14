@@ -6,16 +6,28 @@
  * Time: 16:08
  */
 
-namespace Aplab\AplabAdminBundle\Component\MainMenu;
+namespace Aplab\AplabAdminBundle\Component\Menu;
 
 
 
 use http\Exception\RuntimeException;
 use Psr\SimpleCache\CacheInterface;
 
-class MainMenuManager
+class MenuManager
 {
     const STRUCTURE_LOCATION_DEFAULT = './main_menu_structure_default.json';
+
+    const KEY_ICON = 'icon';
+
+    const KEY_ITEMS = 'items';
+
+    const KEY_ACTION = 'action';
+
+    const KEY_HANDLER = 'handler';
+
+    const KEY_URL = 'url';
+
+    const KEY_ROUTE = 'route';
 
     private $cacheKey;
 

@@ -6,15 +6,18 @@
  * Time: 14:52
  */
 
-namespace Aplab\AplabAdminBundle\Component\MainMenu;
+namespace Aplab\AplabAdminBundle\Component\Menu;
 
-
-class Url extends Action
+/**
+ * Class Route
+ * @package Aplab\AplabAdminBundle\Component\Menu
+ */
+class Route extends Action
 {
     /**
      * @var string
      */
-    private $url;
+    private $route;
 
     /**
      * @var array
@@ -27,16 +30,16 @@ class Url extends Action
     private $id;
 
     /**
-     * Url constructor.
+     * Route constructor.
      * @param string $id
-     * @param string $url
+     * @param string $route
      * @param array|null $parameters
      * @throws Exception
      */
-    public function __construct(string $id, string $url, ?array $parameters = null)
+    public function __construct(string $id, string $route, ?array $parameters = null)
     {
         $this->id = $id;
-        $this->url = $url;
+        $this->route = $route;
         $this->parameters = $parameters;
         static::registerInstance($this);
     }
@@ -52,18 +55,18 @@ class Url extends Action
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getRoute(): string
     {
-        return $this->url;
+        return $this->route;
     }
 
     /**
-     * @param string $url
-     * @return Url
+     * @param string $route
+     * @return Route
      */
-    public function setUrl(string $url): Url
+    public function setRoute(string $route): Route
     {
-        $this->url = $url;
+        $this->route = $route;
         return $this;
     }
 
@@ -77,9 +80,9 @@ class Url extends Action
 
     /**
      * @param array $parameters
-     * @return Url
+     * @return Route
      */
-    public function setParameters(array $parameters): Url
+    public function setParameters(array $parameters): Route
     {
         $this->parameters = $parameters;
         return $this;
@@ -108,7 +111,7 @@ class Url extends Action
 
     /**
      * @param string $id
-     * @return Url|null
+     * @return Route|null
      */
     public static function getInstance(string $id)
     {
@@ -119,7 +122,7 @@ class Url extends Action
      * @param self $instance
      * @throws Exception
      */
-    private static function registerInstance(Url $instance)
+    private static function registerInstance(Route $instance)
     {
         $id = $instance->getId();
         if (array_key_exists($id, static::$instances)) {

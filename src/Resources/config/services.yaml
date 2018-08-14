@@ -32,7 +32,7 @@ services:
     Aplab\AplabAdminBundle\Service\:
         resource: '../../Service'
 
-    Aplab\AplabAdminBundle\Component\MainMenu\MainMenuManager:
+    Aplab\AplabAdminBundle\Component\Menu\MenuManager:
         arguments:
             $structure_location: ~
 

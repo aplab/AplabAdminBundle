@@ -6,7 +6,7 @@
  * Time: 13:51
  */
 
-namespace Aplab\AplabAdminBundle\Component\MainMenu;
+namespace Aplab\AplabAdminBundle\Component\Menu;
 
 
 class MenuItem
