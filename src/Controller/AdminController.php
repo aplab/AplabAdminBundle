@@ -28,9 +28,9 @@ class AdminController extends Controller
      */
     public function desktop(MainMenuManager $main_menu)
     {
-        dump($main_menu);
+//        dump($main_menu);
 
-        dd($main_menu->getStructure());
+        dump($main_menu->getStructure());
 
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
