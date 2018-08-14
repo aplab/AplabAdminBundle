@@ -9,8 +9,7 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
-use Aplab\AplabAdminBundle\Service\MainMenu;
-use Aplab\AplabAdminBundle\Util\Path;
+use Aplab\AplabAdminBundle\Component\MainMenu\MainMenuManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,11 +22,16 @@ class AdminController extends Controller
 {
     /**
      * @Route("/", name="desktop")
+     * @param MainMenuManager $main_menu
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function desktop(Path $path, MainMenu $menu)
+    public function desktop(MainMenuManager $main_menu)
     {
-        $para = $this->container->getParameter('mainmenu.structurelocation');
-        dd($para);
+        dump($main_menu);
+
+        dd($main_menu->getStructure());
+
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }

@@ -9,6 +9,7 @@
 namespace Aplab\AplabAdminBundle\DependencyInjection;
 
 
+use Aplab\AplabAdminBundle\Component\MainMenu\MainMenuManager;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -24,7 +25,9 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('aplab_admin');
-        $rootNode->children()->variableNode('test')->end()->end();
+        $rootNode->children()->arrayNode('main_menu')->children()
+            ->scalarNode('structure_location')->defaultValue(MainMenuManager::STRUCTURE_LOCATION_DEFAULT)->end()
+            ->end();
         return $treeBuilder;
     }
 }
