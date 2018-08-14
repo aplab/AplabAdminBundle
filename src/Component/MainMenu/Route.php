@@ -36,7 +36,7 @@ class Route extends Action
      * @param array|null $parameters
      * @throws Exception
      */
-    public function __construct(string $id, string $route, int $order, ?array $parameters = null)
+    public function __construct(string $id, string $route, ?array $parameters = null)
     {
         $this->id = $id;
         $this->route = $route;
