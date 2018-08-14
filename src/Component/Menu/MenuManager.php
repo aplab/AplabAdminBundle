@@ -9,13 +9,16 @@
 namespace Aplab\AplabAdminBundle\Component\Menu;
 
 
-
 use http\Exception\RuntimeException;
 use Psr\SimpleCache\CacheInterface;
 
+/**
+ * Class MenuManager
+ * @package Aplab\AplabAdminBundle\Component\Menu
+ */
 class MenuManager
 {
-    const STRUCTURE_LOCATION_DEFAULT = './main_menu_structure_default.json';
+    const STRUCTURE_LOCATION_DEFAULT = __DIR__ . '/menu_structure_default.json';
 
     const KEY_ICON = 'icon';
 
@@ -40,7 +43,7 @@ class MenuManager
     public function __construct(?string $structure_location, CacheInterface $cache)
     {
         $this->cache = $cache;
-        $this->structureLocation = $structure_location;
+        $this->structureLocation = $structure_location ?? static::STRUCTURE_LOCATION_DEFAULT;
         $this->cacheKey = join('.', [
             md5(__CLASS__),
             md5(static::STRUCTURE_LOCATION_DEFAULT),
@@ -74,6 +77,7 @@ class MenuManager
 
     /**
      * @return mixed
+     * @throws Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function getStructure()
@@ -94,11 +98,21 @@ class MenuManager
     }
 
     /**
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws Exception
      */
     private function buildStructure()
     {
-        $this->structure = rand(1, 1000000);
-        $this->cache->set($this->cacheKey, $this->structure);
+        $json = file_get_contents($this->structureLocation);
+        $data = json_decode($json);
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \RuntimeException(json_last_error_msg(), json_last_error());
+        }
+        foreach ($data as $instance_name => $menu_data) {
+            $menu = new Menu($instance_name);
+            dump($menu);
+        }
+
+
+        dd($data);
     }
 }
