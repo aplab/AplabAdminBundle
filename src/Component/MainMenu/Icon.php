@@ -36,12 +36,6 @@ class Icon
     protected $color;
 
     /**
-     * The order of sorting in the case of stacked several icons.
-     * @var int
-     */
-    protected $order;
-
-    /**
      * @var static[]
      */
     private static $instances = [];
@@ -56,22 +50,39 @@ class Icon
     }
 
     /**
+     * @param self $instance
+     * @throws Exception
+     */
+    private static function registerInstance(Icon $instance)
+    {
+        $id = $instance->getId();
+        if (array_key_exists($id, static::$instances)) {
+            throw new Exception('Duplicate id: ' . $id);
+        }
+        static::$instances[$id] = $instance;
+    }
+
+    /**
      * Icon constructor.
      * @param string $id
      * @param string $icon
-     * @param int $order
      * @param null|string $color
      * @throws Exception
      */
-    public function __construct(string $id, string $icon, int $order, ?string $color)
+    public function __construct(string $id, string $icon, ?string $color)
     {
-        if (array_key_exists($id, static::$instances)) {
-            throw new Exception('Icon id already exists: ' . $id);
-        }
         $this->id = $id;
         $this->icon = $icon;
-        $this->order = $order;
         $this->color = $color;
+        static::registerInstance($this);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function __wakeup()
+    {
+        static::registerInstance($this);
     }
 
     /**
@@ -84,7 +95,6 @@ class Icon
 
     /**
      * @return void
-     * @noinspection PhpUnusedParameterInspection
      */
     public function setId()
     {
@@ -124,24 +134,6 @@ class Icon
     public function setColor(string $color): Icon
     {
         $this->color = $color;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return $this->order;
-    }
-
-    /**
-     * @param int $order
-     * @return Icon
-     */
-    public function setOrder(int $order): Icon
-    {
-        $this->order = $order;
         return $this;
     }
 }
