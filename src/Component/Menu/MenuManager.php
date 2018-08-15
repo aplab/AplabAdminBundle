@@ -20,6 +20,8 @@ class MenuManager
 {
     const STRUCTURE_LOCATION_DEFAULT = __DIR__ . '/menu_structure_default.json';
 
+    const ID_SEPARATOR = '.';
+
     const KEY_ICON = 'icon';
 
     const KEY_ITEMS = 'items';
@@ -31,6 +33,10 @@ class MenuManager
     const KEY_URL = 'url';
 
     const KEY_ROUTE = 'route';
+
+    const KEY_ID = 'id';
+
+    const KEY_PARAMETERS = 'parameters';
 
     private $cacheKey;
 
@@ -103,16 +109,46 @@ class MenuManager
     private function buildStructure()
     {
         $json = file_get_contents($this->structureLocation);
-        $data = json_decode($json);
+        $data = json_decode($json, true);
         if (JSON_ERROR_NONE !== json_last_error()) {
             throw new \RuntimeException(json_last_error_msg(), json_last_error());
         }
-        foreach ($data as $instance_name => $menu_data) {
-            $menu = new Menu($instance_name);
-            dump($menu);
+        foreach ($data as $id => $menu_data) {
+            $menu = new Menu($id);
+            $this->structure[$id] = $menu;
+            $this->processItem($menu, $menu_data);
         }
 
 
-        dd($data);
+        dd($this);
+    }
+
+    /**
+     * @param Menu|MenuItem $item
+     * @param array|null $item_data
+     * @throws Exception
+     */
+    private function processItem($item, ?array $item_data)
+    {
+        $container_id = $item->getId();
+        $children_data = $item_data[static::KEY_ITEMS] ?? [];
+        if (!is_array($children_data)) {
+            $children_data = [$children_data];
+        }
+        foreach ($children_data as $child_id => $child_data) {
+
+            $child_full_id = join(
+                static::ID_SEPARATOR,
+                [
+                    $container_id,
+                    $child_id
+                ]
+            );
+            $child = new MenuItem($child_full_id);
+            $item->addItem($child);
+            // Recursive call
+            $this->processItem($child, $child_data);
+        }
+
     }
 }

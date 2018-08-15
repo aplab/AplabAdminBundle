@@ -17,11 +17,6 @@ class Handler extends Action
     private $handler;
 
     /**
-     * @var array
-     */
-    private $parameters;
-
-    /**
      * @var string
      */
     private $id;
@@ -30,14 +25,12 @@ class Handler extends Action
      * Handler constructor.
      * @param string $id
      * @param string $handler
-     * @param array|null $parameters
      * @throws Exception
      */
-    public function __construct(string $id, string $handler, ?array $parameters = null)
+    public function __construct(string $id, string $handler)
     {
         $this->id = $id;
         $this->handler = $handler;
-        $this->parameters = $parameters;
         static::registerInstance($this);
     }
 

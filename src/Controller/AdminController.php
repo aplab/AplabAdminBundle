@@ -24,6 +24,7 @@ class AdminController extends Controller
      * @Route("/", name="desktop")
      * @param MenuManager $main_menu
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Aplab\AplabAdminBundle\Component\Menu\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function desktop(MenuManager $main_menu)

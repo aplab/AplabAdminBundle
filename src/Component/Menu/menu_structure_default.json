@@ -8,7 +8,19 @@
                 }
             },
             "item2": {
-                "icon": "fa fa-pencil"
+                "icon": "fa fa-pencil",
+                "items": [
+                    {
+                        "icon": "fa fa-pencil"
+                    },
+                    {
+                        "icon": "fa fa-pencil"
+                    },
+                    {
+                        "icon": "fa fa-pencil",
+                        "id": "some-id"
+                    }
+                ]
             }
         }
     }

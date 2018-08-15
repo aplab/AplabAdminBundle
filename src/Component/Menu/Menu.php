@@ -42,33 +42,33 @@ class Menu
     /**
      * @var string
      */
-    protected $instanceName;
+    protected $id;
 
     /**
      * @return string
      */
-    public function getInstanceName()
+    public function getId()
     {
-        return $this->instanceName;
+        return $this->id;
     }
 
     /**
      * @return string
      * @throws Exception
      */
-    public function setInstanceName()
+    public function setId()
     {
         throw new Exception('Readonly property');
     }
 
     /**
      * MainMenu constructor.
-     * @param string $instance_name
+     * @param string $id
      * @throws Exception
      */
-    public function __construct(string $instance_name)
+    public function __construct(string $id)
     {
-        $this->instanceName = $instance_name;
+        $this->id = $id;
         static::registerInstance($this);
     }
 
@@ -81,12 +81,12 @@ class Menu
     }
 
     /**
-     * @param string $instance_name
+     * @param string $id
      * @return Menu|null
      */
-    public static function getInstance(string $instance_name)
+    public static function getInstance(string $id)
     {
-        return static::$instances[$instance_name] ?? null;
+        return static::$instances[$id] ?? null;
     }
 
     /**
@@ -95,10 +95,10 @@ class Menu
      */
     private static function registerInstance(Menu $instance)
     {
-        $instanceName = $instance->getInstanceName();
-        if (array_key_exists($instanceName, static::$instances)) {
-            throw new Exception('Duplicate instanceName: ' . $instanceName);
+        $id = $instance->getId();
+        if (array_key_exists($id, static::$instances)) {
+            throw new Exception('Duplicate id: ' . $id);
         }
-        static::$instances[$instanceName] = $instance;
+        static::$instances[$id] = $instance;
     }
 }

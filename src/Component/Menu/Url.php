@@ -33,7 +33,7 @@ class Url extends Action
      * @param array|null $parameters
      * @throws Exception
      */
-    public function __construct(string $id, string $url, ?array $parameters = null)
+    public function __construct(string $id, string $url)
     {
         $this->id = $id;
         $this->url = $url;
@@ -64,24 +64,6 @@ class Url extends Action
     public function setUrl(string $url): Url
     {
         $this->url = $url;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParameters(): array
-    {
-        return $this->parameters;
-    }
-
-    /**
-     * @param array $parameters
-     * @return Url
-     */
-    public function setParameters(array $parameters): Url
-    {
-        $this->parameters = $parameters;
         return $this;
     }
 
