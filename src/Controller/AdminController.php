@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
+use Aplab\AplabAdminBundle\Tools\Tools;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,6 +31,9 @@ class AdminController extends Controller
     public function desktop(MenuManager $main_menu)
     {
 //        dump($main_menu);
+
+        $key = '';
+        dump(Tools::is_key($key));
 
         dump($main_menu->getStructure());
 
