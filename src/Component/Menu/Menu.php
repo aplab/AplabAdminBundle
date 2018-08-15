@@ -19,7 +19,7 @@ class Menu
     /**
      * @var MenuItem[]
      */
-    protected $items;
+    protected $items = [];
 
     /**
      * @return MenuItem[]

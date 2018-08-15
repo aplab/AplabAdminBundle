@@ -20,7 +20,7 @@ class MenuManager
 {
     const STRUCTURE_LOCATION_DEFAULT = __DIR__ . '/menu_structure_default.json';
 
-    const ID_SEPARATOR = '.';
+    const ID_SEPARATOR = '--';
 
     const KEY_ICON = 'icon';
 
@@ -136,12 +136,11 @@ class MenuManager
             $children_data = [$children_data];
         }
         foreach ($children_data as $child_id => $child_data) {
-
             $child_full_id = join(
                 static::ID_SEPARATOR,
                 [
                     $container_id,
-                    $child_id
+                    $child_data[static::KEY_ID] ?? $child_id
                 ]
             );
             $child = new MenuItem($child_full_id);

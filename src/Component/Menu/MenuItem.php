@@ -19,7 +19,7 @@ class MenuItem
     /**
      * @var static[]
      */
-    protected $items;
+    protected $items = [];
 
     /**
      * @return static[]
