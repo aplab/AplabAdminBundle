@@ -1,13 +1,24 @@
 {
     "MainMenu": {
-        "items": {
-            "item1": {
+        "items": [
+            {
                 "id": "some-id",
-                "icon": {
-
+                "icon": "fa fa-pencil, fas fa-ban text-danger text-small etc",
+                "disabled": true,
+                "target": "self",
+                "class": "additional-css-class",
+                "url": "admin",
+                "handler": "window.close()",
+                "route": "desktop",
+                "parameters": {
+                    "route_parameter1_name": "route_parameter_value",
+                    "route_parameter2_name": [
+                        "ololo",
+                        "trololo"
+                    ]
                 }
             },
-            "item2": {
+            {
                 "icon": "fa fa-pencil",
                 "items": [
                     {
@@ -22,6 +33,6 @@
                     }
                 ]
             }
-        }
+        ]
     }
 }
