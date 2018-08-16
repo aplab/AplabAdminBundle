@@ -25,31 +25,14 @@ class Route extends Action
     private $parameters;
 
     /**
-     * @var string
-     */
-    private $id;
-
-    /**
      * Route constructor.
-     * @param string $id
      * @param string $route
      * @param array|null $parameters
-     * @throws Exception
      */
-    public function __construct(string $id, string $route, ?array $parameters = null)
+    public function __construct(string $route, ?array $parameters = null)
     {
-        $this->id = $id;
         $this->route = $route;
         $this->parameters = $parameters;
-        static::registerInstance($this);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function __wakeup()
-    {
-        static::registerInstance($this);
     }
 
     /**
@@ -86,48 +69,5 @@ class Route extends Action
     {
         $this->parameters = $parameters;
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return void
-     */
-    public function setId()
-    {
-        throw new \RuntimeException('Readonly property');
-    }
-
-    /**
-     * @var static[]
-     */
-    private static $instances = [];
-
-    /**
-     * @param string $id
-     * @return Route|null
-     */
-    public static function getInstance(string $id)
-    {
-        return static::$instances[$id] ?? null;
-    }
-
-    /**
-     * @param self $instance
-     * @throws Exception
-     */
-    private static function registerInstance(Route $instance)
-    {
-        $id = $instance->getId();
-        if (array_key_exists($id, static::$instances)) {
-            throw new Exception('Duplicate id: ' . $id);
-        }
-        static::$instances[$id] = $instance;
     }
 }
