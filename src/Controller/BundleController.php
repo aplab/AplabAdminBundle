@@ -9,7 +9,7 @@ class BundleController extends AbstractController
 {
     /**
      * @return mixed
-     * @Route ("/admin/test")
+     * @Route ("/admin/test", name="test")
      */
     public function test()
     {

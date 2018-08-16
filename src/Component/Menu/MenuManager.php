@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Component\Menu;
 
 
 use Psr\SimpleCache\CacheInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class MenuManager
@@ -49,6 +50,8 @@ class MenuManager
 
     private $cache;
 
+    private $router;
+
     private $structureLocation;
 
     private $structure;
@@ -57,10 +60,12 @@ class MenuManager
      * MenuManager constructor.
      * @param null|string $structure_location
      * @param CacheInterface $cache
+     * @param UrlGeneratorInterface $router
      */
-    public function __construct(?string $structure_location, CacheInterface $cache)
+    public function __construct(?string $structure_location, CacheInterface $cache, UrlGeneratorInterface $router)
     {
         $this->cache = $cache;
+        $this->router = $router;
         $this->structureLocation = $structure_location ?? static::STRUCTURE_LOCATION_DEFAULT;
         $this->cacheKey = join('.', [
             md5(__CLASS__),
@@ -105,10 +110,11 @@ class MenuManager
                 $this->structure = $this->cache->get($this->cacheKey);
             } else {
                 $this->buildStructure();
+                $this->cache->set($this->cacheKey, $this->structure);
                 if ($this->cache->has($this->cacheKey)) {
                     $this->structure = $this->cache->get($this->cacheKey);
                 } else {
-                    throw new RuntimeException('Main menu cache error');
+                    throw new \RuntimeException('Main menu cache error');
                 }
             }
         }
@@ -130,9 +136,6 @@ class MenuManager
             $this->structure[$id] = $menu;
             $this->processItem($menu, $menu_data);
         }
-
-
-        dd($this);
     }
 
     /**
@@ -198,9 +201,15 @@ class MenuManager
             $action[static::KEY_HANDLER] = new Handler($item_data[static::KEY_HANDLER]);
         }
         if (isset($item_data[static::KEY_ROUTE])) {
-            $action[static::KEY_ROUTE] = new Route(
+            $route = new Route(
                 $item_data[static::KEY_ROUTE],
                 $item_data[static::KEY_PARAMETERS] ?? []
+            );
+            $action[static::KEY_URL] = new Url(
+                $this->router->generate(
+                    $route->getRoute(),
+                    $route->getParameters()
+                )
             );
         }
         if (empty($action)) {
