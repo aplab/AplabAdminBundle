@@ -7,29 +7,29 @@
                 "disabled": true,
                 "target": "self",
                 "class": "additional-css-class",
-                "url": "admin",
-                "handler": "window.close()",
-                "route": "desktop",
-                "parameters": {
-                    "route_parameter1_name": "route_parameter_value",
-                    "route_parameter2_name": [
-                        "ololo",
-                        "trololo"
-                    ]
-                }
+                "url": "admin"
             },
             {
                 "icon": "fa fa-pencil",
                 "items": [
                     {
-                        "icon": "fa fa-pencil"
+                        "icon": "fa fa-pencil",
+                        "handler": "window.close()"
                     },
                     {
                         "icon": "fa fa-pencil"
                     },
                     {
                         "icon": "fa fa-pencil",
-                        "id": "some-id"
+                        "id": "some-id-2",
+                        "route": "desktop",
+                        "parameters": {
+                            "route_parameter1_name": "route_parameter_value",
+                            "route_parameter2_name": [
+                                "ololo",
+                                "trololo"
+                            ]
+                        }
                     }
                 ]
             }

@@ -87,7 +87,7 @@ class MenuItem
     /**
      * @var Icon[]
      */
-    protected $icon;
+    protected $icon = [];
 
     /**
      * MenuItem constructor.
@@ -144,7 +144,7 @@ class MenuItem
      */
     public function setDisabled(bool $disabled): MenuItem
     {
-        $this->disabled = $disabled;
+        $this->disabled = (bool)$disabled;
         return $this;
     }
 
@@ -160,7 +160,7 @@ class MenuItem
      * @param string $class
      * @return MenuItem
      */
-    public function setClass(string $class): MenuItem
+    public function setClass(?string $class): MenuItem
     {
         $this->class = $class;
         return $this;
@@ -178,7 +178,7 @@ class MenuItem
      * @param string $target
      * @return MenuItem
      */
-    public function setTarget(string $target): MenuItem
+    public function setTarget(?string $target): MenuItem
     {
         $this->target = $target;
         return $this;
@@ -211,12 +211,21 @@ class MenuItem
     }
 
     /**
-     * @param Icon[] $icon
+     * @param Icon $icon
      * @return MenuItem
      */
-    public function setIcon(array $icon): MenuItem
+    public function addIcon(Icon $icon): MenuItem
     {
-        $this->icon = $icon;
+        $this->icon[] = $icon;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function clearIcon()
+    {
+        $this->icon = [];
         return $this;
     }
 }
