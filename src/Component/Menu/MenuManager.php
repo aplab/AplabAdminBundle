@@ -20,7 +20,7 @@ class MenuManager
 {
     const STRUCTURE_LOCATION_DEFAULT = __DIR__ . '/menu_structure_default.json';
 
-    const ID_SEPARATOR = '--';
+    const ID_SEPARATOR = '-';
 
     const KEY_ICON = 'icon';
 
@@ -46,6 +46,11 @@ class MenuManager
 
     private $structure;
 
+    /**
+     * MenuManager constructor.
+     * @param null|string $structure_location
+     * @param CacheInterface $cache
+     */
     public function __construct(?string $structure_location, CacheInterface $cache)
     {
         $this->cache = $cache;

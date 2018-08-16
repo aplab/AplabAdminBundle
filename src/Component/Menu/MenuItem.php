@@ -62,6 +62,34 @@ class MenuItem
     }
 
     /**
+     * @var bool
+     */
+    protected $disabled;
+
+    /**
+     * Additional CSS class
+     * @var string
+     */
+    protected $class;
+
+    /**
+     * The target attribute specifies where to open the linked document.
+     * Variants: _blank|_self|_parent|_top|framename
+     * @var string
+     */
+    protected $target;
+
+    /**
+     * @var Action
+     */
+    protected $action;
+
+    /**
+     * @var Icon[]
+     */
+    protected $icon;
+
+    /**
      * MenuItem constructor.
      * @param string $id
      * @throws Exception
@@ -100,5 +128,95 @@ class MenuItem
             throw new Exception('Duplicate id: ' . $id);
         }
         static::$instances[$id] = $instance;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDisabled(): bool
+    {
+        return $this->disabled;
+    }
+
+    /**
+     * @param bool $disabled
+     * @return MenuItem
+     */
+    public function setDisabled(bool $disabled): MenuItem
+    {
+        $this->disabled = $disabled;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass(): string
+    {
+        return $this->class;
+    }
+
+    /**
+     * @param string $class
+     * @return MenuItem
+     */
+    public function setClass(string $class): MenuItem
+    {
+        $this->class = $class;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTarget(): string
+    {
+        return $this->target;
+    }
+
+    /**
+     * @param string $target
+     * @return MenuItem
+     */
+    public function setTarget(string $target): MenuItem
+    {
+        $this->target = $target;
+        return $this;
+    }
+
+    /**
+     * @return Action
+     */
+    public function getAction(): Action
+    {
+        return $this->action;
+    }
+
+    /**
+     * @param Action $action
+     * @return MenuItem
+     */
+    public function setAction(Action $action): MenuItem
+    {
+        $this->action = $action;
+        return $this;
+    }
+
+    /**
+     * @return Icon[]
+     */
+    public function getIcon(): array
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param Icon[] $icon
+     * @return MenuItem
+     */
+    public function setIcon(array $icon): MenuItem
+    {
+        $this->icon = $icon;
+        return $this;
     }
 }
