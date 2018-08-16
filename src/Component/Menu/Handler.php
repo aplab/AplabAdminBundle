@@ -17,29 +17,12 @@ class Handler extends Action
     private $handler;
 
     /**
-     * @var string
-     */
-    private $id;
-
-    /**
      * Handler constructor.
-     * @param string $id
      * @param string $handler
-     * @throws Exception
      */
-    public function __construct(string $id, string $handler)
+    public function __construct(string $handler)
     {
-        $this->id = $id;
         $this->handler = $handler;
-        static::registerInstance($this);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function __wakeup()
-    {
-        static::registerInstance($this);
     }
 
     /**
@@ -58,66 +41,5 @@ class Handler extends Action
     {
         $this->handler = $handler;
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getParameters(): array
-    {
-        return $this->parameters;
-    }
-
-    /**
-     * @param array $parameters
-     * @return Handler
-     */
-    public function setParameters(array $parameters): Handler
-    {
-        $this->parameters = $parameters;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return void
-     */
-    public function setId()
-    {
-        throw new \RuntimeException('Readonly property');
-    }
-
-    /**
-     * @var static[]
-     */
-    private static $instances = [];
-
-    /**
-     * @param string $id
-     * @return Handler|null
-     */
-    public static function getInstance(string $id)
-    {
-        return static::$instances[$id] ?? null;
-    }
-
-    /**
-     * @param self $instance
-     * @throws Exception
-     */
-    private static function registerInstance(Handler $instance)
-    {
-        $id = $instance->getId();
-        if (array_key_exists($id, static::$instances)) {
-            throw new Exception('Duplicate id: ' . $id);
-        }
-        static::$instances[$id] = $instance;
     }
 }

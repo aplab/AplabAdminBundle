@@ -27,9 +27,9 @@ class Route extends Action
     /**
      * Route constructor.
      * @param string $route
-     * @param array|null $parameters
+     * @param array $parameters
      */
-    public function __construct(string $route, ?array $parameters = null)
+    public function __construct(string $route, array $parameters = [])
     {
         $this->route = $route;
         $this->parameters = $parameters;
