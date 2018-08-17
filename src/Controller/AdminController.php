@@ -32,10 +32,11 @@ class AdminController extends Controller
     {
 //        dump($main_menu);
 
-        $key = '';
-        dump(Tools::is_key($key));
+
 
         dump($main_menu->getStructure());
+
+
 
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }

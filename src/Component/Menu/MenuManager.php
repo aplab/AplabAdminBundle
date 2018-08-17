@@ -106,16 +106,10 @@ class MenuManager
     public function getStructure()
     {
         if (is_null($this->structure)) {
-            if ($this->cache->has($this->cacheKey)) {
-                $this->structure = $this->cache->get($this->cacheKey);
-            } else {
+            $this->structure = $this->cache->get($this->cacheKey);
+            if (is_null($this->structure)) {
                 $this->buildStructure();
                 $this->cache->set($this->cacheKey, $this->structure);
-                if ($this->cache->has($this->cacheKey)) {
-                    $this->structure = $this->cache->get($this->cacheKey);
-                } else {
-                    throw new \RuntimeException('Main menu cache error');
-                }
             }
         }
         return $this->structure;

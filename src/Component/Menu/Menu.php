@@ -53,12 +53,14 @@ class Menu
     }
 
     /**
+     * @param string $id
      * @return string
      * @throws Exception
      */
-    public function setId()
+    public function setId(string $id)
     {
-        throw new Exception('Readonly property');
+        $this->id = $id;
+        static::registerInstance($this);
     }
 
     /**
