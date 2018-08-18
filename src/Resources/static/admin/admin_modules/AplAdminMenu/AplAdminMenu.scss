@@ -1,3 +1,94 @@
 .apl-admin-menu {
-
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background: #30343e none repeat scroll 0 0;
+    overflow: hidden;
+    min-width: 100px;
+    >li {
+        border-bottom: 1px solid #252830;
+    }
+    >li:first-child {
+        border-top: 0;
+    }
+    li.open {
+        >span {
+            color: #6f7890;
+        }
+    }
+    li {
+        margin: 0;
+        padding: 0;
+        display: block;
+        position: relative;
+        >span, >a {
+            padding: 15px 30px 15px 50px;
+            display: block;
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #cfd2da;
+            cursor: pointer;
+            position: relative;
+            line-height: 20px;
+        }
+        >span:hover, >span:active {
+            color: #fff;
+            background: #434857;
+        }
+        >a:hover, >a:active {
+            color: #fff;
+            background: #434857;
+        }
+        a {
+            text-decoration: none !important;
+        }
+        i {
+            position: absolute;
+            font-size: 18px;
+            //color: inherit;
+            left: 8px;
+            top: 8px;
+            width: 34px;
+            height: 34px;
+            text-align: center;
+            line-height: 34px;
+            overflow: hidden;
+        }
+        i.fa-chevron-down {
+            right: 8px;
+            top: 8px;
+            width: 34px;
+            height: 34px;
+            text-align: center;
+            line-height: 34px;
+            overflow: hidden;
+            left: auto;
+            font-size: 14px;
+        }
+        i.fa-chevron-down.trans {
+            -webkit-transition: all 0.2s ease 0s;
+            -o-transition: all 0.2s ease 0s;
+            transition: all 0.2s ease 0s;
+        }
+    }
+    li.open {
+        background: #252830;
+        > span > i.fa-chevron-down {
+            -webkit-transform: rotate(179deg);
+            -ms-transform: rotate(179deg);
+            -o-transform: rotate(179deg);
+            transform: rotate(179deg);
+        }
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+}
+.apl-admin-submenu {
+    display: none;
 }
