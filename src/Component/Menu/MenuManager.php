@@ -119,6 +119,18 @@ class MenuManager
     }
 
     /**
+     * @param $id
+     * @return Menu
+     * @throws Exception
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function getMenu($id)
+    {
+        $structure = $this->getStructure();
+        return $structure[$id] ?? null;
+    }
+
+    /**
      * @throws Exception
      */
     private function buildStructure(): void

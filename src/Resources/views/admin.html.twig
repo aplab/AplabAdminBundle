@@ -5,6 +5,9 @@
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('static/cms/build.js') }}"></script>
+    {{ render(controller(
+        'Aplab\\AplabAdminBundle\\Controller\\MainMenuController::mainMenu'
+    )) }}
 {% endblock %}
 {% block body_classes %}{{ UiDataTransmitter.getBodyClasses() }}{% endblock %}
 {% block body %}

@@ -29,18 +29,8 @@ class AdminController extends Controller
      * @throws \Aplab\AplabAdminBundle\Component\Menu\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function desktop(MenuManager $main_menu)
+    public function desktop()
     {
-//        dump($main_menu);
-
-
-
-        $main_menu->getStructure();
-        $menu = Menu::getInstance('MainMenu');
-        dump($menu->__toJson());
-
-
-
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }
