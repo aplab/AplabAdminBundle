@@ -68,8 +68,12 @@ function AplAdminMenu(data, append_to) {
             var span = $('<span>');
             span.text(item.name);
             var icon = null;
-            if (item.icon !== undefined && item.icon.name !== undefined) {
-                icon = $('<i class="' + item.icon.name + '" aria-hidden="true"></i>');
+            if (item.icon !== undefined && item.icon.length) {
+                icon = '';
+                for (var icon_item_id in item.icon) {
+                    icon += '<i class="' + item.icon[icon_item_id] + '" aria-hidden="true"></i>';
+                }
+                icon = $(icon);
             }
             if (child_number) {
                 li.prepend(span);

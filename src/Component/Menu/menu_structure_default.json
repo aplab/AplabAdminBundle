@@ -4,7 +4,7 @@
             {
                 "id": "some-id",
                 "name": "Пункт 1",
-                "icon": "fa fa-pencil, fas fa-ban text-danger text-small etc",
+                "icon": "fas fa-pencil-alt, fas fa-ban text-danger text-small",
                 "disabled": true,
                 "target": "self",
                 "class": "additional-css-class",
@@ -12,20 +12,20 @@
             },
             {
                 "name": "Пункт 2",
-                "icon": "fa fa-pencil",
+                "icon": "fas fa-pencil-alt",
                 "items": [
                     {
                         "name": "Пункт 2.1",
-                        "icon": "fa fa-pencil",
+                        "icon": "fas fa-pencil-alt",
                         "handler": "window.close()"
                     },
                     {
                         "name": "Пункт 2.2",
-                        "icon": "fa fa-pencil"
+                        "icon": "fas fa-pencil-alt"
                     },
                     {
                         "name": "Пункт 2.3",
-                        "icon": "fa fa-pencil",
+                        "icon": "fas fa-pencil-alt",
                         "id": "some-id-2",
                         "route": "admin_desktop"
                     }

@@ -54,7 +54,6 @@ class MenuItem implements \JsonSerializable
 
     /**
      * @param string $id
-     * @return string
      * @throws Exception
      */
     public function setId(string $id)
@@ -277,7 +276,7 @@ class MenuItem implements \JsonSerializable
             $data['url'] = $action->getUrl();
         }
         if ($action instanceof Route) {
-            $data['url'] = $action->getnerateUrl();
+            $data['url'] = $action->generateUrl();
         }
         if ($action instanceof Handler) {
             $data['handler'] = $action->getHandler();
