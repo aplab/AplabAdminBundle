@@ -33,6 +33,7 @@
     "gulp-uglify": "^3.0.1",
     "gulp-util": "^3.0.8",
     "jquery": "^3.3.1",
+    "jquery-mousewheel": "^3.1.13",
     "js-cookie": "^2.2.0",
     "jsonfile": "^4.0.0",
     "opensans-webkit": "^1.0.1",
