@@ -9,7 +9,7 @@
 namespace Aplab\AplabAdminBundle\Component\Menu;
 
 
-class MenuItem
+class MenuItem implements \JsonSerializable
 {
     /**
      * @var static[]
@@ -92,13 +92,38 @@ class MenuItem
     protected $icon = [];
 
     /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return MenuItem
+     */
+    public function setName(string $name): MenuItem
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
      * MenuItem constructor.
      * @param string $id
+     * @param string $name
      * @throws Exception
      */
-    public function __construct(string $id)
+    public function __construct(string $id, string $name)
     {
         $this->id = $id;
+        $this->name = $name;
         static::registerInstance($this);
     }
 
@@ -153,7 +178,7 @@ class MenuItem
     /**
      * @return string
      */
-    public function getClass(): string
+    public function getClass(): ?string
     {
         return $this->class;
     }
@@ -171,7 +196,7 @@ class MenuItem
     /**
      * @return string
      */
-    public function getTarget(): string
+    public function getTarget(): ?string
     {
         return $this->target;
     }
@@ -189,7 +214,7 @@ class MenuItem
     /**
      * @return Action
      */
-    public function getAction(): Action
+    public function getAction(): ?Action
     {
         return $this->action;
     }
@@ -229,5 +254,40 @@ class MenuItem
     {
         $this->icon = [];
         return $this;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        $data = [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'disabled' => $this->isDisabled(),
+            'target' => $this->getTarget(),
+            'class' => $this->getClass()
+        ];
+        $action = ($this->getAction());
+        if ($action instanceof Url) {
+            $data['url'] = $action->getUrl();
+        }
+        if ($action instanceof Route) {
+            $data['url'] = $action->getnerateUrl();
+        }
+        if ($action instanceof Handler) {
+            $data['handler'] = $action->getHandler();
+        }
+        $data['icon'] = array_map(function (Icon $i) {
+            return $i->getIcon();
+        }, $this->getIcon());
+        $data['items'] = array_map(function (MenuItem $i) {
+            return $i->jsonSerialize();
+        }, $this->getItems());
+        return $data;
     }
 }

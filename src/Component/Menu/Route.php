@@ -8,6 +8,8 @@
 
 namespace Aplab\AplabAdminBundle\Component\Menu;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 /**
  * Class Route
  * @package Aplab\AplabAdminBundle\Component\Menu
@@ -33,6 +35,22 @@ class Route extends Action
     {
         $this->route = $route;
         $this->parameters = $parameters;
+    }
+
+    /**
+     * @return UrlGeneratorInterface
+     */
+    public static function getRouter(): UrlGeneratorInterface
+    {
+        return self::$router;
+    }
+
+    /**
+     * @param UrlGeneratorInterface $router
+     */
+    public static function setRouter(UrlGeneratorInterface $router): void
+    {
+        self::$router = $router;
     }
 
     /**
@@ -70,4 +88,20 @@ class Route extends Action
         $this->parameters = $parameters;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function generateUrl()
+    {
+        return static::getRouter()->generate(
+            $this->getRoute(),
+            $this->getParameters()
+        );
+    }
+
+    /**
+     * @var UrlGeneratorInterface
+     */
+    protected static $router;
 }

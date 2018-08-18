@@ -38,6 +38,8 @@ class MenuManager
 
     const KEY_ID = 'id';
 
+    const KEY_NAME = 'name';
+
     const KEY_DISABLED = 'disabled';
 
     const KEY_CLASS = 'class';
@@ -72,6 +74,7 @@ class MenuManager
             md5(static::STRUCTURE_LOCATION_DEFAULT),
             md5($this->structureLocation)
         ]);
+        Route::setRouter($this->getRouter());
     }
 
     /**
@@ -150,7 +153,10 @@ class MenuManager
                         $child_id
                     ]
                 );
-                $child = new MenuItem($child_data[static::KEY_ID] ?? $child_full_id);
+                $child = new MenuItem(
+                    $child_data[static::KEY_ID] ?? $child_full_id,
+                    $child_data[static::KEY_NAME] ?? 'untitled'
+                );
                 $this->initIcon($child, $child_data);
                 $this->initAction($child, $child_data);
                 $child->setDisabled($child_data[static::KEY_DISABLED] ?? false);
@@ -195,15 +201,9 @@ class MenuManager
             $action[static::KEY_HANDLER] = new Handler($item_data[static::KEY_HANDLER]);
         }
         if (isset($item_data[static::KEY_ROUTE])) {
-            $route = new Route(
+            $action[static::KEY_ROUTE] = new Route(
                 $item_data[static::KEY_ROUTE],
                 $item_data[static::KEY_PARAMETERS] ?? []
-            );
-            $action[static::KEY_URL] = new Url(
-                $this->router->generate(
-                    $route->getRoute(),
-                    $route->getParameters()
-                )
             );
         }
         if (empty($action)) {
@@ -213,5 +213,23 @@ class MenuManager
             throw new \RuntimeException('only one action can be defined');
         }
         $item->setAction(reset($action));
+    }
+
+    /**
+     * @return UrlGeneratorInterface
+     */
+    public function getRouter(): UrlGeneratorInterface
+    {
+        return $this->router;
+    }
+
+    /**
+     * @param UrlGeneratorInterface $router
+     * @return MenuManager
+     */
+    public function setRouter(UrlGeneratorInterface $router): MenuManager
+    {
+        $this->router = $router;
+        return $this;
     }
 }

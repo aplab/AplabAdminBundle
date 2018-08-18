@@ -9,6 +9,7 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
+use Aplab\AplabAdminBundle\Component\Menu\Menu;
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
 use Aplab\AplabAdminBundle\Tools\Tools;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,7 +35,9 @@ class AdminController extends Controller
 
 
 
-        dump($main_menu->getStructure());
+        $main_menu->getStructure();
+        $menu = Menu::getInstance('MainMenu');
+        dump($menu->__toJson());
 
 
 

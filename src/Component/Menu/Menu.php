@@ -9,7 +9,7 @@
 namespace Aplab\AplabAdminBundle\Component\Menu;
 
 
-class Menu
+class Menu implements \JsonSerializable
 {
     /**
      * @var static[]
@@ -102,5 +102,39 @@ class Menu
             throw new Exception('Duplicate id: ' . $id);
         }
         static::$instances[$id] = $instance;
+    }
+
+    /**
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     * @since 5.4.0
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'items' => array_map(function(MenuItem $i) {
+                return $i->jsonSerialize();
+            }, $this->items)
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return json_encode($this);
+    }
+
+    /**
+     * @param int $options
+     * @return string
+     */
+    public function __toJson($options = JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)
+    {
+        return json_encode($this, $options);
     }
 }
