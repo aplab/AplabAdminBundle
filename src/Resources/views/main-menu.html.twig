@@ -1,3 +1,5 @@
 <script>
-    var aplab_admin_bundle_main_menu = {{ json|raw }}
+    $(document).ready(function () {
+        new AplAdminMenu({{ json|raw }})
+    });
 </script>

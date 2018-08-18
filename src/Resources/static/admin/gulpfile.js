@@ -26,7 +26,8 @@ var dest_dir = '../../../../../../../public/static/cms';
 
 gulp.task('scss-dev', function () {
     return gulp.src([
-        './stylesheet/main.scss'
+        './stylesheet/main.scss',
+        './admin_modules/AplAdminMenu/AplAdminMenu.scss'
     ])
         .pipe(plumber())
         .pipe(sourcemaps.init())
@@ -72,6 +73,7 @@ gulp.task('scripts-dev', function () {
             './node_modules/js-cookie/src/js.cookie.js',
             './node_modules/popper.js/dist/umd/popper.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
+            './admin_modules/AplAdminMenu/AplAdminMenu.js',
             './js/main.js'
         ])
         .pipe(plumber())
@@ -107,6 +109,8 @@ gulp.task('watch', function () {
     gulp.watch('./stylesheet/*.scss', gulp.series('scss-dev'));
     gulp.watch('./stylesheet/*.css', gulp.series('css-dev'));
     gulp.watch('./js/*.js', gulp.series('scripts-dev'));
+    gulp.watch('./admin_modules/**/*.js', gulp.series('scripts-dev'));
+    gulp.watch('./admin_modules/**/*.scss', gulp.series('scss-dev'));
 });
 
 gulp.task('default', gulp.series('scss-dev', 'css-dev', 'scripts-dev', /*'img',*/ 'fonts'));
