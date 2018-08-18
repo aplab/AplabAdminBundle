@@ -61,10 +61,6 @@ function AplAdminMenu(data, append_to) {
             var li = $('<li>');
             li.prop('id', item.id);
             ul.append(li);
-            var child_number = 0;
-            if (item.items !== undefined) {
-                child_number = createMenuItems(li, item.items, level + 1);
-            }
             var span = $('<span>');
             span.text(item.name);
             var icon = null;
@@ -74,6 +70,15 @@ function AplAdminMenu(data, append_to) {
                     icon += '<i class="' + item.icon[icon_item_id] + '" aria-hidden="true"></i>';
                 }
                 icon = $(icon);
+            }
+            var child_number = 0;
+            if (item.items !== undefined) {
+                child_number = createMenuItems(li, item.items, level + 1);
+            }
+            if (item.disabled) {
+                li.prepend(span);
+                span.append(icon);
+                continue;
             }
             if (child_number) {
                 li.prepend(span);
@@ -86,64 +91,39 @@ function AplAdminMenu(data, append_to) {
                     var exclude = append_to.find('.apl-admin-submenu').has($next);
                     append_to.find('.apl-admin-submenu').not($next).not(exclude).slideUp().parent().removeClass('open');
                     if ($parent.hasClass('open')) {
-                        Cookies.set(
-                            'apl-admin-menu-' + instanceName,
-                            $parent.prop('id'),
-                            {
-                                expires: 7,
-                                path: '/'
-                            }
-                        );
+                        localStorage.setItem('apl-admin-menu-' + instanceName, $parent.prop('id'));
                         return;
                     }
                     var closest = $parent.closest('.open');
                     if (closest.length) {
-                        Cookies.set(
-                            'apl-admin-menu-' + instanceName,
-                            closest.prop('id'),
-                            {
-                                expires: 7,
-                                path: '/'
-                            }
-                        );
+                        localStorage.setItem('apl-admin-menu-' + instanceName, closest.prop('id'));
                         return;
                     }
-                    Cookies.set(
-                        'apl-admin-menu-' + instanceName,
-                        '',
-                        {
-                            expires: 7,
-                            path: '/'
-                        }
-                    );
+                    localStorage.setItem('apl-admin-menu-' + instanceName, '');
                 });
                 span.append('<i class="fas fa-chevron-down"></i>');
                 if (icon) {
                     span.append(icon);
                 }
             } else {
-                if (item.action !== undefined) {
-                    if (item.action.type === 'url') {
-                        var a = $('<a>');
-                        a.text(item.name);
-                        a.prop('href', item.action.url);
-                        if (item.action.hasOwnProperty('target')) {
-                            a.prop('target', item.action.target);
-                        }
-                        li.append(a);
-                        a.append(icon);
-                    } else {
-                        li.prepend(span);
-                        if (item.action.type === 'callback') {
-                            (function (v)//isolation
-                            {
-                                span.click(function () {
-                                    eval(v);
-                                });
-                            })(item.action.callback);
-                        }
-                        span.append(icon);
+                if (item.url !== undefined) {
+                    var a = $('<a>');
+                    a.text(item.name);
+                    a.prop('href', item.url);
+                    if (item.hasOwnProperty('target') && item.target) {
+                        a.prop('target', item.target);
                     }
+                    li.append(a);
+                    a.append(icon);
+                } else if (item.handler !== undefined) {
+                    li.prepend(span);
+                    (function (v)//isolation
+                    {
+                        span.click(function () {
+                            eval(v);
+                        });
+                    })(item.handler);
+                    span.append(icon);
                 } else {
                     li.prepend(span);
                     span.append(icon);
@@ -162,7 +142,10 @@ function AplAdminMenu(data, append_to) {
      * Set current item
      */
     var setCurrent = function () {
-        var current_id = Cookies.get('apl-admin-menu-' + instanceName);
+        var current_id = localStorage.getItem('apl-admin-menu-' + instanceName);
+        if (!current_id) {
+            return;
+        }
         var current = $('#' + current_id);
         if (!current.length) {
             return;

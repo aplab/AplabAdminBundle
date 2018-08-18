@@ -27,7 +27,8 @@ var dest_dir = '../../../../../../../public/static/cms';
 gulp.task('scss-dev', function () {
     return gulp.src([
         './stylesheet/main.scss',
-        './admin_modules/AplAdminMenu/AplAdminMenu.scss'
+        './admin_modules/AplAdminMenu/AplAdminMenu.scss',
+        './admin_modules/Scrollable/CapsuleUiScrollable.scss'
     ])
         .pipe(plumber())
         .pipe(sourcemaps.init())
@@ -74,6 +75,7 @@ gulp.task('scripts-dev', function () {
             './node_modules/popper.js/dist/umd/popper.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
             './admin_modules/AplAdminMenu/AplAdminMenu.js',
+            './admin_modules/Scrollable/CapsuleUiScrollable.js',
             './js/main.js'
         ])
         .pipe(plumber())
