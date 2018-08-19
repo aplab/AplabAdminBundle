@@ -30,7 +30,8 @@ class AdminController extends Controller
      */
     public function desktop(SampleEntityRepository $repository)
     {
-        dd($repository->count([]));
+        $count = $repository->count([]);
+        $items = $repository->findAll();
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }
