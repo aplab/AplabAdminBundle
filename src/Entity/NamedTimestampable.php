@@ -26,8 +26,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class NamedTimestampable
 {
+    public function __construct()
+    {
+        dump($this);
+        $this->createdAt = new \DateTime;
+        dump($this);
+    }
+
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="bigint")
@@ -37,10 +43,44 @@ class NamedTimestampable
      *         @ModuleMetadata\Cell(order=2000, width=200, type="Label")
      *     },
      *     widget={
-     *         @ModuleMetadata\Widget(order=1000, tab="Additional", type="Label"
+     *         @ModuleMetadata\Widget(order=1000, tab="Additional", type="Label")
      *     })
      */
-    protected $id;
+    private $id;
+
+    /**
+     * @ORM\Column(type="string")
+     * @ModuleMetadata\Property(title="ID",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(
+     *     type="datetime",
+     *     nullable=true,
+     *     columnDefinition="DATETIME NULL DEFAULT CURRENT_TIMESTAMP",
+     *     options={"default"="CURRENT_TIMESTAMP"}
+     * )
+     * @ModuleMetadata\Property(title="Created at",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(
+     *     type="datetime",
+     *     nullable=true,
+     *     columnDefinition="DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+     *     options={"default"="CURRENT_TIMESTAMP"}
+     * )
+     * @ModuleMetadata\Property(title="Last modified",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
+     */
+    private $lastModified;
 
     /**
      * @return mixed
@@ -51,39 +91,46 @@ class NamedTimestampable
     }
 
     /**
-     * @var string
-     * @ORM\Column(type="string")
-     * @ModuleMetadata\Property(title="ID",
-     *     cell={
-     *         @ModuleMetadata\Cell(order=2000, width=200, type="Label")
-     *     },
-     *     widget={
-     *         @ModuleMetadata\Widget(order=2000, tab="General", type="Label"
-     *     })
+     * @param mixed $id
+     * @return NamedTimestampable
      */
-    protected $name;
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     /**
-     * @var string
-     * @ORM\Column(
-     *     type="datetime_immutable",
-     *     columnDefinition="DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP"
-     * )
-     * @ModuleMetadata\Property(title="Created at",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label"})
+     * @return mixed
      */
-    protected $createdAt;
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
-     * @var string
-     * @ORM\Column(
-     *     type="datetime_immutable",
-     *     columnDefinition="DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
-     * )
-     * @ModuleMetadata\Property(title="Last modified",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label"})
+     * @param mixed $name
+     * @return NamedTimestampable
      */
-    protected $lastModified;
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastModified()
+    {
+        return $this->lastModified;
+    }
 }
