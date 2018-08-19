@@ -27,7 +27,8 @@ class AdminController extends AbstractController
      * @param NamedTimestampableRepository $repository
      * @param ModuleMetadataRepository $mdr
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function desktop(NamedTimestampableRepository $repository, ModuleMetadataRepository $mdr)
     {
@@ -35,7 +36,7 @@ class AdminController extends AbstractController
 //        $items = $repository->findAll();
 //        $items2 = $repository->findBy([], ['id' => 'DESC'], 3, 2);
 
-//        $md = $mdr->getMetadata(NamedTimestampable::class);
+        $md = $mdr->getMetadata(NamedTimestampable::class);
         $item = new NamedTimestampable;
 //        $item->setName(bin2hex(random_bytes(10)));
 
@@ -43,6 +44,7 @@ class AdminController extends AbstractController
         $item->setName(rand(10, 20));
 
         $em = $this->getDoctrine()->getManager();
+        $meta = $em->getClassMetadata(NamedTimestampable::class);
         $em->persist($item);
         $em->flush();
 

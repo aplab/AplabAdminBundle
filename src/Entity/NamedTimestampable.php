@@ -28,16 +28,14 @@ class NamedTimestampable
 {
     public function __construct()
     {
-        dump($this);
         $this->createdAt = new \DateTime;
-        dump($this);
     }
 
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="bigint")
-     * @ModuleMetadata\Property(title="ID",
+     * @ModuleMetadata\Property(title="ID", readonly=true,
      *     cell={
      *         @ModuleMetadata\Cell(order=1000, width=60, type="Label"),
      *         @ModuleMetadata\Cell(order=2000, width=200, type="Label")
@@ -63,7 +61,7 @@ class NamedTimestampable
      *     columnDefinition="DATETIME NULL DEFAULT CURRENT_TIMESTAMP",
      *     options={"default"="CURRENT_TIMESTAMP"}
      * )
-     * @ModuleMetadata\Property(title="Created at",
+     * @ModuleMetadata\Property(title="Created at", readonly=true,
      *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
      */
@@ -76,7 +74,7 @@ class NamedTimestampable
      *     columnDefinition="DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
      *     options={"default"="CURRENT_TIMESTAMP"}
      * )
-     * @ModuleMetadata\Property(title="Last modified",
+     * @ModuleMetadata\Property(title="Last modified", readonly=true,
      *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
      */

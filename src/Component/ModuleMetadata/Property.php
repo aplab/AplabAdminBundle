@@ -27,6 +27,7 @@ use Doctrine\ORM\Mapping\Annotation;
  *   @Attribute("label", type = "string", required=false),
  *   @Attribute("cell", type = "array<Aplab\AplabAdminBundle\Component\ModuleMetadata\Cell>", required=true),
  *   @Attribute("widget", type = "array<Aplab\AplabAdminBundle\Component\ModuleMetadata\Widget>", required=true),
+ *   @Attribute("readonly", type = "boolean")
  * })
  */
 class Property implements Annotation
@@ -44,6 +45,7 @@ class Property implements Annotation
         $this->label = $values['label'] ?? '';
         $this->cell = $values['cell'] ?? [];
         $this->widget = $values['widget'] ?? [];
+        $this->readonly = $values['readonly'] ?? false;
     }
 
     /**
@@ -98,6 +100,29 @@ class Property implements Annotation
      * @var Cell[]
      */
     private $cell;
+
+    /**
+     * @var boolean
+     */
+    private $readonly;
+
+    /**
+     * @return bool
+     */
+    public function isReadonly(): bool
+    {
+        return $this->readonly;
+    }
+
+    /**
+     * @param bool $readonly
+     * @return Property
+     */
+    public function setReadonly(bool $readonly): Property
+    {
+        $this->readonly = $readonly;
+        return $this;
+    }
 
     /**
      * @return array
