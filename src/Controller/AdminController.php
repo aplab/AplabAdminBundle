@@ -31,7 +31,9 @@ class AdminController extends Controller
     public function desktop(SampleEntityRepository $repository)
     {
         $count = $repository->count([]);
+        $count2 = $repository->count([]);
         $items = $repository->findAll();
+        $items2 = $repository->findBy([], ['id' => 'DESC'], 3, 2);
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }

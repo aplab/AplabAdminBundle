@@ -51,7 +51,7 @@
                             },
                             {
                                 "name": "Пункт 2.2",
-                                "icon": "fas fa-pencil-alt"
+                                "icon": "fas fa-address-card text-success, fas fa-pencil-alt"
                             },
                             {
                                 "name": "Пункт 2.3",
