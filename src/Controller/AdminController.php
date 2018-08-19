@@ -11,6 +11,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 use Aplab\AplabAdminBundle\Component\Menu\Menu;
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
+use Aplab\AplabAdminBundle\Repository\SampleEntityRepository;
 use Aplab\AplabAdminBundle\Tools\Tools;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,13 +25,12 @@ class AdminController extends Controller
 {
     /**
      * @Route("/", name="desktop")
-     * @param MenuManager $main_menu
+     * @param SampleEntityRepository $repository
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Aplab\AplabAdminBundle\Component\Menu\Exception
-     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function desktop()
+    public function desktop(SampleEntityRepository $repository)
     {
+        dd($repository->count([]));
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }
