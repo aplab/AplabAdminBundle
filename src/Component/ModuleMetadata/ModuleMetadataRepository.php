@@ -61,8 +61,9 @@ class ModuleMetadataRepository
         $cache_key = join(static::CACHE_KEY_DELIMITER, [
             $this->cacheKeyPrefix, $cache_key_suffix
         ]);
-        if ($this->cache->has($cache_key)) {
-            return $this->cache->get($cache_key);
+        $metadata = $this->cache->get($cache_key);
+        if ($metadata instanceof ModuleMetadata) {
+            return $metadata;
         }
         $metadata = new ModuleMetadata($reflection_class, $this->getReader());
         $env = $_SERVER['APP_ENV'] ?? 'dev';
