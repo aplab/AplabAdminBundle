@@ -36,6 +36,8 @@ class AdminController extends AbstractController
 //        $items = $repository->findAll();
 //        $items2 = $repository->findBy([], ['id' => 'DESC'], 3, 2);
 
+        dump($repository);
+
         $md = $mdr->getMetadata(NamedTimestampable::class);
         $item = new NamedTimestampable;
 //        $item->setName(bin2hex(random_bytes(10)));
@@ -44,6 +46,8 @@ class AdminController extends AbstractController
         $item->setName(rand(10, 20));
 
         $em = $this->getDoctrine()->getManager();
+        $r2 = $em->getRepository(NamedTimestampable::class);
+        dump($r2);
         $meta = $em->getClassMetadata(NamedTimestampable::class);
         $em->persist($item);
         $em->flush();
