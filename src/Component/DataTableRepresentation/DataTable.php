@@ -65,9 +65,18 @@ class DataTable
         return $this->cell;
     }
 
-    private function initCell()
+    /**
+     * Data table cell initialization
+     */
+    private function initCell(): void
     {
         $this->cell = [];
-
+        $properties = $this->moduleMetadata->getProperties();
+        foreach ($properties as $property_name => $property_metadata) {
+            $cell_metadata_list = $property_metadata->getCell();
+            foreach ($cell_metadata_list as $cell_metadata) {
+                dump($cell_metadata);
+            }
+        }
     }
 }
