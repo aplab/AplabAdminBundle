@@ -10,14 +10,8 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
-use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
-use Aplab\AplabAdminBundle\Repository\NamedTimestampableRepository;
-use Aplab\AplabAdminBundle\Util\CssWidthDefinition;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,14 +24,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="desktop")
      * @param DataTableRepresentation $dtr
-     * @param CssWidthDefinition $cwd
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function desktop(DataTableRepresentation $dtr, CssWidthDefinition $cwd) {
+    public function desktop(DataTableRepresentation $dtr) {
 
-        $cwd->add(60)->add(100)->add(200);
         $dt = $dtr->getDataTable(NamedTimestampable::class);
 
         $cell = $dt->getCell();

@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation;
 
 
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository;
+use Aplab\AplabAdminBundle\Util\CssWidthDefinition;
 use Doctrine\ORM\EntityManagerInterface;
 
 class DataTableRepresentation
@@ -35,14 +36,21 @@ class DataTableRepresentation
     private $dataTable = [];
 
     /**
+     * @var CssWidthDefinition
+     */
+    private $cssWidthDefinition;
+
+    /**
      * DataTable constructor.
      * @param ModuleMetadataRepository $mmr
      * @param EntityManagerInterface $emi
+     * @param CssWidthDefinition $cwd
      */
-    public function __construct(ModuleMetadataRepository $mmr, EntityManagerInterface $emi)
+    public function __construct(ModuleMetadataRepository $mmr, EntityManagerInterface $emi, CssWidthDefinition $cwd)
     {
         $this->moduleMetadataRepository = $mmr;
         $this->entityManager = $emi;
+        $this->cssWidthDefinition = $cwd;
     }
 
     /**
@@ -78,5 +86,11 @@ class DataTableRepresentation
         return $this->dataTable[$entity_class_name];
     }
 
-
+    /**
+     * @return CssWidthDefinition
+     */
+    public function getCssWidthDefinition(): CssWidthDefinition
+    {
+        return $this->cssWidthDefinition;
+    }
 }

@@ -11,6 +11,7 @@ namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation;
 
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType\CellTypeFactory;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadata;
+use Aplab\AplabAdminBundle\Util\CssWidthDefinition;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\Tests\Compiler\C;
 
@@ -42,6 +43,11 @@ class DataTable
     private $cell;
 
     /**
+     * @var CssWidthDefinition
+     */
+    private $cssWidthDefinition;
+
+    /**
      * DataTable constructor.
      * @param \ReflectionClass $erc
      * @param DataTableRepresentation $dtr
@@ -54,6 +60,7 @@ class DataTable
         $this->entityClassName = $this->entityReflectionClass->getName();
         $this->entityManager = $dtr->getEntityManager();
         $this->moduleMetadata = $dtr->getModuleMetadataRepository()->getMetadata($this->entityClassName);
+        $this->cssWidthDefinition = $dtr->getCssWidthDefinition();
     }
 
     /**
@@ -79,6 +86,7 @@ class DataTable
             $cell_metadata_list = $property_metadata->getCell();
             $property = $this->entityReflectionClass->getProperty($property_name);
             foreach ($cell_metadata_list as $cell_metadata) {
+                $this->cssWidthDefinition->add($cell_metadata->getWidth());
                 $this->cell[] = new DataTableCell($property, $property_metadata, $cell_metadata, $f);
             }
         }
