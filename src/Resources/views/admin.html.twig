@@ -2,6 +2,9 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('/static/cms/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('/static/cms/build.css') }}">
+    {{ render(controller(
+        'Aplab\\AplabAdminBundle\\Controller\\UtilController::cssWidthDefinition'
+    )) }}
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('static/cms/build.js') }}"></script>
@@ -35,6 +38,7 @@
             {#{{ dump(items2) }}#}
             {#{{ dump(md) }}#}
             {#{{ dump(meta) }}#}
+            {{ dump(cell) }}
 
 
         {% endblock %}

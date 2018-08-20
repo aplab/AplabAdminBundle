@@ -9,8 +9,10 @@
 namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation;
 
 
+use Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType\CellTypeFactory;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadata;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\Tests\Compiler\C;
 
 class DataTable
 {
@@ -70,12 +72,14 @@ class DataTable
      */
     private function initCell(): void
     {
+        $f = new CellTypeFactory;
         $this->cell = [];
         $properties = $this->moduleMetadata->getProperties();
         foreach ($properties as $property_name => $property_metadata) {
             $cell_metadata_list = $property_metadata->getCell();
+            $property = $this->entityReflectionClass->getProperty($property_name);
             foreach ($cell_metadata_list as $cell_metadata) {
-                dump($cell_metadata);
+                $this->cell[] = new DataTableCell($property, $property_metadata, $cell_metadata, $f);
             }
         }
     }

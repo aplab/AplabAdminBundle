@@ -55,9 +55,9 @@ class Cell implements Annotation
 
     /**
      * @param Options $options
-     * @return Widget
+     * @return Cell
      */
-    public function setOptions(Options $options): Widget
+    public function setOptions(Options $options): Cell
     {
         $this->options = $options;
         return $this;

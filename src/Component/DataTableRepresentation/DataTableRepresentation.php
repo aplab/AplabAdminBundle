@@ -64,6 +64,7 @@ class DataTableRepresentation
     /**
      * @param string $entity_class_name
      * @return DataTable
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
     public function getDataTable(string $entity_class_name):DataTable
