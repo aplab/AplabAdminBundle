@@ -12,6 +12,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Aplab\AplabAdminBundle\Repository\NamedTimestampableRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,11 +27,15 @@ class AdminController extends AbstractController
      * @Route("/", name="desktop")
      * @param NamedTimestampableRepository $repository
      * @param ModuleMetadataRepository $mdr
+     * @param EntityManagerInterface $em
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function desktop(NamedTimestampableRepository $repository, ModuleMetadataRepository $mdr)
+    public function desktop(
+        NamedTimestampableRepository $repository,
+        ModuleMetadataRepository $mdr,
+        EntityManagerInterface $em)
     {
 //        $count = $repository->count([]);
 //        $items = $repository->findAll();
@@ -45,7 +50,6 @@ class AdminController extends AbstractController
         $item = $repository->find(12);
         $item->setName(rand(10, 20));
 
-        $em = $this->getDoctrine()->getManager();
         $r2 = $em->getRepository(NamedTimestampable::class);
 //        dump($r2);
         $meta = $em->getClassMetadata(NamedTimestampable::class);
