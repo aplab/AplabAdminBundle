@@ -8,7 +8,10 @@
 
 namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType;
 
-
+/**
+ * Class CellTypeFactory
+ * @package Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType
+ */
 class CellTypeFactory
 {
     const PREFIX = '\\CellType';

@@ -12,6 +12,7 @@ namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation;
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType\CellTypeFactory;
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType\CellTypeInterface;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\Cell;
+use Aplab\AplabAdminBundle\Component\ModuleMetadata\Options;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\Property;
 
 class DataTableCell
@@ -37,6 +38,11 @@ class DataTableCell
     private $type;
 
     /**
+     * @var Options
+     */
+    private $options;
+
+    /**
      * DataTableCell constructor.
      * @param \ReflectionProperty $property
      * @param Property $property_metadata
@@ -49,6 +55,7 @@ class DataTableCell
         $this->width = $cell_metadata->getWidth();
         $this->order = $cell_metadata->getOrder();
         $this->type = $factory->create($cell_metadata->getType());
+        $this->options = $cell_metadata->getOptions();
     }
 
     /**

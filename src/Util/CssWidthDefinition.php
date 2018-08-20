@@ -17,6 +17,11 @@ class CssWidthDefinition
     private $data;
 
     /**
+     * @var int
+     */
+    private $sum;
+
+    /**
      * CssWidthDefinition constructor.
      */
     public function __construct()
@@ -30,6 +35,7 @@ class CssWidthDefinition
      */
     public function add(int $width): self
     {
+        $this->sum += $width;
         $this->data[$width] = $width;
         return $this;
     }
@@ -40,5 +46,13 @@ class CssWidthDefinition
     public function getData()
     {
         return array_values($this->data);
+    }
+
+    /**
+     * @return int
+     */
+    public function getSum(): int
+    {
+        return $this->sum;
     }
 }

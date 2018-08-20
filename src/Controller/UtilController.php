@@ -25,7 +25,9 @@ class UtilController extends Controller
     public function cssWidthDefinition(CssWidthDefinition $cwd)
     {
         return $this->render('@AplabAdmin/css-width-definition.html.twig', [
-            'w' => $cwd->getData()
+            'w' => $cwd->getData(),
+            's' => $cwd->getSum(),
+            'e' => $cwd->getSum() + 100
         ]);
     }
 }
