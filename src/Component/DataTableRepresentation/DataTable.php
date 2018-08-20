@@ -82,5 +82,8 @@ class DataTable
                 $this->cell[] = new DataTableCell($property, $property_metadata, $cell_metadata, $f);
             }
         }
+        usort($this->cell, function (DataTableCell $a, DataTableCell $b) {
+            return $a->getOrder() <=> $b->getOrder();
+        });
     }
 }

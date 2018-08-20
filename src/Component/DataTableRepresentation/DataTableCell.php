@@ -50,4 +50,38 @@ class DataTableCell
         $this->order = $cell_metadata->getOrder();
         $this->type = $factory->create($cell_metadata->getType());
     }
+
+    /**
+     * @return string
+     */
+    public function getPropertyName(): string
+    {
+        return $this->propertyName;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder(): int
+    {
+        return $this->order;
+    }
+
+    /**
+     * @return CellTypeInterface
+     */
+    public function getType(): CellTypeInterface
+    {
+        return $this->type;
+    }
+
+
 }
