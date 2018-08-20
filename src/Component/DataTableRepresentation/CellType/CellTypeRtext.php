@@ -6,7 +6,7 @@
  * Time: 10:53
  */
 
-namespace Aplab\AplabAdminBundle\Component\DataTableView\CellType;
+namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType;
 
 
 class CellTypeRtext extends CellTypeAbstract
