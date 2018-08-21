@@ -1,0 +1,114 @@
+{% extends ('@AplabAdmin/admin.html.twig') %}
+{% block workarea %}
+    <!--data grid-->
+    <div class="apl-data-table"
+         id="apl-data-table"
+         data-base-url="<?=$this->instance->baseUrl?>">
+        <!--data grid body-->
+        <div class="apl-data-table-body">
+            <!--data grid content-->
+            <div class="apl-data-table-content">
+
+                <div class="apl-data-table-header">
+                    <div class="apl-data-table-header-row wExt">
+                        <?php foreach ($columns as $column) : ?>
+                        <?php if ($column->column->title) : ?>
+                        <div class="w<?= $column->column->width ?>"
+                             title="<?= _::_($column->column->title) ?>">
+                            <?= _::_($column->column->title) ?>
+                        </div>
+                        <?php else : ?>
+                        <div class="w<?= $column->column->width ?>"
+                             title="<?= _::_($column->property->title) ?>">
+                            <?= _::_($column->property->title) ?>
+                        </div>
+                        <?php endif ?>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+
+                <div class="apl-data-table-sidebar">
+                    <div class="apl-data-table-sidebar-header">
+                        <input type="checkbox">
+                    </div>
+                    <div class="apl-data-table-sidebar-body">
+                        <div class="apl-data-table-sidebar-body-col"></div>
+                    </div>
+                </div>
+
+                <div class="apl-data-table-data-wrapper">
+                    <div class="apl-data-table-data wSum">
+                        <?php foreach ($this->instance->items as $item) : ?>
+                        <?php
+                        $key = $item::pk();
+                        if (is_array($key)) {
+                            /**
+                             * @TODO проработать вариант с составными ключами, json {"id1":"","id2":""}
+                             */
+                        } else {
+                            $data_pk = json_encode([
+                                $key => $item->{$key}
+                        ]);
+                        }
+                        ?>
+                        <div class="wExt<?=$row_class?>" data-pk="<?=str::hsc($data_pk)?>">
+                            <?php foreach ($columns as $column) : ?>
+                            <?php $column->cell->item = $item ?>
+                            <?php $column->cell->id = $cell_id_counter++ ?>
+                            <?=$column->cell?>
+                            <?php endforeach ?>
+                        </div>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+
+            </div>
+            <!--end of apl-data-table-content-->
+
+            <div class="apl-data-table-scroll-horizontal-wrapper">
+                <div class="apl-data-table-scroll-horizontal">
+                    <div class="apl-data-table-scroll-horizontal-content"></div>
+                </div>
+            </div>
+
+            <div class="apl-data-table-scroll-vertical-wrapper">
+                <div class="apl-data-table-scroll-vertical">
+                    <div class="apl-data-table-scroll-vertical-content"></div>
+                </div>
+            </div>
+
+        </div>
+        <!--end of data grid body-->
+        <!--data grid footer-->
+        <div class="apl-data-table-footer">
+            <div class="apl-data-table-prev<?=$this->instance->currentPage>1?'':' disabled'?>">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            </div>
+            <div class="apl-data-table-page">
+                <select class="form-control">
+                    <?php for ($i = 1; $i <= $this->instance->pagesNumber; $i++) : ?>
+                    <option value="<?=$i?>"
+                    <?=$i==$this->instance->currentPage?' selected="selected"':''?>>
+                    <?=$i?>
+                    </option>
+                    <?php endfor ?>
+                </select>
+            </div>
+            <div class="apl-data-table-next<?=$this->instance->currentPage<$this->instance->pagesNumber?'':' disabled'?>">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </div>
+            <div class="apl-data-table-limit">
+                <select class="form-control">
+                    <?php foreach ($this->instance->itemsPerPageVariants as $v) : ?>
+                    <option value="<?=$v?>"
+                    <?=$v==$this->instance->itemsPerPage?' selected="selected"':''?>>
+                    <?=$v?>
+                    </option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+        <!--end of data grid footer-->
+    </div>
+    <!--end of data grid-->
+{% endblock %}

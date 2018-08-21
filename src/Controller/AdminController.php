@@ -33,10 +33,8 @@ class AdminController extends AbstractController
         $dt = $dtr->getDataTable(NamedTimestampable::class);
 
         $cell = $dt->getCell();
-        foreach ($cell as $item) {
-            $item->getType()->getType();
-        }
 
-        return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
+
+        return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
     }
 }
