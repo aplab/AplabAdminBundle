@@ -157,6 +157,15 @@ function AplDataTable (container, data)
         vcalc();
         hcalc();
         vcalc();
+        setTimeout(function () {
+            var sidebar_body_col_divs = sidebar_body_col.find('div');
+            data.children('div').each(function (i, o)
+            {
+                sidebar_body_col_divs.eq(i).css({
+                    height: $(o).height()
+                });
+            });
+        }, 1);
     };
 
     init();
