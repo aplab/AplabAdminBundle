@@ -67,9 +67,7 @@ class ModuleMetadataRepository
         }
         $metadata = new ModuleMetadata($reflection_class, $this->getReader());
         $env = $_SERVER['APP_ENV'] ?? 'dev';
-        if ('prod' === $env) {
-            $this->cache->set($cache_key, $metadata);
-        }
+        $this->cache->set($cache_key, $metadata);
         return $metadata;
     }
 

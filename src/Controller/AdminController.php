@@ -34,8 +34,8 @@ class AdminController extends AbstractController
 
         $cell = $dt->getCell();
         $items = $dt->getItems();
-        dump($cell);
-        dump($items);
+//        dump($cell);
+//        dump($items);
 
         return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
     }
