@@ -7,7 +7,6 @@
 function AplAdminMenu(data, append_to) {
     append_to = append_to || $('body');
     var instanceName = data.id;
-    console.log(data);
 
     (
         /**

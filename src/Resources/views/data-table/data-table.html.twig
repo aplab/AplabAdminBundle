@@ -1,4 +1,12 @@
 {% extends ('@AplabAdmin/admin.html.twig') %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            new AplDataTable($('#apl-data-table'));
+        });
+    </script>
+{% endblock %}
 {% block workarea %}
     <!--data grid-->
     <div class="apl-data-table"
@@ -34,31 +42,31 @@
                         {% for item in items %}
                             <div class="wExt" data-pk="<?=str::hsc($data_pk)?>">
                                 {% for cell_item in cell %}
-
+                                    {% include '@AplabAdmin/data-table/cell-type/' ~ cell_item.type.type ~ '.html.twig' %}
                                 {% endfor %}
                             </div>
                         {% endfor %}
-                        <?php foreach ($this->instance->items as $item) : ?>
-                            <?php
-                            $key = $item::pk();
-                            if (is_array($key)) {
-                                /**
-                                 * @TODO проработать вариант с составными ключами, json {"id1":"","id2":""}
-                                 */
-                            } else {
-                                $data_pk = json_encode([
-                                    $key => $item->{$key}
-                            ]);
-                            }
-                            ?>
-                            <div class="wExt<?=$row_class?>" data-pk="<?=str::hsc($data_pk)?>">
-                                <?php foreach ($columns as $column) : ?>
-                                    <?php $column->cell->item = $item ?>
-                                    <?php $column->cell->id = $cell_id_counter++ ?>
-                                    <?=$column->cell?>
-                                <?php endforeach ?>
-                            </div>
-                        <?php endforeach ?>
+                        {#<?php foreach ($this->instance->items as $item) : ?>#}
+                            {#<?php#}
+                            {#$key = $item::pk();#}
+                            {#if (is_array($key)) {#}
+                                {#/**#}
+                                 {#* @TODO проработать вариант с составными ключами, json {"id1":"","id2":""}#}
+                                 {#*/#}
+                            {#} else {#}
+                                {#$data_pk = json_encode([#}
+                                    {#$key => $item->{$key}#}
+                            {#]);#}
+                            {#}#}
+                            {#?>#}
+                            {#<div class="wExt<?=$row_class?>" data-pk="<?=str::hsc($data_pk)?>">#}
+                                {#<?php foreach ($columns as $column) : ?>#}
+                                    {#<?php $column->cell->item = $item ?>#}
+                                    {#<?php $column->cell->id = $cell_id_counter++ ?>#}
+                                    {#<?=$column->cell?>#}
+                                {#<?php endforeach ?>#}
+                            {#</div>#}
+                        {#<?php endforeach ?>#}
                     </div>
                 </div>
 

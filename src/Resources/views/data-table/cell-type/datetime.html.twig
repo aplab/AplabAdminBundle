@@ -1,0 +1,8 @@
+<div class="w{{ cell_item.width }} text-center">
+    {% set tmp = attribute(item, cell_item.propertyName) %}
+    {% if tmp is null %}
+        <span class="text-muted">undefined</span>
+    {% else %}
+        {{ tmp|date("Y.m.d H:i:s") }}
+    {% endif %}
+</div>
