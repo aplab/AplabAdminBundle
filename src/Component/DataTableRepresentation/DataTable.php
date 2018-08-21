@@ -94,4 +94,13 @@ class DataTable
             return $a->getOrder() <=> $b->getOrder();
         });
     }
+
+    /**
+     * Temporary stub
+     * @return object[]
+     */
+    public function getItems()
+    {
+        return $this->entityManager->getRepository($this->entityClassName)->findAll();
+    }
 }
