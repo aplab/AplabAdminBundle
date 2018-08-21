@@ -14,33 +14,41 @@
 {% endblock %}
 {% block body_classes %}{{ UiDataTransmitter.getBodyClasses() }}{% endblock %}
 {% block body %}
-    <div id="capsule-cms-sidebar">
+    <div id="aplab-admin-sidebar">
         {% block sidebar %}
-            <div id="capsule-cms-sidebar-buttons">
-                <button id="capsule-cms-sidebar-button-close">
+            <div id="aplab-admin-sidebar-buttons">
+                <button id="aplab-admin-sidebar-button-close">
                     <i class="fas fa-times"></i>
                 </button>
-                <button id="capsule-cms-sidebar-button-toggle-pin">
+                <button id="aplab-admin-sidebar-button-toggle-pin">
                     <i class="fas fa-thumbtack"></i>
                 </button>
             </div>
         {% endblock %}
         <div id="apl-admin-main-menu-wrapper"></div>
     </div>
-    <div id="capsule-cms-content">
+    <div id="aplab-admin-content">
         {% block content %}
-            <button class="btn btn-light m-1"
-                    id="capsule-cms-open-sidebar">
-                <i class="fas fa-bars"></i>
-            </button>
-            {#{{ dump(count) }}#}
-            {#{{ dump(items) }}#}
-            {#{{ dump(items2) }}#}
-            {#{{ dump(md) }}#}
-            {#{{ dump(meta) }}#}
-            {{ dump(cell) }}
+            <div id="aplab-admin-navbar">
+                {% block navbar %}
+                    <button class="btn btn-light m-1"
+                            id="aplab-admin-open-sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                {% endblock %}
+            </div>
+            <div id="aplab-admin-workarea">
+                {% block workarea %}
+                    {#{{ dump(count) }}#}
+                    {#{{ dump(items) }}#}
+                    {#{{ dump(items2) }}#}
+                    {#{{ dump(md) }}#}
+                    {#{{ dump(meta) }}#}
+                    {{ dump(cell) }}
 
 
+                {% endblock %}
+            </div>
         {% endblock %}
     </div>
 {% endblock %}

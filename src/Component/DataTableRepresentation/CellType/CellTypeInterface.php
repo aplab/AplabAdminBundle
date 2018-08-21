@@ -11,5 +11,5 @@ namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType;
 
 interface CellTypeInterface
 {
-
+    public function getType();
 }

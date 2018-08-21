@@ -5,74 +5,74 @@ $(document).ready(function () {
      *
      * @constructor
      */
-    window.CapsuleCms = function () {
+    window.AplabAdmin = function () {
     };
 
     /**
      * Returns common cookie key name
      * @returns {string}
      */
-    CapsuleCms.getCookieKey = function () {
-        return 'capsule-cms-data';
+    AplabAdmin.getCookieKey = function () {
+        return 'aplab-admin-data';
     };
 
     /**
      * Initialize
      */
-    CapsuleCms.init = function () {
-        $('#capsule-cms-open-sidebar').click(function () {
-            CapsuleCms.openSidebar();
+    AplabAdmin.init = function () {
+        $('#aplab-admin-open-sidebar').click(function () {
+            AplabAdmin.openSidebar();
         });
 
-        $('#capsule-cms-sidebar-button-close').click(function () {
-            CapsuleCms.closeSidebar();
+        $('#aplab-admin-sidebar-button-close').click(function () {
+            AplabAdmin.closeSidebar();
         });
 
-        $('#capsule-cms-sidebar-button-toggle-pin').click(function () {
-            CapsuleCms.togglePinSidebar();
+        $('#aplab-admin-sidebar-button-toggle-pin').click(function () {
+            AplabAdmin.togglePinSidebar();
         });
     };
 
     /**
      * Open sidebar
      */
-    CapsuleCms.openSidebar = function () {
-        $('body').addClass('capsule-cms-sidebar-open');
-        CapsuleCms.setIsSidebarOpen(true);
+    AplabAdmin.openSidebar = function () {
+        $('body').addClass('aplab-admin-sidebar-open');
+        AplabAdmin.setIsSidebarOpen(true);
     };
 
     /**
      * Close sidebar
      */
-    CapsuleCms.closeSidebar = function () {
-        $('body').removeClass('capsule-cms-sidebar-open');
-        CapsuleCms.setIsSidebarOpen(false);
+    AplabAdmin.closeSidebar = function () {
+        $('body').removeClass('aplab-admin-sidebar-open');
+        AplabAdmin.setIsSidebarOpen(false);
     };
 
     /**
      * Pin sidebar
      */
-    CapsuleCms.pinSidebar = function () {
-        $('body').addClass('capsule-cms-sidebar-pin');
-        CapsuleCms.setIsSidebarPin(true);
+    AplabAdmin.pinSidebar = function () {
+        $('body').addClass('aplab-admin-sidebar-pin');
+        AplabAdmin.setIsSidebarPin(true);
     };
 
     /**
      * Unpin sidebar
      */
-    CapsuleCms.unpinSidebar = function () {
-        $('body').removeClass('capsule-cms-sidebar-pin');
-        CapsuleCms.setIsSidebarPin(false);
+    AplabAdmin.unpinSidebar = function () {
+        $('body').removeClass('aplab-admin-sidebar-pin');
+        AplabAdmin.setIsSidebarPin(false);
     };
 
     /**
      * Toggle pin sidebar
      */
-    CapsuleCms.togglePinSidebar = function () {
-        if ($('body').hasClass('capsule-cms-sidebar-pin')) {
-            CapsuleCms.unpinSidebar();
+    AplabAdmin.togglePinSidebar = function () {
+        if ($('body').hasClass('aplab-admin-sidebar-pin')) {
+            AplabAdmin.unpinSidebar();
         } else {
-            CapsuleCms.pinSidebar();
+            AplabAdmin.pinSidebar();
         }
     };
 
@@ -81,12 +81,12 @@ $(document).ready(function () {
      *
      * @returns {*}
      */
-    CapsuleCms.getCookieData = function () {
-        var data = Cookies.getJSON(CapsuleCms.getCookieKey());
+    AplabAdmin.getCookieData = function () {
+        var data = Cookies.getJSON(AplabAdmin.getCookieKey());
         var type = typeof(data);
         if ('object' !== type.toLowerCase()) {
             data = {};
-            Cookies.set(CapsuleCms.getCookieKey(), data);
+            Cookies.set(AplabAdmin.getCookieKey(), data);
         }
         return data;
     };
@@ -96,10 +96,10 @@ $(document).ready(function () {
      *
      * @param value
      */
-    CapsuleCms.setIsSidebarPin = function (value) {
-        var data = CapsuleCms.getCookieData();
+    AplabAdmin.setIsSidebarPin = function (value) {
+        var data = AplabAdmin.getCookieData();
         data.sidebar_pin = !!value;
-        Cookies.set(CapsuleCms.getCookieKey(), data);
+        Cookies.set(AplabAdmin.getCookieKey(), data);
     };
 
     /**
@@ -107,14 +107,14 @@ $(document).ready(function () {
      *
      * @param value
      */
-    CapsuleCms.setIsSidebarOpen = function (value) {
-        var data = CapsuleCms.getCookieData();
+    AplabAdmin.setIsSidebarOpen = function (value) {
+        var data = AplabAdmin.getCookieData();
         data.sidebar_open = !!value;
-        Cookies.set(CapsuleCms.getCookieKey(), data);
+        Cookies.set(AplabAdmin.getCookieKey(), data);
     };
 
     /**
      * Call initialization.
      */
-    CapsuleCms.init(/** test 6 */);
+    AplabAdmin.init(/** test 6 */);
 });

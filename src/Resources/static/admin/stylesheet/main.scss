@@ -25,16 +25,5 @@ body {
     overflow: hidden;
 }
 
-@import "sidebar";
+@import "layout_admin";
 
-#capsule-cms-content {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: auto;
-    background: $content-background-color none repeat scroll 0 0;
-    overflow: hidden;
-    z-index: 200;
-}

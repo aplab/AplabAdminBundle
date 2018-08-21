@@ -11,11 +11,11 @@ namespace Aplab\AplabAdminBundle\Util;
 
 class UiDataTransmitter
 {
-    const COOKIE_KEY = 'capsule-cms-data';
+    const COOKIE_KEY = 'aplab-admin-data';
 
-    const CLASS_SIDEBAR_OPEN = 'capsule-cms-sidebar-open';
+    const CLASS_SIDEBAR_OPEN = 'aplab-admin-sidebar-open';
 
-    const CLASS_SIDEBAR_PIN = 'capsule-cms-sidebar-pin';
+    const CLASS_SIDEBAR_PIN = 'aplab-admin-sidebar-pin';
 
     private $sidebarPin;
 
