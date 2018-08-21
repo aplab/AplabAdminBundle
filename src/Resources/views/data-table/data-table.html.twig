@@ -11,19 +11,12 @@
 
                 <div class="apl-data-table-header">
                     <div class="apl-data-table-header-row wExt">
-                        <?php foreach ($columns as $column) : ?>
-                        <?php if ($column->column->title) : ?>
-                        <div class="w<?= $column->column->width ?>"
-                             title="<?= _::_($column->column->title) ?>">
-                            <?= _::_($column->column->title) ?>
-                        </div>
-                        <?php else : ?>
-                        <div class="w<?= $column->column->width ?>"
-                             title="<?= _::_($column->property->title) ?>">
-                            <?= _::_($column->property->title) ?>
-                        </div>
-                        <?php endif ?>
-                        <?php endforeach ?>
+                        {% for cell_item in cell %}
+                            <div class="w{{ cell_item.width }}"
+                                 title="{{ cell_item.propertyTitle }}">
+                                {{ cell_item.propertyTitle }}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
 

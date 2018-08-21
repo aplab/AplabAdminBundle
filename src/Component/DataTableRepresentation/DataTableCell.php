@@ -23,6 +23,11 @@ class DataTableCell
     private $propertyName;
 
     /**
+     * @var string
+     */
+    private $propertyTitle;
+
+    /**
      * @var int
      */
     private $width;
@@ -52,6 +57,7 @@ class DataTableCell
     public function __construct(\ReflectionProperty $property, Property $property_metadata, Cell $cell_metadata, CellTypeFactory $factory)
     {
         $this->propertyName = $property->getName();
+        $this->propertyTitle = $property_metadata->getTitle();
         $this->width = $cell_metadata->getWidth();
         $this->order = $cell_metadata->getOrder();
         $this->type = $factory->create($cell_metadata->getType());
@@ -90,5 +96,19 @@ class DataTableCell
         return $this->type;
     }
 
+    /**
+     * @return string
+     */
+    public function getPropertyTitle(): string
+    {
+        return $this->propertyTitle;
+    }
 
+    /**
+     * @return Options
+     */
+    public function getOptions(): Options
+    {
+        return $this->options;
+    }
 }
