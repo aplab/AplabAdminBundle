@@ -62,7 +62,7 @@ class NamedTimestampable
      *     options={"default"="CURRENT_TIMESTAMP"}
      * )
      * @ModuleMetadata\Property(title="Created at", readonly=true,
-     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Datetime")},
+     *     cell={@ModuleMetadata\Cell(order=2000, width=156, type="Datetime")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
      */
     private $createdAt;
@@ -75,7 +75,7 @@ class NamedTimestampable
      *     options={"default"="CURRENT_TIMESTAMP"}
      * )
      * @ModuleMetadata\Property(title="Last modified", readonly=true,
-     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Datetime")},
+     *     cell={@ModuleMetadata\Cell(order=2000, width=156, type="Datetime")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
      */
     private $lastModified;
