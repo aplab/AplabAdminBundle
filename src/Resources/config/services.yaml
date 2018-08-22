@@ -39,6 +39,9 @@ services:
         arguments:
             $structure_location: ~
 
+    Aplab\AplabAdminBundle\Component\ActionMenu\ActionMenuManager:
+        arguments: ['@router.default']
+
     Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository:
         arguments: ['@cache.app.simple', '@annotations.reader']
 

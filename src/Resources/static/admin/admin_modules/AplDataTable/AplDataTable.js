@@ -170,6 +170,18 @@ function AplDataTable (container, data)
 
     init();
 
+    this.reinit = function() {
+        setTimeout(function () {
+            init();
+        }, 10);
+        setTimeout(function () {
+            init();
+        }, 100);
+        setTimeout(function () {
+            init();
+        }, 1000);
+    };
+
     $(window).resize(function()
     {
         init();

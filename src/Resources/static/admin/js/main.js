@@ -39,6 +39,9 @@ $(document).ready(function () {
     AplabAdmin.openSidebar = function () {
         $('body').addClass('aplab-admin-sidebar-open');
         AplabAdmin.setIsSidebarOpen(true);
+        if (AplDataTable.getInstance !== undefined) {
+            AplDataTable.getInstance().reinit();
+        }
     };
 
     /**
@@ -47,6 +50,9 @@ $(document).ready(function () {
     AplabAdmin.closeSidebar = function () {
         $('body').removeClass('aplab-admin-sidebar-open');
         AplabAdmin.setIsSidebarOpen(false);
+        if (AplDataTable.getInstance !== undefined) {
+            AplDataTable.getInstance().reinit();
+        }
     };
 
     /**
@@ -55,6 +61,9 @@ $(document).ready(function () {
     AplabAdmin.pinSidebar = function () {
         $('body').addClass('aplab-admin-sidebar-pin');
         AplabAdmin.setIsSidebarPin(true);
+        if (AplDataTable.getInstance !== undefined) {
+            AplDataTable.getInstance().reinit();
+        }
     };
 
     /**
@@ -63,6 +72,9 @@ $(document).ready(function () {
     AplabAdmin.unpinSidebar = function () {
         $('body').removeClass('aplab-admin-sidebar-pin');
         AplabAdmin.setIsSidebarPin(false);
+        if (AplDataTable.getInstance !== undefined) {
+            AplDataTable.getInstance().reinit();
+        }
     };
 
     /**
