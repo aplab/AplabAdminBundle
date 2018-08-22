@@ -58,10 +58,11 @@ class ActionMenuManager
 
     /**
      * @param ActionMenu $menu
+     * @throws Exception
      */
     private function preconfigureDefaultInstance(ActionMenu $menu)
     {
-
+        $menu->addItem(new MenuItem('test_id', 'test name'));
     }
 
     /**

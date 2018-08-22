@@ -20,29 +20,6 @@ class ActionMenu implements \JsonSerializable
     protected static $instances = [];
 
     /**
-     * @var MenuItem[]
-     */
-    protected $items = [];
-
-    /**
-     * @return MenuItem[]
-     */
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    /**
-     * @param MenuItem $item
-     * @return ActionMenu
-     */
-    public function addItem(MenuItem $item)
-    {
-        $this->items[] = $item;
-        return $this;
-    }
-
-    /**
      * @var string
      */
     protected $id;
@@ -64,6 +41,29 @@ class ActionMenu implements \JsonSerializable
     {
         $this->id = $id;
         static::registerInstance($this);
+        return $this;
+    }
+
+    /**
+     * @var MenuItem[]
+     */
+    protected $items = [];
+
+    /**
+     * @return MenuItem[]
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param MenuItem $item
+     * @return ActionMenu
+     */
+    public function addItem(MenuItem $item)
+    {
+        $this->items[] = $item;
         return $this;
     }
 

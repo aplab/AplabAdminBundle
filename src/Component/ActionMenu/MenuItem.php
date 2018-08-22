@@ -40,6 +40,29 @@ class MenuItem implements \JsonSerializable
     }
 
     /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return MenuItem
+     */
+    public function setName(string $name): MenuItem
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
      * @var bool
      */
     protected $disabled;
@@ -66,29 +89,6 @@ class MenuItem implements \JsonSerializable
      * @var Icon[]
      */
     protected $icon = [];
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     * @return MenuItem
-     */
-    public function setName(string $name): MenuItem
-    {
-        $this->name = $name;
-        return $this;
-    }
 
     /**
      * MenuItem constructor.
