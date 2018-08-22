@@ -20,12 +20,12 @@ class ActionMenu implements \JsonSerializable
     protected static $instances = [];
 
     /**
-     * @var ActionMenuItem[]
+     * @var MenuItem[]
      */
     protected $items = [];
 
     /**
-     * @return ActionMenuItem[]
+     * @return MenuItem[]
      */
     public function getItems()
     {
@@ -33,10 +33,10 @@ class ActionMenu implements \JsonSerializable
     }
 
     /**
-     * @param ActionMenuItem $item
+     * @param MenuItem $item
      * @return ActionMenu
      */
-    public function addItem(ActionMenuItem $item)
+    public function addItem(MenuItem $item)
     {
         $this->items[] = $item;
         return $this;
@@ -57,13 +57,14 @@ class ActionMenu implements \JsonSerializable
 
     /**
      * @param string $id
-     * @return string
+     * @return static
      * @throws Exception
      */
     public function setId(string $id)
     {
         $this->id = $id;
         static::registerInstance($this);
+        return $this;
     }
 
     /**
@@ -87,7 +88,7 @@ class ActionMenu implements \JsonSerializable
 
     /**
      * @param string $id
-     * @return Menu|null
+     * @return ActionMenu|null
      */
     public static function getInstance(string $id)
     {
@@ -98,7 +99,7 @@ class ActionMenu implements \JsonSerializable
      * @param self $instance
      * @throws Exception
      */
-    private static function registerInstance(Menu $instance)
+    private static function registerInstance(ActionMenu $instance)
     {
         $id = $instance->getId();
         if (array_key_exists($id, static::$instances)) {
@@ -118,7 +119,7 @@ class ActionMenu implements \JsonSerializable
     {
         return [
             'id' => $this->id,
-            'items' => array_map(function(ActionMenuItem $i) {
+            'items' => array_map(function(MenuItem $i) {
                 return $i->jsonSerialize();
             }, $this->items)
         ];

@@ -43,6 +43,7 @@ class ActionMenuManager
     /**
      * @param string $id
      * @return ActionMenu
+     * @throws Exception
      */
     public function getInstance($id = self::DEFAULT_INSTANCE_NAME)
     {

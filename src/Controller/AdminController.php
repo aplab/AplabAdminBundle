@@ -27,10 +27,13 @@ class AdminController extends AbstractController
      * @param DataTableRepresentation $dtr
      * @param ActionMenuManager $amm
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Aplab\AplabAdminBundle\Component\ActionMenu\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
     public function desktop(DataTableRepresentation $dtr, ActionMenuManager $amm) {
+
+        dump($amm->getInstance());
 
         $dt = $dtr->getDataTable(NamedTimestampable::class);
 

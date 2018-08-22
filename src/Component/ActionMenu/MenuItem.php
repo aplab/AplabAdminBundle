@@ -6,7 +6,7 @@
  * Time: 13:51
  */
 
-namespace Aplab\AplabAdminBundle\Component\Menu;
+namespace Aplab\AplabAdminBundle\Component\ActionMenu;
 
 
 class MenuItem implements \JsonSerializable
@@ -15,29 +15,6 @@ class MenuItem implements \JsonSerializable
      * @var static[]
      */
     protected static $instances = [];
-
-    /**
-     * @var static[]
-     */
-    protected $items = [];
-
-    /**
-     * @return static[]
-     */
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    /**
-     * @param self $item
-     * @return static
-     */
-    public function addItem(MenuItem $item)
-    {
-        $this->items[] = $item;
-        return $this;
-    }
 
     /**
      * @var string
@@ -284,9 +261,6 @@ class MenuItem implements \JsonSerializable
         $data['icon'] = array_map(function (Icon $i) {
             return $i->getIcon();
         }, $this->getIcon());
-        $data['items'] = array_map(function (MenuItem $i) {
-            return $i->jsonSerialize();
-        }, $this->getItems());
         return $data;
     }
 }
