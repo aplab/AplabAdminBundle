@@ -103,6 +103,24 @@
     }
 }
 
+#aplab-admin-open-sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: $navbar-height;
+    height: $navbar-height;
+    background: $navbar-background-color;
+    border: 0;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    line-height: 49px;
+    outline-style: none;
+}
+
 .aplab-admin-sidebar-open {
     #aplab-admin-open-sidebar {
         display: none;
@@ -139,7 +157,10 @@
     height :$navbar-height;
     top: 0;
     bottom: auto;
-    overflow: hidden;
+    //overflow: hidden;
+    z-index: 200;
+    color: #fff;
+    background: $navbar-background-color;
 }
 #aplab-admin-workarea {
     position: absolute;
@@ -150,4 +171,5 @@
     height: auto;
     bottom: 0;
     overflow: hidden;
+    z-index: 100;
 }
