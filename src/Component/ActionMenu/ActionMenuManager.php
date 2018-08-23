@@ -63,11 +63,13 @@ class ActionMenuManager
      */
     private function preconfigureDefaultInstance(ActionMenu $menu)
     {
-        $menu->addItem(new MenuItem('test_id', 'test name'));
-        MenuItem::getInstance('test_id')
-            ->setAction(new Route('admin_desktop'))
-            ->addIcon(new Icon('fas fa-thumbtack'))
-            ->addIcon(new Icon('fas fa-shipping-fast text-danger'));
+        for ($i = 1; $i < 20; $i++) {
+            $menu->addItem(new MenuItem('test_id' . $i, 'test name test nametest nametest name'));
+            MenuItem::getInstance('test_id' . $i)
+                ->setAction(new Route('admin_desktop'))
+                ->addIcon(new Icon('fas fa-shipping-fast text-danger'))
+                ->addIcon(new Icon('fas fa-thumbtack text-success small'));
+        }
     }
 
     /**
