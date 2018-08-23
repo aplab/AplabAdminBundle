@@ -126,6 +126,35 @@ $(document).ready(function () {
     };
 
     /**
+     * Expand actionsbar handler
+     */
+    AplabAdmin.expandActionMenu = function ()
+    {
+        AplActionMenu.getInstance('apl-admin-action-menu').show();
+        $('body').on('click', AplabAdmin.clickOutsideActionMenuHandler);
+    };
+
+    AplabAdmin.collapseActionMenu = function ()
+    {
+        $('body').off('click', AplabAdmin.clickOutsideActionMenuHandler);
+        AplActionMenu.getInstance('apl-admin-action-menu').hide();
+    };
+
+    AplabAdmin.clickOutsideActionMenuHandler = function (event)
+    {
+        if ($(event.target).closest('#apl-admin-action-menu').length) {
+            return;
+        }
+        AplabAdmin.collapseActionMenu();
+    };
+
+    $('#aplab-admin-open-action-menu').on('click', function (event)
+    {
+        event.stopPropagation();
+        AplabAdmin.expandActionMenu();
+    });
+
+    /**
      * Call initialization.
      */
     AplabAdmin.init(/** test 6 */);

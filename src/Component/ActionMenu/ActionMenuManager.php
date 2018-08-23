@@ -28,6 +28,7 @@ class ActionMenuManager
     public function __construct(UrlGeneratorInterface $router)
     {
         $this->router = $router;
+        Route::setRouter($router);
     }
 
     /**
@@ -63,6 +64,10 @@ class ActionMenuManager
     private function preconfigureDefaultInstance(ActionMenu $menu)
     {
         $menu->addItem(new MenuItem('test_id', 'test name'));
+        MenuItem::getInstance('test_id')
+            ->setAction(new Route('admin_desktop'))
+            ->addIcon(new Icon('fas fa-thumbtack'))
+            ->addIcon(new Icon('fas fa-shipping-fast text-danger'));
     }
 
     /**

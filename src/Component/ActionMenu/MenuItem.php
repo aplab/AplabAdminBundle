@@ -65,7 +65,7 @@ class MenuItem implements \JsonSerializable
     /**
      * @var bool
      */
-    protected $disabled;
+    protected $disabled = false;
 
     /**
      * Additional CSS class

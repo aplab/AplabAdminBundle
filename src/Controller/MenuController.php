@@ -9,10 +9,11 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
+use Aplab\AplabAdminBundle\Component\ActionMenu\ActionMenuManager;
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class MainMenuController extends AbstractController
+class MenuController extends AbstractController
 {
     /**
      * @param MenuManager $manager
@@ -25,6 +26,21 @@ class MainMenuController extends AbstractController
         $menu = $manager->getMenu('MainMenu');
         return $this->render(
             '@AplabAdmin/main-menu.html.twig', [
+                'json' => $menu->__toJson()
+            ]
+        );
+    }
+
+    /**
+     * @param ActionMenuManager $manager
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Aplab\AplabAdminBundle\Component\ActionMenu\Exception
+     */
+    public function actionMenu(ActionMenuManager $manager)
+    {
+        $menu = $manager->getInstance();
+        return $this->render(
+            '@AplabAdmin/action-menu.html.twig', [
                 'json' => $menu->__toJson()
             ]
         );

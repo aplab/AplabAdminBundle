@@ -9,7 +9,10 @@
 {% block javascripts %}
     <script src="{{ asset('static/cms/build.js') }}"></script>
     {{ render(controller(
-        'Aplab\\AplabAdminBundle\\Controller\\MainMenuController::mainMenu'
+        'Aplab\\AplabAdminBundle\\Controller\\MenuController::mainMenu'
+    )) }}
+    {{ render(controller(
+        'Aplab\\AplabAdminBundle\\Controller\\MenuController::actionMenu'
     )) }}
 {% endblock %}
 {% block body_classes %}{{ UiDataTransmitter.getBodyClasses() }}{% endblock %}
@@ -33,6 +36,9 @@
                 {% block navbar %}
                     <button id="aplab-admin-open-sidebar">
                         <i class="fas fa-bars"></i>
+                    </button>
+                    <button id="aplab-admin-open-action-menu">
+                        <i class="fas fa-ellipsis-v"></i>
                     </button>
 
 
