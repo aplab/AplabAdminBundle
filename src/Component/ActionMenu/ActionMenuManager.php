@@ -63,7 +63,7 @@ class ActionMenuManager
      */
     private function preconfigureDefaultInstance(ActionMenu $menu)
     {
-        for ($i = 1; $i < 20; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $menu->addItem(new MenuItem('test_id' . $i, 'test name test nametest nametest name'));
             MenuItem::getInstance('test_id' . $i)
                 ->setAction(new Route('admin_desktop'))
