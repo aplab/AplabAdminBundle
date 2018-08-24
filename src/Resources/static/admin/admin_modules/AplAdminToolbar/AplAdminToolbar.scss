@@ -1,4 +1,5 @@
 $namespace: apl-admin-toolbar;
+$height: 50px;
 .apl-admin-toolbar {
   position: absolute;
   left: 0;
@@ -6,9 +7,39 @@ $namespace: apl-admin-toolbar;
   top: 0;
   bottom: 0;
   overflow: hidden;
-  background: #ccc;
   display: block;
   &-item {
-
+    display: block;
+    float: right;
+    height: $height;
+    overflow: hidden;
+    color: #fff !important;
+  }
+  &-icons {
+    display: block;
+    overflow: hidden;
+    height: 32px;
+    width: auto;
+    position: relative;
+  }
+  &-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    height: 32px;
+    text-align: center;
+    line-height: 31px;
+    font-size: 18px;
+  }
+  &-text {
+    display: block;
+    overflow: hidden;
+    height: 18px;
+    width: auto;
+    line-height: 17px;
+    font-size: 11px;
   }
 }

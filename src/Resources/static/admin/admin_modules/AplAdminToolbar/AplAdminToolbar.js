@@ -60,25 +60,27 @@ function AplAdminToolbar(data, append_to)
             var item = items[id];
             var span;
             var icon = null;
+            var text = $('<span class="apl-admin-toolbar-text">' + item.name + '</span>');
             if (item.icon !== undefined && item.icon.length) {
-                icon = '';
+                icon = '<span class="apl-admin-toolbar-icons">';
                 for (var icon_item_id in item.icon) {
-                    icon += '<i class="' + item.icon[icon_item_id] + '" aria-hidden="true"></i>';
+                    icon += '<span class="apl-admin-toolbar-icon">';
+                    icon += '<i class="' + item.icon[icon_item_id] + '" aria-hidden="true"></i></span>';
                 }
+                icon += '</span>';
                 icon = $(icon);
             }
             if (item.url !== undefined) {
-                var a = $('<a>');
-                a.text(item.name);
+                var a = $('<a class="apl-admin-toolbar-item">');
                 a.prop('href', item.url);
                 if (item.hasOwnProperty('target') && item.target) {
                     a.prop('target', item.target);
                 }
                 toolbar.append(a);
                 a.append(icon);
+                a.append(text);
             } else if (item.handler !== undefined) {
-                span = $('<span>');
-                span.html(item.caption);
+                span = $('<span class="apl-admin-toolbar-item">');
                 toolbar.append(span);
                 (function (v)//isolation
                 {
@@ -88,11 +90,12 @@ function AplAdminToolbar(data, append_to)
                     });
                 })(item.handler);
                 span.append(icon);
+                span.append(text);
             } else {
-                span = $('<span>');
-                span.text(item.caption);
+                span = $('<span class="apl-admin-toolbar-item">');
                 toolbar.append(span);
                 span.append(icon);
+                span.append(text);
             }
         }
     };

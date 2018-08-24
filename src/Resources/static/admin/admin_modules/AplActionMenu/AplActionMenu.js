@@ -112,7 +112,7 @@ function AplActionMenu(data, append_to)
                 a.append(icon);
             } else if (item.handler !== undefined) {
                 span = $('<span>');
-                span.html(item.caption);
+                span.html(item.name);
                 content.append(span);
                 (function (v)//isolation
                 {
@@ -125,7 +125,7 @@ function AplActionMenu(data, append_to)
                 span.append(icon);
             } else {
                 span = $('<span>');
-                span.text(item.caption);
+                span.text(item.name);
                 content.append(span);
                 span.append(icon);
             }

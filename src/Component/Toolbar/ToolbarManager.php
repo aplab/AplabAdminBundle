@@ -64,11 +64,11 @@ class ToolbarManager
     private function preconfigureDefaultInstance(Toolbar $menu)
     {
         for ($i = 1; $i < 10; $i++) {
-            $menu->addItem(new ToolbarItem('test_id' . $i, 'test name test nametest nametest name'));
+            $menu->addItem(new ToolbarItem('test_id' . $i, 'test name'));
             ToolbarItem::getInstance('test_id' . $i)
                 ->setAction(new Route('admin_desktop'))
-                ->addIcon(new Icon('fas fa-shipping-fast text-danger'))
-                ->addIcon(new Icon('fas fa-thumbtack text-success small'));
+                ->addIcon(new Icon('fas fa-shipping-fast'))
+                ->addIcon(new Icon('fas fa-thumbtack'));
         }
     }
 
