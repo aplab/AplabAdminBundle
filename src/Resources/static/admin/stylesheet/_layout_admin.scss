@@ -192,3 +192,20 @@
     overflow: hidden;
     z-index: 100;
 }
+
+#aplab-admin-toolbar-wrapper {
+    position: absolute;
+    left: $navbar-height;
+    right: $navbar-height;
+    top: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    //background: #ccc;
+}
+.aplab-admin-sidebar-open {
+    #aplab-admin-toolbar-wrapper {
+        left: 0;
+    }
+}

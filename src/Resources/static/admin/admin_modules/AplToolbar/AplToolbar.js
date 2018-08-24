@@ -8,7 +8,7 @@
  * @param append_to
  * @constructor
  */
-function AplActionMenu(data, append_to)
+function AplToolbar(data, append_to)
 {
     append_to = append_to || $('body');
     var instanceName = data.id;
