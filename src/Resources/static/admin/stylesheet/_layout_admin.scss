@@ -202,10 +202,16 @@
     width: auto;
     height: auto;
     overflow: hidden;
+    -webkit-transition: left 0.15s ease 0s;
+    -o-transition: left 0.15s ease 0s;
+    transition: left 0.15s ease 0s;
     //background: #ccc;
 }
 .aplab-admin-sidebar-open {
     #aplab-admin-toolbar-wrapper {
         left: 0;
+        -webkit-transition: left 0.15s ease 0s;
+        -o-transition: left 0.15s ease 0s;
+        transition: left 0.15s ease 0s;
     }
 }

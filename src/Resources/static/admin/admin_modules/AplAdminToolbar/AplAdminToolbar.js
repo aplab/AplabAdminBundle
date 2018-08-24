@@ -43,37 +43,11 @@ function AplAdminToolbar(data, append_to)
         }
     )(this, arguments.callee);
 
-    var menu = $('<div>').prop({
+    var toolbar = $('<div>').prop({
         id: instanceName,
-        class: 'apl-action-menu'
+        class: 'apl-admin-toolbar'
     });
-    append_to.append(menu);
-
-    var wrapper = $('<div>').prop({
-        class: 'apl-action-menu-wrapper'
-    });
-    menu.append(wrapper);
-
-    var container = $('<div>').prop({
-        class: 'apl-action-menu-container'
-    });
-    wrapper.append(container);
-
-    var content = $('<div>').prop({
-        class: 'apl-action-menu-content'
-    });
-    container.append(content);
-
-    var scrollbar = $('<div>').prop({
-        class: 'apl-action-menu-scrollbar'
-    });
-    wrapper.append(scrollbar);
-
-    this.show = function () {
-        menu.show();
-        calcWidth();
-        init();
-    };
+    append_to.append(toolbar);
 
     /**
      * Create menu items
@@ -100,25 +74,24 @@ function AplAdminToolbar(data, append_to)
                 if (item.hasOwnProperty('target') && item.target) {
                     a.prop('target', item.target);
                 }
-                content.append(a);
+                toolbar.append(a);
                 a.append(icon);
             } else if (item.handler !== undefined) {
                 span = $('<span>');
                 span.html(item.caption);
-                content.append(span);
+                toolbar.append(span);
                 (function (v)//isolation
                 {
                     span.click(function ()
                     {
                         eval(v);
-                        menu.hide();
                     });
                 })(item.handler);
                 span.append(icon);
             } else {
                 span = $('<span>');
                 span.text(item.caption);
-                content.append(span);
+                toolbar.append(span);
                 span.append(icon);
             }
         }

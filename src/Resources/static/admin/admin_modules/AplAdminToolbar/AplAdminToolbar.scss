@@ -1,5 +1,5 @@
-$namespace: apl-toolbar;
-{.$namespace} {
+$namespace: apl-admin-toolbar;
+.apl-admin-toolbar {
   position: absolute;
   left: 0;
   right: 0;
@@ -7,4 +7,8 @@ $namespace: apl-toolbar;
   bottom: 0;
   overflow: hidden;
   background: #ccc;
+  display: block;
+  &-item {
+
+  }
 }
