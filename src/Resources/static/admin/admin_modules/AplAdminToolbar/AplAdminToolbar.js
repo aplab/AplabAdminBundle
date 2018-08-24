@@ -8,7 +8,7 @@
  * @param append_to
  * @constructor
  */
-function AplToolbar(data, append_to)
+function AplAdminToolbar(data, append_to)
 {
     append_to = append_to || $('body');
     var instanceName = data.id;
@@ -75,14 +75,6 @@ function AplToolbar(data, append_to)
         init();
     };
 
-    // noinspection JSUnusedGlobalSymbols
-    /**
-     * Public method wrapper
-     */
-    this.hide = function () {
-        menu.hide();
-    };
-
     /**
      * Create menu items
      */
@@ -133,63 +125,4 @@ function AplToolbar(data, append_to)
     };
 
     createMenuItems();
-
-    var containerHeight;
-    var contentHeight;
-    var scrollbarHeight;
-    var scrollbarTop;
-    var skipInit = false;
-
-    var content_scroll_distance;
-    var scrollbar_move_distance;
-
-    var margin_right;
-
-    var calcWidth = function () {
-        var wrapper_width = wrapper.width();
-        var content_width = content.width();
-        var scrollbar_width = wrapper_width - content_width;
-        margin_right = parseInt(container.css('marginRight'), 10) + (-scrollbar_width);
-        container.css({
-            marginRight: margin_right
-        });
-    };
-
-    var init = function() {
-        if (skipInit) {
-            return;
-        }
-        containerHeight = container.height();
-        contentHeight = content.height();
-        if (containerHeight >= contentHeight) {
-            scrollbar.hide();
-            return;
-        }
-        scrollbarHeight = containerHeight * containerHeight / contentHeight;
-        if (scrollbarHeight < 20) {
-            scrollbarHeight = 20;
-        }
-        content_scroll_distance = contentHeight - containerHeight;
-        scrollbar_move_distance = containerHeight - scrollbarHeight;
-
-        scrollbarTop = container.scrollTop() * scrollbar_move_distance / content_scroll_distance;
-        scrollbar.css({
-            height: scrollbarHeight,
-            top: scrollbarTop
-        });
-        if (margin_right) {
-            scrollbar.show();
-        }
-    };
-
-    $(window).resize(function() {
-        init();
-        calcWidth();
-    });
-
-    container.scroll(function() {
-        init();
-    });
-
-    init();
 }
