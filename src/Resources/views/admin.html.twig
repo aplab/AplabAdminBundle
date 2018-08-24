@@ -14,6 +14,9 @@
     {{ render(controller(
         'Aplab\\AplabAdminBundle\\Controller\\MenuController::actionMenu'
     )) }}
+    {{ render(controller(
+        'Aplab\\AplabAdminBundle\\Controller\\MenuController::toolbar'
+    )) }}
 {% endblock %}
 {% block body_classes %}{{ UiDataTransmitter.getBodyClasses() }}{% endblock %}
 {% block body %}

@@ -33,7 +33,7 @@ class AdminController extends AbstractController
      */
     public function desktop(DataTableRepresentation $dtr, ActionMenuManager $amm) {
 
-        dump($amm->getInstance()->__toJson());
+//        dump($amm->getInstance()->__toJson());
 
         $dt = $dtr->getDataTable(NamedTimestampable::class);
 

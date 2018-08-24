@@ -11,6 +11,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 use Aplab\AplabAdminBundle\Component\ActionMenu\ActionMenuManager;
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
+use Aplab\AplabAdminBundle\Component\Toolbar\ToolbarManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MenuController extends AbstractController
@@ -41,6 +42,21 @@ class MenuController extends AbstractController
         $menu = $manager->getInstance();
         return $this->render(
             '@AplabAdmin/action-menu.html.twig', [
+                'json' => $menu->__toJson()
+            ]
+        );
+    }
+
+    /**
+     * @param ToolbarManager $manager
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Aplab\AplabAdminBundle\Component\Toolbar\Exception
+     */
+    public function toolbar(ToolbarManager $manager)
+    {
+        $menu = $manager->getInstance();
+        return $this->render(
+            '@AplabAdmin/toolbar.html.twig', [
                 'json' => $menu->__toJson()
             ]
         );
