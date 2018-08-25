@@ -12,7 +12,6 @@ namespace Aplab\AplabAdminBundle\Controller;
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -34,10 +33,8 @@ class NamedTimestampableController extends AbstractController
         $dt = $dtr->getDataTable(NamedTimestampable::class);
         $cell = $dt->getCell();
         $pager = $dt->getPager();
-        if (isset($_POST['itemsPerPage'])) {
+        if (isset($_POST['itemsPerPage']) && isset($_POST['pageNumber'])) {
             $pager->setItemsPerPage($_POST['itemsPerPage']);
-        }
-        if (isset($_POST['pageNumber'])) {
             $pager->setCurrentPage($_POST['pageNumber']);
         }
         $items = $dt->getItems();
