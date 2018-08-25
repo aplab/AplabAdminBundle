@@ -78,6 +78,8 @@ gulp.task('scripts-dev', function () {
             './node_modules/js-cookie/src/js.cookie.js',
             './node_modules/popper.js/dist/umd/popper.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
+            './node_modules/screenfull/dist/screenfull.js',
+            './node_modules/clipboard/dist/clipboard.js',
             './admin_modules/AplAdminMenu/AplAdminMenu.js',
             './admin_modules/AplDataTable/AplDataTable.js',
             './admin_modules/AplActionMenu/AplActionMenu.js',
