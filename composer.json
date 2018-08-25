@@ -17,7 +17,8 @@
         "symfony/asset": "^4.1",
         "symfony/twig-bundle": "^4.1",
         "symfony/cache": "^4.1",
-        "symfony/orm-pack": "^1.0"
+        "symfony/orm-pack": "^1.0",
+        "symfony/filesystem": "^4.1"
     },
     "autoload": {
         "psr-4": {
