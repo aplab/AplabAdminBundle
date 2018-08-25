@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation;
 
 
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType\CellTypeFactory;
+use Aplab\AplabAdminBundle\Component\DataTableRepresentation\Pager\Pager;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadata;
 use Aplab\AplabAdminBundle\Util\CssWidthDefinition;
 use Doctrine\ORM\EntityManagerInterface;
@@ -109,7 +110,13 @@ class DataTable
      */
     public function getItems()
     {
-        return $this->entityManager->getRepository($this->entityClassName)->findAll();
+        $pager = $this->getPager();
+        return $this->entityManager->getRepository($this->entityClassName)->findBy(
+            [],
+            ['id' => 'DESC'],
+            $pager->getItemsPerPage(),
+            $pager->getOffset()
+        );
     }
 
     /**
@@ -127,5 +134,28 @@ class DataTable
             $this->count = $this->entityManager->getRepository($this->entityClassName)->count([]);
         }
         return $this->count;
+    }
+
+    /**
+     * @var Pager
+     */
+    private $pager;
+
+    /**
+     * @return Pager
+     */
+    public function getPager()
+    {
+        if (is_null($this->pager)) {
+            $pager = $this->systemState->get('pager');
+            if ($pager instanceof Pager) {
+                $this->pager = $pager;
+                $pager->setCount($this->getCount());
+            } else {
+                $this->pager = new Pager($this->getCount());
+                $this->systemState->pager = $pager;
+            }
+        }
+        return $this->pager;
     }
 }

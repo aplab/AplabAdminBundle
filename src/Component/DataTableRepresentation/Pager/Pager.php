@@ -112,6 +112,16 @@ class Pager
     }
 
     /**
+     * @param int $count
+     * @return Pager
+     */
+    public function setCount(int $count): Pager
+    {
+        $this->count = $count;
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getCurrentPage(): int
@@ -140,5 +150,21 @@ class Pager
     public function getOffset(): int
     {
         return ($this->currentPage - 1) * $this->itemsPerPage;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPrev(): ?int
+    {
+        return ($this->currentPage > 1) ? ($this->currentPage - 1) : null;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getNext(): ?int
+    {
+        return ($this->currentPage < ceil($this->count / $this->itemsPerPage)) ? ($this->currentPage + 1) : null;
     }
 }

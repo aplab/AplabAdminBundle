@@ -46,27 +46,6 @@
                                 {% endfor %}
                             </div>
                         {% endfor %}
-                        {#<?php foreach ($this->instance->items as $item) : ?>#}
-                            {#<?php#}
-                            {#$key = $item::pk();#}
-                            {#if (is_array($key)) {#}
-                                {#/**#}
-                                 {#* @TODO проработать вариант с составными ключами, json {"id1":"","id2":""}#}
-                                 {#*/#}
-                            {#} else {#}
-                                {#$data_pk = json_encode([#}
-                                    {#$key => $item->{$key}#}
-                            {#]);#}
-                            {#}#}
-                            {#?>#}
-                            {#<div class="wExt<?=$row_class?>" data-pk="<?=str::hsc($data_pk)?>">#}
-                                {#<?php foreach ($columns as $column) : ?>#}
-                                    {#<?php $column->cell->item = $item ?>#}
-                                    {#<?php $column->cell->id = $cell_id_counter++ ?>#}
-                                    {#<?=$column->cell?>#}
-                                {#<?php endforeach ?>#}
-                            {#</div>#}
-                        {#<?php endforeach ?>#}
                     </div>
                 </div>
 
@@ -89,30 +68,24 @@
         <!--end of data grid body-->
         <!--data grid footer-->
         <div class="apl-data-table-footer">
-            <div class="apl-data-table-prev<?=$this->instance->currentPage>1?'':' disabled'?>">
+            <div class="apl-data-table-prev{{ pager.prev ? '' : ' disabled' }}">
                 <span class="fas fa-chevron-left" aria-hidden="true"></span>
             </div>
             <div class="apl-data-table-page">
                 <select class="form-control">
-                    <?php for ($i = 1; $i <= $this->instance->pagesNumber; $i++) : ?>
-                    <option value="<?=$i?>"
-                    <?=$i==$this->instance->currentPage?' selected="selected"':''?>>
-                    <?=$i?>
-                    </option>
-                    <?php endfor ?>
+                    {% for p in pager.pages %}
+                        <option value="{{ p }}"{{ p == pager.currentPage ? ' selected' }}>{{ p }}</option>
+                    {% endfor %}
                 </select>
             </div>
-            <div class="apl-data-table-next<?=$this->instance->currentPage<$this->instance->pagesNumber?'':' disabled'?>">
+            <div class="apl-data-table-next{{ pager.next ? '' : ' disabled' }}">
                 <span class="fas fa-chevron-right" aria-hidden="true"></span>
             </div>
             <div class="apl-data-table-limit">
                 <select class="form-control">
-                    <?php foreach ($this->instance->itemsPerPageVariants as $v) : ?>
-                    <option value="<?=$v?>"
-                    <?=$v==$this->instance->itemsPerPage?' selected="selected"':''?>>
-                    <?=$v?>
-                    </option>
-                    <?php endforeach ?>
+                    {% for ipp in pager.itemsPerPageVariants %}
+                        <option value="{{ ipp }}"{{ ipp == pager.itemsPerPage ? ' selected' }}>{{ ipp }}</option>
+                    {% endfor %}
                 </select>
             </div>
         </div>

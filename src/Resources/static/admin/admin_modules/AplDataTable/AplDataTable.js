@@ -1,30 +1,31 @@
 /**
  * Created by polyanin on 17.11.2016.
  */
-function AplDataTable (container, data)
-{
-    /**
-     * static init
-     *
-     * @param self o same object
-     * @param c same function
-     */
-    (function(o, c) {
-        if (undefined === c.instance) {
-            c.instance = o;
-        } else {
-            if (c.instance !== o) {
-                console.log('Instance already exists. Only one instance allowed!');
-                throw new Error('Instance already exists. Only one instance allowed!');
+function AplDataTable(container) {
+
+    (
+        /**
+         * static init
+         *
+         * @param o self same object
+         * @param c same function
+         */
+        function (o, c) {
+            if (undefined === c.instance) {
+                c.instance = o;
+            } else {
+                if (c.instance !== o) {
+                    console.log('Instance already exists. Only one instance allowed!');
+                    throw new Error('Instance already exists. Only one instance allowed!');
+                }
+            }
+            if (undefined === c.getInstance) {
+                c.getInstance = function () {
+                    return c.instance;
+                };
             }
         }
-        if (undefined === c.getInstance) {
-            c.getInstance = function()
-            {
-                return c.instance;
-            };
-        }
-    })(this, arguments.callee);
+    )(this, arguments.callee);
 
     var prefix = '.apl-data-table-';
 
@@ -59,8 +60,7 @@ function AplDataTable (container, data)
     container.append(scrollbar_calc_outer);
     scrollbar_calc_outer.append(scrollbar_calc_inner);
 
-    data.children('div').on('click', function ()
-    {
+    data.children('div').on('click', function () {
         // if (isTouchDevice()) {
         //     return;
         // }
@@ -69,8 +69,7 @@ function AplDataTable (container, data)
         o.toggleClass('apl-data-table-active');
     });
 
-    data.children('div').each(function (i, o)
-    {
+    data.children('div').each(function (i, o) {
         var div = $('<div>');
         var o = $(o);
         div.css({
@@ -84,8 +83,7 @@ function AplDataTable (container, data)
      *
      * @returns {{h: number, v: number}}
      */
-    var calcScrollbarWidth = function ()
-    {
+    var calcScrollbarWidth = function () {
         var ow = scrollbar_calc_outer.width();
         var iw = scrollbar_calc_inner.width();
         var oh = scrollbar_calc_outer.height();
@@ -96,8 +94,7 @@ function AplDataTable (container, data)
         }
     };
 
-    var init = function ()
-    {
+    var init = function () {
         var system_scrollbar_size = calcScrollbarWidth();
         var data_width = data.width();
         var data_height = data.height();
@@ -159,8 +156,7 @@ function AplDataTable (container, data)
         vcalc();
         setTimeout(function () {
             var sidebar_body_col_divs = sidebar_body_col.find('div');
-            data.children('div').each(function (i, o)
-            {
+            data.children('div').each(function (i, o) {
                 sidebar_body_col_divs.eq(i).css({
                     height: $(o).height()
                 });
@@ -170,7 +166,7 @@ function AplDataTable (container, data)
 
     init();
 
-    this.reinit = function() {
+    this.reinit = function () {
         setTimeout(function () {
             init();
         }, 10);
@@ -182,13 +178,11 @@ function AplDataTable (container, data)
         }, 1000);
     };
 
-    $(window).resize(function()
-    {
+    $(window).resize(function () {
         init();
     });
 
-    scroll_vertical.scroll(function ()
-    {
+    scroll_vertical.scroll(function () {
         var scroll_top = -1 * $(this).scrollTop();
         data.css({
             top: scroll_top
@@ -198,8 +192,7 @@ function AplDataTable (container, data)
         })
     });
 
-    scroll_horizontal.scroll(function ()
-    {
+    scroll_horizontal.scroll(function () {
         var scroll_left = -1 * $(this).scrollLeft();
         data.css({
             left: scroll_left
@@ -209,8 +202,7 @@ function AplDataTable (container, data)
         })
     });
 
-    body.on('mousewheel', function (event)
-    {
+    body.on('mousewheel', function (event) {
         var current = scroll_vertical.scrollTop();
         scroll_vertical.scrollTop(current + -111 * event.deltaY);
     });
@@ -219,24 +211,21 @@ function AplDataTable (container, data)
     var start_position_y = 0;
 
 
-    body.on('touchstart', function(event)
-    {
+    body.on('touchstart', function (event) {
         var e = event.originalEvent;
         start_position_x = scroll_horizontal.scrollLeft() + e.touches[0].pageX;
         start_position_y = scroll_vertical.scrollTop() + e.touches[0].pageY;
         // e.preventDefault();
     });
 
-    body.on('touchend', function(event)
-    {
+    body.on('touchend', function (event) {
         var e = event.originalEvent;
         start_position_x = 0;
         start_position_y = 0;
         // e.preventDefault();
     });
 
-    body.on('touchmove', function(event)
-    {
+    body.on('touchmove', function (event) {
         var e = event.originalEvent;
         scroll_horizontal.scrollLeft(start_position_x - e.touches[0].pageX);
         scroll_vertical.scrollTop(start_position_y - e.touches[0].pageY);
@@ -245,8 +234,7 @@ function AplDataTable (container, data)
 
     sidebar_header_checkbox.prop({
         checked: false
-    }).change(function ()
-    {
+    }).change(function () {
         sidebar_body_col.find(':checkbox').prop({
             checked: sidebar_header_checkbox.prop('checked')
         });
@@ -257,15 +245,12 @@ function AplDataTable (container, data)
      */
     var last_sidebar_checkbox;
     var all_sidebar_checkboxes = sidebar_body_col.find(':checkbox');
-    all_sidebar_checkboxes.each(function (i, o)
-    {
-        $(o).dblclick(function(event)
-        {
+    all_sidebar_checkboxes.each(function (i, o) {
+        $(o).dblclick(function (event) {
             event.stopPropagation();
         });
         // click handler
-        $(o).click(function(event)
-        {
+        $(o).click(function (event) {
             event.stopPropagation();
             if (!last_sidebar_checkbox) {
                 last_sidebar_checkbox = this;
@@ -301,8 +286,7 @@ function AplDataTable (container, data)
      *
      * @returns {{length: number}}
      */
-    this.getCheckedRows = function ()
-    {
+    this.getCheckedRows = function () {
         var elements = {
             length: 0,
             items: []
@@ -331,8 +315,7 @@ function AplDataTable (container, data)
      *
      * @returns {{length: number}}
      */
-    this.getCurrentRow = function ()
-    {
+    this.getCurrentRow = function () {
         var elements = {
             length: 0,
             items: {}
@@ -353,8 +336,7 @@ function AplDataTable (container, data)
         return elements;
     };
 
-    var navigate = function ()
-    {
+    var navigate = function () {
         var f = $('<form method="post">');
         var page_number = $('<input type="hidden" name="pageNumber">').val(page_select.val());
         var items_per_page = $('<input type="hidden" name="itemsPerPage">').val(limit_select.val());
@@ -363,36 +345,31 @@ function AplDataTable (container, data)
         f.submit();
     };
 
-    page_select.change(function ()
-    {
+    page_select.change(function () {
         navigate();
-    })
+    });
 
-    limit_select.change(function ()
-    {
+    limit_select.change(function () {
         navigate();
-    })
+    });
 
     if (!(prev_trigger.hasClass('disabled'))) {
-        prev_trigger.click(function ()
-        {
+        prev_trigger.click(function () {
             prev_trigger.addClass('disabled');
             page_select.val(parseInt(page_select.val(), 10) - 1);
             navigate();
-        })
+        });
     }
 
     if (!(next_trigger.hasClass('disabled'))) {
-        next_trigger.click(function ()
-        {
+        next_trigger.click(function () {
             next_trigger.addClass('disabled');
             page_select.val(parseInt(page_select.val(), 10) + 1);
             navigate();
-        })
+        });
     }
 
-    this.del = function ()
-    {
+    this.del = function () {
         CapsuleCms.collapseActionMenu();
         var items;
         items = this.getCheckedRows();
@@ -434,12 +411,11 @@ function AplDataTable (container, data)
      *
      * @returns {boolean}
      */
-    var isTouchDevice = function ()
-    {
+    var isTouchDevice = function () {
         return 'ontouchstart' in document.documentElement;
     };
 
-    data.find(':checkbox').change(function() {
+    data.find(':checkbox').change(function () {
         var o = $(this);
         var value = o.prop('checked') ? 1 : 0;
         var name = o.prop('name');
@@ -462,27 +438,24 @@ function AplDataTable (container, data)
         $.post(
             url,
             post_data,
-            function (data)
-            {
+            function (data) {
                 try {
                     if ('ok' == data.status) {
                         o.prop('checked', value);
                     }
                 } catch (e) {
-                    alert ('error: ' + e.message);
+                    alert('error: ' + e.message);
                 }
             },
             'json'
         );
     });
 
-    this.batchAddFilesPlugin = function ()
-    {
+    this.batchAddFilesPlugin = function () {
         var uploader = CapsuleCmsFileUploader.getInstance();
         uploader.setTitle('Upload files');
         uploader.setUrl('/ajax/uploadFile/');
-        uploader.done = function ()
-        {
+        uploader.done = function () {
             uploader.purgeWindow();
             location = location;
         };
