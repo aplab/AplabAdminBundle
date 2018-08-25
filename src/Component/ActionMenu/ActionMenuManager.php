@@ -63,13 +63,9 @@ class ActionMenuManager
      */
     private function preconfigureDefaultInstance(ActionMenu $menu)
     {
-        for ($i = 1; $i < 10; $i++) {
-            $menu->addItem(new MenuItem('test_id' . $i, 'test name test nametest nametest name'));
-            MenuItem::getInstance('test_id' . $i)
-                ->setAction(new Route('admin_desktop'))
-                ->addIcon(new Icon('fas fa-shipping-fast text-danger'))
-                ->addIcon(new Icon('fas fa-thumbtack text-success small'));
-        }
+        $menu->addItem((new MenuItem('toggle_fullscreen', 'Toggle fullscreen'))
+            ->setAction(new Handler('screenfull.toggle();'))
+            ->addIcon(new Icon('fas fa-thumbtack text-success small')));
     }
 
     /**
