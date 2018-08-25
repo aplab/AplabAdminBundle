@@ -1,5 +1,6 @@
 $namespace: apl-admin-toolbar;
-$height: 50px;
+$height: 46px;
+$item-hover-color: #fff;
 .apl-admin-toolbar {
   position: absolute;
   left: 0;
@@ -8,17 +9,29 @@ $height: 50px;
   bottom: 0;
   overflow: hidden;
   display: block;
+  padding-top: 2px;
   &-item {
     display: block;
     float: right;
     height: $height;
     overflow: hidden;
-    color: #fff !important;
+    color: #afb1b3;
+    border: 1px transparent solid;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0 5px;
+    cursor: pointer;
+  }
+  &-item:hover {
+    border-color: #757B80;
+    background-color: #464A4D;
+    color: $item-hover-color;
   }
   &-icons {
     display: block;
     overflow: hidden;
-    height: 32px;
+    height: 24px;
     width: auto;
     position: relative;
   }
@@ -41,5 +54,11 @@ $height: 50px;
     width: auto;
     line-height: 17px;
     font-size: 11px;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    color: $item-hover-color;
   }
 }
