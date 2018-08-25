@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-
+    aplab_admin_data_dir: '%kernel.project_dir%/var/aplab-admin/data/'
 
 
 services:
@@ -51,6 +51,10 @@ services:
     Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation:
         arguments: ['@Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository', '@doctrine.orm.entity_manager']
 
+    Aplab\AplabAdminBundle\Component\SystemState\SystemStateManager:
+        arguments:
+            $aplab_admin_data_dir: '%aplab_admin_data_dir%'
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Aplab\AplabAdminBundle\Controller\:
@@ -64,3 +68,6 @@ services:
 #        class: Capsule\Util\CapsuleCmsUiDataTransmitter
 #
 
+    Aplab\AplabAdminBundle\EventListener\TerminateListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.terminate }

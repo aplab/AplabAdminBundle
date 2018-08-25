@@ -11,6 +11,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 use Aplab\AplabAdminBundle\Component\ActionMenu\ActionMenuManager;
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
+use Aplab\AplabAdminBundle\Component\SystemState\SystemStateManager;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,10 +32,13 @@ class AdminController extends AbstractController
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function desktop(DataTableRepresentation $dtr, ActionMenuManager $amm) {
+    public function desktop(DataTableRepresentation $dtr, ActionMenuManager $amm, SystemStateManager $ssm) {
 
 //        dump($amm->getInstance()->__toJson());
-
+        $ss = $ssm->get();
+        $bag = $ss->test;
+        $bag->test1 = 'immutable value';
+        dump($ss);
         $dt = $dtr->getDataTable(NamedTimestampable::class);
 
         $cell = $dt->getCell();
