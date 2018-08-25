@@ -38,7 +38,7 @@ class AdminController extends AbstractController
         $ss = $ssm->get();
         $bag = $ss->test;
         $bag->test1 = 'immutable value';
-        dump($ss);
+//        dump($ss);
         $dt = $dtr->getDataTable(NamedTimestampable::class);
 
         $cell = $dt->getCell();
