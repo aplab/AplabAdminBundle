@@ -7,7 +7,6 @@ parameters:
     locale: 'en'
     aplab_admin_data_dir: '%kernel.project_dir%/var/aplab-admin/data/'
 
-
 services:
     # default configuration for services in *this* file
     _defaults:

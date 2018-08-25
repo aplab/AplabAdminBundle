@@ -12,6 +12,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -42,10 +43,20 @@ class NamedTimestampableController extends AbstractController
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/add", name="add")
      */
-    public function test()
+    public function addItem()
     {
-        return $this->redirectToRoute('admin_named_timestampable_list');
+        return new Response('test');
+    }
+
+    /**
+     * @Route("/{id}", name="edit")
+     * @param $id
+     * @return Response
+     */
+    public function editItem($id)
+    {
+        return new Response($id);
     }
 }
