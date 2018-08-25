@@ -13,7 +13,6 @@ use Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType\CellTypeFa
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadata;
 use Aplab\AplabAdminBundle\Util\CssWidthDefinition;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\Tests\Compiler\C;
 
 class DataTable
 {
@@ -48,19 +47,28 @@ class DataTable
     private $cssWidthDefinition;
 
     /**
+     * @var \Aplab\AplabAdminBundle\Component\SystemState\SystemState
+     */
+    private $systemState;
+
+    /**
      * DataTable constructor.
-     * @param \ReflectionClass $erc
-     * @param DataTableRepresentation $dtr
+     * @param \ReflectionClass $entity_reflection_class
+     * @param DataTableRepresentation $data_table_representation
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function __construct(\ReflectionClass $erc, DataTableRepresentation $dtr)
+    public function __construct(\ReflectionClass $entity_reflection_class,
+                                DataTableRepresentation $data_table_representation)
     {
-        $this->entityReflectionClass = $erc;
+        $this->entityReflectionClass = $entity_reflection_class;
         $this->entityClassName = $this->entityReflectionClass->getName();
-        $this->entityManager = $dtr->getEntityManager();
-        $this->moduleMetadata = $dtr->getModuleMetadataRepository()->getMetadata($this->entityClassName);
-        $this->cssWidthDefinition = $dtr->getCssWidthDefinition();
+        $this->entityManager = $data_table_representation->getEntityManager();
+        $this->moduleMetadata = $data_table_representation->getModuleMetadataRepository()
+            ->getMetadata($this->entityClassName);
+        $this->cssWidthDefinition = $data_table_representation->getCssWidthDefinition();
+        $this->systemState = $data_table_representation->getSystemStateManager()
+            ->get()->get($this->entityClassName . __CLASS__);
     }
 
     /**
@@ -102,5 +110,22 @@ class DataTable
     public function getItems()
     {
         return $this->entityManager->getRepository($this->entityClassName)->findAll();
+    }
+
+    /**
+     * @var int
+     */
+    private $count;
+
+    /**
+     * @param void
+     * @return int
+     */
+    public function getCount():int
+    {
+        if (is_null($this->count)) {
+            $this->count = $this->entityManager->getRepository($this->entityClassName)->count([]);
+        }
+        return $this->count;
     }
 }

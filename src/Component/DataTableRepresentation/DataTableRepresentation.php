@@ -47,22 +47,6 @@ class DataTableRepresentation
     private $systemStateManager;
 
     /**
-     * @var int
-     */
-    private $itemsPerPage = 100;
-
-    /**
-     * @var array
-     */
-    private $itemsPerPageVariants = [
-        10,
-        50,
-        100,
-        200,
-        500
-    ];
-
-    /**
      * DataTable constructor.
      * @param ModuleMetadataRepository $mmr
      * @param EntityManagerInterface $emi
@@ -133,41 +117,5 @@ class DataTableRepresentation
     public function getSystemStateManager(): SystemStateManager
     {
         return $this->systemStateManager;
-    }
-
-    /**
-     * @return int
-     */
-    public function getItemsPerPage(): int
-    {
-        return $this->itemsPerPage;
-    }
-
-    /**
-     * @return array
-     */
-    public function getItemsPerPageVariants(): array
-    {
-        return $this->itemsPerPageVariants;
-    }
-
-    /**
-     * @param int $itemsPerPage
-     * @return DataTableRepresentation
-     */
-    public function setItemsPerPage(int $itemsPerPage): DataTableRepresentation
-    {
-        $this->itemsPerPage = $itemsPerPage;
-        return $this;
-    }
-
-    /**
-     * @param array $itemsPerPageVariants
-     * @return DataTableRepresentation
-     */
-    public function setItemsPerPageVariants(array $itemsPerPageVariants): DataTableRepresentation
-    {
-        $this->itemsPerPageVariants = $itemsPerPageVariants;
-        return $this;
     }
 }

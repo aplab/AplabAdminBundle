@@ -26,26 +26,16 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="desktop")
      * @param DataTableRepresentation $dtr
-     * @param ActionMenuManager $amm
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Aplab\AplabAdminBundle\Component\ActionMenu\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function desktop(DataTableRepresentation $dtr, ActionMenuManager $amm, SystemStateManager $ssm) {
-
-//        dump($amm->getInstance()->__toJson());
-        $ss = $ssm->get();
-        $bag = $ss->test;
-        $bag->test1 = 'immutable value';
-//        dump($ss);
+    public function desktop(DataTableRepresentation $dtr) {
         $dt = $dtr->getDataTable(NamedTimestampable::class);
-
         $cell = $dt->getCell();
         $items = $dt->getItems();
-//        dump($cell);
-//        dump($items);
-
+        $count = $dt->getCount();
+        dump($count);
         return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
     }
 }
