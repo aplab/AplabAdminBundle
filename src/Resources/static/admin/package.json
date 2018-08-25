@@ -39,7 +39,8 @@
     "jsonfile": "^4.0.0",
     "opensans-webkit": "^1.0.1",
     "popper.js": "^1.14.4",
-    "screenfull": "^3.3.2"
+    "screenfull": "^3.3.2",
+    "selectize": "^0.12.6"
   },
   "devDependencies": {},
   "optionalDependencies": {}
