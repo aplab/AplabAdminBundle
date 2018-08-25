@@ -12,17 +12,11 @@ namespace Aplab\AplabAdminBundle\Component\SystemState;
 class DataBag
 {
     /**
-     * @var SystemState
-     */
-    private $owner;
-
-    /**
      * DataBag constructor.
-     * @param SystemState $owner
      */
-    public function __construct(SystemState $owner)
+    public function __construct()
     {
-        $this->owner = $owner;
+
     }
 
     /**
@@ -55,16 +49,7 @@ class DataBag
      */
     public function __set($name, $value)
     {
-        if (array_key_exists($name, $this->data)) {
-            if ($this->data[$name] === $value) {
-                return;
-            }
-            $this->data[$name] = $value;
-            $this->owner->setIsModified();
-        } else {
-            $this->data[$name] = $value;
-            $this->owner->setIsModified();
-        }
+        $this->data[$name] = $value;
     }
 
     /**
@@ -81,9 +66,6 @@ class DataBag
      */
     public function __unset($name)
     {
-        if (array_key_exists($name, $this->data)) {
-            unset($this->data[$name]);
-            $this->owner->setIsModified();
-        }
+        unset($this->data[$name]);
     }
 }

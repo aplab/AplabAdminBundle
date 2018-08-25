@@ -19,30 +19,6 @@ class SystemState
     private $id;
 
     /**
-     * Default true while object is created first and store needed
-     * @var bool
-     */
-    private $isModified = true;
-
-    /**
-     * @return bool
-     */
-    public function isModified(): bool
-    {
-        return $this->isModified;
-    }
-
-    /**
-     * @param bool $isModified
-     * @return SystemState
-     */
-    public function setIsModified(bool $isModified = true): SystemState
-    {
-        $this->isModified = $isModified;
-        return $this;
-    }
-
-    /**
      * @return int
      */
     public function getId(): int
@@ -82,12 +58,10 @@ class SystemState
     {
         $key = self::k($name);
         if (!array_key_exists($key, $this->data)) {
-            $this->data[$key] = new DataBag($this);
-            $this->setIsModified();
+            $this->data[$key] = new DataBag;
         }
         if (!($this->data[$key] instanceof DataBag)) {
-            $this->data[$key] = new DataBag($this);
-            $this->setIsModified();
+            $this->data[$key] = new DataBag;
         }
         return $this->data[$key];
     }
@@ -118,10 +92,7 @@ class SystemState
     public function purge($name)
     {
         $key = $this->k($name);
-        if (array_key_exists($key, $this->data)) {
-            unset($this->data[$key]);
-            $this->setIsModified();
-        }
+        unset($this->data[$key]);
     }
 
     /**

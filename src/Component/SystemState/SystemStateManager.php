@@ -95,13 +95,9 @@ class SystemStateManager
     public function flush(LoggerInterface $logger)
     {
         foreach ($this->data as $item) {
-            if ($item->isModified()) {
-                $logger->info($this->reflectionClass->getShortName() . '::' . $item->getId());
-                $item->setIsModified(false);
-                $path = new Path($this->dataDir, $item->getId());
-                $data = serialize($item);
-                $this->filesystem->dumpFile($path, $data);
-            }
+            $path = new Path($this->dataDir, $item->getId());
+            $data = serialize($item);
+            $this->filesystem->dumpFile($path, $data);
         }
     }
 }

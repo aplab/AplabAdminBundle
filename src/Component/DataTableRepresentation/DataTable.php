@@ -153,7 +153,7 @@ class DataTable
                 $pager->setCount($this->getCount());
             } else {
                 $this->pager = new Pager($this->getCount());
-                $this->systemState->pager = $pager;
+                $this->systemState->pager = $this->pager;
             }
         }
         return $this->pager;

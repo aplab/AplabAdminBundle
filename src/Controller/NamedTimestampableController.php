@@ -33,17 +33,22 @@ class NamedTimestampableController extends AbstractController
     {
         $dt = $dtr->getDataTable(NamedTimestampable::class);
         $cell = $dt->getCell();
-        $items = $dt->getItems();
-        $count = $dt->getCount();
         $pager = $dt->getPager();
+        if (isset($_POST['itemsPerPage'])) {
+            $pager->setItemsPerPage($_POST['itemsPerPage']);
+        }
+        if (isset($_POST['pageNumber'])) {
+            $pager->setCurrentPage($_POST['pageNumber']);
+        }
+        $items = $dt->getItems();
         return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
     }
 
     /**
-     * @Route("/test" name="test")
+     * @Route("/test", name="test")
      */
     public function test()
     {
-        $this->redirectToRoute('list');
+        return $this->redirectToRoute('admin_named_timestampable_list');
     }
 }
