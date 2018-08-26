@@ -63,7 +63,7 @@ class ToolbarManager
      */
     private function preconfigureDefaultInstance(Toolbar $menu)
     {
-        $menu->addItem((new ToolbarItem('test_id', 'Home'))
+        $menu->addItem((new ToolbarItem('Home', 'test_id'))
             ->setAction(new Route('admin_desktop'))
             ->addIcon(new Icon('fas fa-home')));
     }

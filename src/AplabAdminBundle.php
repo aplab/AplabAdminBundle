@@ -9,7 +9,6 @@
 namespace Aplab\AplabAdminBundle;
 
 
-use Aplab\AplabAdminBundle\DependencyInjection\AplabAdminBundleExtension;
 use Aplab\AplabAdminBundle\Util\UiDataTransmitter;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

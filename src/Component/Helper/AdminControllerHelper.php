@@ -135,11 +135,23 @@ class AdminControllerHelper
     }
 
     /**
+     * @param null|string $suffix
      * @return string
      */
-    public function getModulePath()
+    public function getModulePath(?string $suffix = null): string
     {
-        return join('/', array_slice(explode('/', '/' . trim($this->getMasterRequest()->getPathInfo(), '/')), 0, 3));
+        if (is_scalar($suffix)) {
+            $suffix = ltrim($suffix, '/');
+        }
+        $data = explode('/', '/' . trim($this->getMasterRequest()->getPathInfo(), '/'));
+        if (sizeof($data) < 3) {
+            throw new \RuntimeException('unable to get module path not from a module');
+        }
+        $data = array_slice($data, 0, 3);
+        if ($suffix) {
+            $data[] = $suffix;
+        }
+        return join('/', $data);
     }
 
     /**
@@ -147,6 +159,10 @@ class AdminControllerHelper
      */
     public function getBundlePath()
     {
-        return join('/', array_slice(explode('/', '/' . trim($this->getMasterRequest()->getPathInfo(), '/')), 0, 2));
+        $data = explode('/', '/' . trim($this->getMasterRequest()->getPathInfo(), '/'));
+        if (sizeof($data) < 3) {
+            throw new \RuntimeException('unable to get bundle path not from a bundle');
+        }
+        return join('/', array_slice($data, 0, 3));
     }
 }

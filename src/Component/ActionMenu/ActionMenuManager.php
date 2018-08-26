@@ -65,7 +65,7 @@ class ActionMenuManager
     {
         $menu->addItem((new MenuItem('toggle_fullscreen', 'Toggle fullscreen'))
             ->setAction(new Handler('screenfull.toggle();'))
-            ->addIcon(new Icon('fas fa-thumbtack text-success small')));
+            ->addIcon(new Icon('far fa-window-maximize')));
     }
 
     /**

@@ -10,12 +10,8 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
-use Aplab\AplabAdminBundle\Component\Helper\AdminControllerHelper;
-use Aplab\AplabAdminBundle\Component\Toolbar\Handler;
-use Aplab\AplabAdminBundle\Component\Toolbar\Icon;
-use Aplab\AplabAdminBundle\Component\Toolbar\ToolbarItem;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,7 +23,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class NamedTimestampableController extends BaseAdminController
 {
     /**
-     * @Route("/", name="list")
+     * @var string
+     */
+    protected $entityClassName = NamedTimestampable::class;
+
+    /**
+     * @Route("/", name="list", methods="GET")
      * @param DataTableRepresentation $data_table_representation
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -36,18 +37,65 @@ class NamedTimestampableController extends BaseAdminController
      */
     public function listItems(DataTableRepresentation $data_table_representation)
     {
+        $helper = $this->adminControllerHelper;
         $toolbar = $this->adminControllerHelper->getToolbar();
-        $toolbar->addItem((new ToolbarItem('addItem', 'Add item'))->addIcon(new Icon('fas fa-plus')));
-        $toolbar->addItem((new ToolbarItem('dropItem', 'Drop selected'))
-            ->addIcon(new Icon('fas fa-trash-alt'))
-            ->setAction(new Handler('AplDataTable.getInstance().del();')));
-        $data_table = $data_table_representation->getDataTable(NamedTimestampable::class);
+        $toolbar->addUrl('Add item', $helper->getModulePath('add'), 'fas fa-plus');
+        $toolbar->addHandler('Drop selected', 'AplDataTable.getInstance().del();', 'fas fa-trash-alt');
+
+        $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
         $pager = $data_table->getPager();
         if (isset($_POST['itemsPerPage']) && isset($_POST['pageNumber'])) {
             $pager->setItemsPerPage($_POST['itemsPerPage']);
             $pager->setCurrentPage($_POST['pageNumber']);
         }
         return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
+    }
+
+    /**
+     * @Route("/", name="list_param", methods="POST")
+     * @param DataTableRepresentation $data_table_representation
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     */
+    public function setListParam(DataTableRepresentation $data_table_representation)
+    {
+        if (isset($_POST['itemsPerPage']) && isset($_POST['pageNumber'])) {
+            $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
+            $pager = $data_table->getPager();
+            $pager->setItemsPerPage($_POST['itemsPerPage']);
+            $pager->setCurrentPage($_POST['pageNumber']);
+        }
+        return $this->redirectToRoute('admin_named_timestampable_list');
+    }
+
+    /**
+     * @Route("/del", name="drop", methods="POST")
+     */
+    public function dropItem()
+    {
+        $class = $this->getEntityClassName();
+        $entity_manager = $this->getDoctrine()->getManager();
+        $class_metadata = $entity_manager->getClassMetadata($class);
+        $pk = $class_metadata->getIdentifier();
+        /**
+         * @TODO composite key support
+         */
+        if (empty($pk)) {
+            throw new \RuntimeException('identifier not found');
+        }
+        if (sizeof($pk) > 1) {
+            throw new \RuntimeException('composite identifier not supported');
+        }
+        $key = reset($pk);
+        $ids = $_POST[$key];
+        $ids = json_decode($ids);
+        $items = $entity_manager->getRepository($class)->findBy([$key => $ids]);
+        foreach ($items as $item) {
+            $entity_manager->remove($item);
+        }
+        $entity_manager->flush();
+        return $this->redirectToRoute('admin_named_timestampable_list');
     }
 
     /**

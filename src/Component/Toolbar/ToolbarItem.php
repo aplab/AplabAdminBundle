@@ -91,13 +91,16 @@ class ToolbarItem implements \JsonSerializable
     protected $icon = [];
 
     /**
-     * MenuItem constructor.
-     * @param string $id
+     * ToolbarItem constructor.
      * @param string $name
+     * @param string|null $id
      * @throws Exception
      */
-    public function __construct(string $id, string $name)
+    public function __construct(string $name, ?string $id = null)
     {
+        if (is_null($id)) {
+            $id = spl_object_hash($this);
+        }
         $this->id = $id;
         $this->name = $name;
         static::registerInstance($this);

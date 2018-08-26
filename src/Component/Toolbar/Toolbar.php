@@ -141,4 +141,87 @@ class Toolbar implements \JsonSerializable
     {
         return json_encode($this, $options);
     }
+
+    /**
+     * Add item as route from scratch
+     * Icon must be a string, comma-separated string, array, array of comma-separated strings or mixed
+     * @param string $item_title
+     * @param string $route_name
+     * @param string|array $icon
+     * @param array $route_parameters
+     * @param null|string $item_id
+     * @return ToolbarItem|mixed
+     * @throws Exception
+     */
+    public function addRoute(string $item_title, string $route_name, $icon = [],
+                             $route_parameters = [], ?string $item_id = null)
+    {
+        $item = new ToolbarItem($item_title, $item_id);
+        $route = new Route($route_name, $route_parameters);
+        if (!is_array($icon)) {
+            $icon = [$icon];
+        }
+        foreach ($icon as $icons_data) {
+            $icon_data = explode(',', $icons_data);
+            foreach ($icon_data as $icon_data_item)
+            $item->addIcon(new Icon(trim($icon_data_item)));
+        }
+        $item->setAction($route);
+        $this->addItem($item);
+        return $item;
+    }
+
+    /**
+     * Add item as handler from scratch
+     * Icon must be a string, comma-separated string, array, array of comma-separated strings or mixed
+     * @param string $item_title
+     * @param string $handler_code
+     * @param string|array $icon
+     * @param null|string $item_id
+     * @return ToolbarItem|mixed
+     * @throws Exception
+     */
+    public function addHandler(string $item_title, string $handler_code, $icon = [], ?string $item_id = null)
+    {
+        $item = new ToolbarItem($item_title, $item_id);
+        $handler = new Handler($handler_code);
+        if (!is_array($icon)) {
+            $icon = [$icon];
+        }
+        foreach ($icon as $icons_data) {
+            $icon_data = explode(',', $icons_data);
+            foreach ($icon_data as $icon_data_item)
+            $item->addIcon(new Icon(trim($icon_data_item)));
+        }
+        $item->setAction($handler);
+        $this->addItem($item);
+        return $item;
+    }
+
+    /**
+     * Add item as url from scratch
+     * Icon must be a string, comma-separated string, array, array of comma-separated strings or mixed
+     * @param string $item_title
+     * @param string $url
+     * @param string|array $icon
+     * @param null|string $item_id
+     * @return ToolbarItem|mixed
+     * @throws Exception
+     */
+    public function addUrl(string $item_title, string $url, $icon = [], ?string $item_id = null)
+    {
+        $item = new ToolbarItem($item_title, $item_id);
+        $handler = new Url($url);
+        if (!is_array($icon)) {
+            $icon = [$icon];
+        }
+        foreach ($icon as $icons_data) {
+            $icon_data = explode(',', $icons_data);
+            foreach ($icon_data as $icon_data_item)
+            $item->addIcon(new Icon(trim($icon_data_item)));
+        }
+        $item->setAction($handler);
+        $this->addItem($item);
+        return $item;
+    }
 }

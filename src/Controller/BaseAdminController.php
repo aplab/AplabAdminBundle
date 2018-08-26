@@ -27,8 +27,19 @@ abstract class BaseAdminController extends AbstractController
      * BaseAdminController constructor.
      * @param AdminControllerHelper $adminControllerHelper
      */
-    public function __construct(AdminControllerHelper $adminControllerHelper)
+    final public function __construct(AdminControllerHelper $adminControllerHelper)
     {
         $this->adminControllerHelper = $adminControllerHelper;
+        if (!isset($this->entityClassName)) {
+            throw new \LogicException(get_class($this) . ' must have a protected $entityClassName = Entity::class');
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEntityClassName() {
+        /** @noinspection PhpUndefinedFieldInspection */
+        return $this->entityClassName;
     }
 }

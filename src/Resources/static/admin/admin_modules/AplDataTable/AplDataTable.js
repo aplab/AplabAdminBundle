@@ -395,7 +395,7 @@ function AplDataTable(container) {
         }
         var f = $('<form method="post">');
         f.prop({
-            action: (base_url + '/del/').replace(/\/{2,}/, '/')
+            action: (base_url + '/del').replace(/\/{2,}/, '/')
         });
         for (var p in post_data) {
             var input = $('<input type="hidden" name="' + p + '">')
