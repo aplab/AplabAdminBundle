@@ -54,6 +54,12 @@ services:
         arguments:
             $aplab_admin_data_dir: '%aplab_admin_data_dir%'
 
+    Aplab\AplabAdminBundle\Component\Helper\AdminControllerHelper:
+        arguments:
+            - '@Aplab\AplabAdminBundle\Component\Menu\MenuManager'
+            - '@Aplab\AplabAdminBundle\Component\ActionMenu\ActionMenuManager'
+            - '@Aplab\AplabAdminBundle\Component\Toolbar\ToolbarManager'
+
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
     Aplab\AplabAdminBundle\Controller\:

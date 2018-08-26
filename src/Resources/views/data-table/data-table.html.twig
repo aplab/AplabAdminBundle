@@ -7,11 +7,17 @@
         });
     </script>
 {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ render(controller(
+        'Aplab\\AplabAdminBundle\\Controller\\UtilController::cssWidthDefinition'
+    )) }}
+{% endblock %}
 {% block workarea %}
     <!--data grid-->
     <div class="apl-data-table"
          id="apl-data-table"
-         data-base-url="<?=$this->instance->baseUrl?>">
+         data-base-url="{{ app.request.pathInfo }}">
         <!--data grid body-->
         <div class="apl-data-table-body">
             <!--data grid content-->
@@ -19,7 +25,7 @@
 
                 <div class="apl-data-table-header">
                     <div class="apl-data-table-header-row wExt">
-                        {% for cell_item in cell %}
+                        {% for cell_item in data_table.cell %}
                             <div class="w{{ cell_item.width }}"
                                  title="{{ cell_item.propertyTitle }}">
                                 {{ cell_item.propertyTitle }}
@@ -39,9 +45,9 @@
 
                 <div class="apl-data-table-data-wrapper">
                     <div class="apl-data-table-data wSum">
-                        {% for item in items %}
-                            <div class="wExt" data-pk="<?=str::hsc($data_pk)?>">
-                                {% for cell_item in cell %}
+                        {% for item in data_table.items %}
+                            <div class="wExt" data-pk="{{ data_table.helperIdentifierJson(item) }}">
+                                {% for cell_item in data_table.cell %}
                                     {{ block(cell_item.type.type, "@AplabAdmin/data-table/cell-type.html.twig") }}
                                 {% endfor %}
                             </div>

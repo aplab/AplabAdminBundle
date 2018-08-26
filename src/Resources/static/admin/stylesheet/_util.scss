@@ -10,6 +10,12 @@
 //    }
 //}
 
-//.sf-dump {
-//    z-index: 0 !important;
-//}
+.sf-dump {
+    z-index: 10000000 !important;
+}
+.sf-toolbarreset {
+    bottom: -13px!important;
+}
+.sf-toolbarreset:hover {
+    bottom: 0!important;
+}

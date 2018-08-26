@@ -48,18 +48,22 @@ class DataTableRepresentation
 
     /**
      * DataTable constructor.
-     * @param ModuleMetadataRepository $mmr
-     * @param EntityManagerInterface $emi
-     * @param CssWidthDefinition $cwd
-     * @param SystemStateManager $ssm
+     * @param ModuleMetadataRepository $module_metadata_repository
+     * @param EntityManagerInterface $entity_manager_interface
+     * @param CssWidthDefinition $css_width_definition
+     * @param SystemStateManager $system_state_manager
      */
-    public function __construct(ModuleMetadataRepository $mmr, EntityManagerInterface $emi,
-                                CssWidthDefinition $cwd, SystemStateManager $ssm)
+    public function __construct(
+        ModuleMetadataRepository $module_metadata_repository,
+        EntityManagerInterface $entity_manager_interface,
+        CssWidthDefinition $css_width_definition,
+        SystemStateManager $system_state_manager
+    )
     {
-        $this->moduleMetadataRepository = $mmr;
-        $this->entityManager = $emi;
-        $this->cssWidthDefinition = $cwd;
-        $this->systemStateManager = $ssm;
+        $this->moduleMetadataRepository = $module_metadata_repository;
+        $this->entityManager = $entity_manager_interface;
+        $this->cssWidthDefinition = $css_width_definition;
+        $this->systemStateManager = $system_state_manager;
     }
 
     /**

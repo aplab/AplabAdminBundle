@@ -37,8 +37,7 @@ class NamedTimestampable
      * @ORM\Column(type="bigint")
      * @ModuleMetadata\Property(title="ID", readonly=true,
      *     cell={
-     *         @ModuleMetadata\Cell(order=1000, width=60, type="Label"),
-     *         @ModuleMetadata\Cell(order=2000, width=200, type="Label")
+     *         @ModuleMetadata\Cell(order=1000, width=80, type="EditId")
      *     },
      *     widget={
      *         @ModuleMetadata\Widget(order=1000, tab="Additional", type="Label")
@@ -49,7 +48,7 @@ class NamedTimestampable
     /**
      * @ORM\Column(type="string")
      * @ModuleMetadata\Property(title="Name",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
+     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
      */
     private $name;

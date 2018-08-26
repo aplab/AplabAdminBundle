@@ -18,6 +18,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 class MenuManager
 {
+    const DEFAULT_ID = 'MainMenu';
+
     const STRUCTURE_LOCATION_DEFAULT = __DIR__ . '/menu_structure_default.json';
 
     const ID_SEPARATOR = '-';
@@ -124,7 +126,7 @@ class MenuManager
      * @throws Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function getMenu($id)
+    public function getMenu($id = self::DEFAULT_ID)
     {
         $structure = $this->getStructure();
         return $structure[$id] ?? null;

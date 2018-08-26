@@ -370,7 +370,7 @@ function AplDataTable(container) {
     }
 
     this.del = function () {
-        CapsuleCms.collapseActionMenu();
+        AplabAdmin.collapseActionMenu();
         var items;
         items = this.getCheckedRows();
         if (!items.length) {

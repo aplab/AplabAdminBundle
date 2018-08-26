@@ -53,6 +53,32 @@ class DataTable
     private $systemState;
 
     /**
+     * READ-ONLY: The field names of all fields that are part of the identifier/primary key
+     * of the mapped entity class.
+     *
+     * @var array
+     */
+    private $identifier;
+
+    /**
+     * @return array
+     */
+    public function getIdentifier(): array
+    {
+        return $this->identifier;
+    }
+
+    public function helperIdentifierJson($item)
+    {
+        $data = [];
+        foreach ($this->identifier as $i) {
+            $getter = 'get' . ucfirst($i);
+            $data[$i] = $item->$getter();
+        }
+        return json_encode($data);
+    }
+
+    /**
      * DataTable constructor.
      * @param \ReflectionClass $entity_reflection_class
      * @param DataTableRepresentation $data_table_representation
@@ -70,6 +96,8 @@ class DataTable
         $this->cssWidthDefinition = $data_table_representation->getCssWidthDefinition();
         $this->systemState = $data_table_representation->getSystemStateManager()
             ->get()->get($this->entityClassName . __CLASS__);
+        $this->identifier = $this->entityManager->getClassMetadata($this->entityClassName)->identifier;
+        $this->initCell();
     }
 
     /**

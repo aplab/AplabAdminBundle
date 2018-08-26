@@ -13,5 +13,12 @@
         {{ attribute(item, cell_item.propertyName) }}
     </div>
 {% endblock %}
+{% block editid %}
+    <div class="w{{ cell_item.width }} text-right">
+        <a href="{{ app.request.pathInfo }}{{ attribute(item, cell_item.propertyName) }}">
+            {{ "%07d"|format(attribute(item, cell_item.propertyName)) }}
+        </a>
+    </div>
+{% endblock %}
 {% block example %}
 {% endblock %}

@@ -3,12 +3,21 @@
         "items": [
             {
                 "id": "some-id",
-                "name": "Пункт 1",
-                "icon": "fas fa-pencil-alt, fas fa-ban text-danger",
-                "disabled": true,
-                "target": "self",
+                "name": "Named timestampable",
+                "icon": "fas fa-clock",
+                "disabled": false,
+                "target": "_self",
                 "class": "additional-css-class",
-                "url": "admin"
+                "route": "admin_named_timestampable_list"
+            },
+            {
+                "id": "test",
+                "name": "Test",
+                "icon": "fas fa-vial",
+                "disabled": false,
+                "target": "_self",
+                "class": "additional-css-class",
+                "route": "admin_test"
             },
             {
                 "name": "Пункт 2",
@@ -17,7 +26,7 @@
                     {
                         "name": "Пункт 2.1",
                         "icon": "fas fa-pencil-alt",
-                        "handler": "window.close()"
+                        "handler": "alert('handler action');"
                     },
                     {
                         "name": "Пункт 2.2",
@@ -27,44 +36,6 @@
                         "name": "Пункт 2.3",
                         "icon": "fas fa-pencil-alt",
                         "id": "some-id-2",
-                        "route": "admin_desktop"
-                    }
-                ]
-            },
-            {
-                "name": "Пункт 2",
-                "icon": "fas fa-ban text-warning, fas fa-pencil-alt",
-                "items": [
-                    {
-                        "name": "Пункт 2.1",
-                        "icon": "fas fa-pencil-alt",
-                        "handler": "window.close()"
-                    },
-                    {
-                        "name": "Пункт 2.2",
-                        "icon": "fas fa-pencil-alt",
-                        "items": [
-                            {
-                                "name": "Пункт 2.1",
-                                "icon": "fas fa-pencil-alt",
-                                "handler": "window.close()"
-                            },
-                            {
-                                "name": "Пункт 2.2",
-                                "icon": "fas fa-address-card text-success, fas fa-pencil-alt"
-                            },
-                            {
-                                "name": "Пункт 2.3",
-                                "icon": "fas fa-pencil-alt",
-                                "id": "some-id-234",
-                                "route": "admin_desktop"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "Пункт 2.3",
-                        "icon": "fas fa-pencil-alt",
-                        "id": "some-id-23",
                         "route": "admin_desktop"
                     }
                 ]

@@ -8,9 +8,7 @@
 
 namespace Aplab\AplabAdminBundle\Controller;
 
-
-use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
-use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
+use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,17 +21,17 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/", name="desktop")
-     * @param DataTableRepresentation $dtr
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \ReflectionException
      */
-    public function desktop(DataTableRepresentation $dtr) {
-        $dt = $dtr->getDataTable(NamedTimestampable::class);
-        $cell = $dt->getCell();
-        $items = $dt->getItems();
-        $count = $dt->getCount();
-        $pager = $dt->getPager();
-        return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
+    public function desktop() {
+        return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
+    }
+
+    /**
+     * @Route("/test", name="test")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function test() {
+        return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }
