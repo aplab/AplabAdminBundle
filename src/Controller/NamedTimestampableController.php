@@ -11,7 +11,6 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -44,10 +43,6 @@ class NamedTimestampableController extends BaseAdminController
 
         $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
         $pager = $data_table->getPager();
-        if (isset($_POST['itemsPerPage']) && isset($_POST['pageNumber'])) {
-            $pager->setItemsPerPage($_POST['itemsPerPage']);
-            $pager->setCurrentPage($_POST['pageNumber']);
-        }
         return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
     }
 
