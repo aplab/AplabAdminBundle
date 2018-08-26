@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -19,6 +20,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminController extends AbstractController
 {
+    protected $masterRequest;
+
+    public function __construct(RequestStack $masterRequest)
+    {
+        dump($masterRequest->getMasterRequest());
+    }
+
     /**
      * @Route("/", name="desktop")
      * @return \Symfony\Component\HttpFoundation\Response
