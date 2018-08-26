@@ -12,22 +12,46 @@ namespace Aplab\AplabAdminBundle\Component\Helper;
 use Aplab\AplabAdminBundle\Component\ActionMenu\ActionMenuManager;
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
 use Aplab\AplabAdminBundle\Component\Toolbar\ToolbarManager;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class AdminControllerHelper
 {
+    /**
+     * @var MenuManager
+     */
     protected $menuManager;
 
+    /**
+     * @var ActionMenuManager
+     */
     protected $actionMenuManager;
 
+    /**
+     * @var ToolbarManager
+     */
     protected $toolbarManager;
 
+    /**
+     * @var RequestStack
+     */
+    protected $requestStack;
+
+    /**
+     * AdminControllerHelper constructor.
+     * @param MenuManager $menuManager
+     * @param ActionMenuManager $actionMenuManager
+     * @param ToolbarManager $toolbarManager
+     * @param RequestStack $requestStack
+     */
     public function __construct(MenuManager $menuManager,
                                 ActionMenuManager $actionMenuManager,
-                                ToolbarManager $toolbarManager)
+                                ToolbarManager $toolbarManager,
+                                RequestStack $requestStack)
     {
         $this->menuManager = $menuManager;
         $this->actionMenuManager = $actionMenuManager;
         $this->toolbarManager = $toolbarManager;
+        $this->requestStack = $requestStack;
     }
 
     /**
@@ -92,5 +116,37 @@ class AdminControllerHelper
             return $this->actionMenuManager->getInstance();
         }
         return $this->actionMenuManager->getInstance($id);
+    }
+
+    /**
+     * @return RequestStack
+     */
+    public function getRequestStack(): RequestStack
+    {
+        return $this->requestStack;
+    }
+
+    /**
+     * @return null|\Symfony\Component\HttpFoundation\Request
+     */
+    public function getMasterRequest()
+    {
+        return $this->requestStack->getMasterRequest();
+    }
+
+    /**
+     * @return string
+     */
+    public function getModulePath()
+    {
+        return join('/', array_slice(explode('/', '/' . trim($this->getMasterRequest()->getPathInfo(), '/')), 0, 3));
+    }
+
+    /**
+     * @return string
+     */
+    public function getBundlePath()
+    {
+        return join('/', array_slice(explode('/', '/' . trim($this->getMasterRequest()->getPathInfo(), '/')), 0, 2));
     }
 }

@@ -85,10 +85,10 @@ function AplAdminMenu(data, append_to) {
                     var $this = $(this);
                     var $next = $this.next();
                     var $parent = $this.parent();
-                    $next.slideToggle();
+                    $next.slideToggle(100);
                     $parent.toggleClass('open');
                     var exclude = append_to.find('.apl-admin-submenu').has($next);
-                    append_to.find('.apl-admin-submenu').not($next).not(exclude).slideUp().parent().removeClass('open');
+                    append_to.find('.apl-admin-submenu').not($next).not(exclude).slideUp(100).parent().removeClass('open');
                     if ($parent.hasClass('open')) {
                         localStorage.setItem('apl-admin-menu-' + instanceName, $parent.prop('id'));
                         return;

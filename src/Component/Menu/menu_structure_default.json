@@ -2,7 +2,15 @@
     "MainMenu": {
         "items": [
             {
-                "id": "some-id",
+                "id": "home",
+                "name": "Home",
+                "icon": "fas fa-home",
+                "disabled": false,
+                "target": "_self",
+                "route": "admin_desktop"
+            },
+            {
+                "id": "named-timestampable",
                 "name": "Named timestampable",
                 "icon": "fas fa-clock",
                 "disabled": false,

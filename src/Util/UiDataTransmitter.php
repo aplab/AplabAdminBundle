@@ -24,7 +24,8 @@ class UiDataTransmitter
     public function __construct()
     {
         try {
-            $data = json_decode($_COOKIE[static::COOKIE_KEY]);
+            $data = $_COOKIE[static::COOKIE_KEY] ?? '{}';
+            $data = json_decode($data);
         } catch (\Throwable $exception) {
             $data = new \stdClass;
         }

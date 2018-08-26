@@ -24,20 +24,19 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package Aplab\AplabAdminBundle\Controller
  * @Route("/admin/named-timestampable", name="admin_named_timestampable_")
  */
-class NamedTimestampableController extends AbstractController
+class NamedTimestampableController extends BaseAdminController
 {
     /**
      * @Route("/", name="list")
      * @param DataTableRepresentation $data_table_representation
-     * @param AdminControllerHelper $helper
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      * @throws \Aplab\AplabAdminBundle\Component\Toolbar\Exception
      */
-    public function listItems(DataTableRepresentation $data_table_representation, AdminControllerHelper $helper)
+    public function listItems(DataTableRepresentation $data_table_representation)
     {
-        $toolbar = $helper->getToolbar();
+        $toolbar = $this->adminControllerHelper->getToolbar();
         $toolbar->addItem((new ToolbarItem('addItem', 'Add item'))->addIcon(new Icon('fas fa-plus')));
         $toolbar->addItem((new ToolbarItem('dropItem', 'Drop selected'))
             ->addIcon(new Icon('fas fa-trash-alt'))

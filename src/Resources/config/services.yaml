@@ -48,7 +48,9 @@ services:
         arguments: ['@cache.app.simple', '@annotations.reader']
 
     Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation:
-        arguments: ['@Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository', '@doctrine.orm.entity_manager']
+        arguments:
+            - '@Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository'
+            - '@doctrine.orm.entity_manager'
 
     Aplab\AplabAdminBundle\Component\SystemState\SystemStateManager:
         arguments:
