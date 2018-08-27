@@ -48,6 +48,19 @@ gulp.task('scss-dev', function () {
         .pipe(touch());
 });
 
+gulp.task('cke', function () {
+    return gulp.src(
+        [
+            './node_modules/ckeditor/**/*.*',
+            // '!./node_modules/ckeditor/samples/**/*.*',
+            '!./node_modules/ckeditor/bower.json',
+            '!./node_modules/ckeditor/composer.json',
+            '!./node_modules/ckeditor/README.md',
+            '!./node_modules/ckeditor/CHANGES.md'
+        ]/*, {since: gulp.lastRun('fonts')}*/)
+        .pipe(gulp.dest('./' + dest_dir + '/ckeditor'));
+});
+
 gulp.task('css-dev', function () {
     return gulp.src([
         './node_modules/opensans-webkit/src/css/open-sans.css',
