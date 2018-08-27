@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
+use Aplab\AplabAdminBundle\Component\InstanceEditor\InstatceEditorManager;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,6 +43,7 @@ class NamedTimestampableController extends BaseAdminController
         $toolbar->addHandler('Drop selected', 'AplDataTable.getInstance().del();', 'fas fa-trash-alt');
 
         $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
+        dump($data_table->getModuleMetadata());
         $pager = $data_table->getPager();
         return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
     }
@@ -95,10 +97,15 @@ class NamedTimestampableController extends BaseAdminController
 
     /**
      * @Route("/add", name="add")
+     * @param InstatceEditorManager $instatceEditorManager
+     * @return Response
      */
-    public function addItem()
+    public function addItem(InstatceEditorManager $instatceEditorManager)
     {
-        return new Response('test');
+        $entity_class_name = $this->getEntityClassName();
+        $item = new $entity_class_name;
+        dump($instatceEditorManager->getInstanceEditor($item));
+        return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 
     /**

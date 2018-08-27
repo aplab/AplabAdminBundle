@@ -186,4 +186,52 @@ class DataTable
         }
         return $this->pager;
     }
+
+    /**
+     * @return string
+     */
+    public function getEntityClassName(): string
+    {
+        return $this->entityClassName;
+    }
+
+    /**
+     * @return \ReflectionClass
+     */
+    public function getEntityReflectionClass(): \ReflectionClass
+    {
+        return $this->entityReflectionClass;
+    }
+
+    /**
+     * @return EntityManagerInterface
+     */
+    public function getEntityManager(): EntityManagerInterface
+    {
+        return $this->entityManager;
+    }
+
+    /**
+     * @return ModuleMetadata
+     */
+    public function getModuleMetadata(): ModuleMetadata
+    {
+        return $this->moduleMetadata;
+    }
+
+    /**
+     * @return CssWidthDefinition
+     */
+    public function getCssWidthDefinition(): CssWidthDefinition
+    {
+        return $this->cssWidthDefinition;
+    }
+
+    /**
+     * @return \Aplab\AplabAdminBundle\Component\SystemState\SystemState
+     */
+    public function getSystemState(): \Aplab\AplabAdminBundle\Component\SystemState\SystemState
+    {
+        return $this->systemState;
+    }
 }

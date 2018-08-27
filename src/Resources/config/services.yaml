@@ -56,6 +56,12 @@ services:
         arguments:
             $aplab_admin_data_dir: '%aplab_admin_data_dir%'
 
+#    aplab_admin.system_state_manager:
+#        class: Aplab\AplabAdminBundle\Component\SystemState\SystemStateManager
+#        autowire: true
+#        arguments:
+#            $aplab_admin_data_dir: '%aplab_admin_data_dir%'
+
     Aplab\AplabAdminBundle\Component\Helper\AdminControllerHelper:
         arguments:
             - '@Aplab\AplabAdminBundle\Component\Menu\MenuManager'
@@ -80,3 +86,16 @@ services:
             - { name: kernel.event_listener, event: kernel.terminate }
 
 
+#    aplab_aplab_admin.event_listener.terminate_listener:
+#        class: Aplab\AplabAdminBundle\EventListener\TerminateListener
+#        arguments: ['@aplab_admin.system_state_manager', '@?']
+
+    aplab_admin.instatce_editor_manager:
+        class: Aplab\AplabAdminBundle\Component\InstanceEditor\InstatceEditorManager
+        public: true
+        arguments: ~
+
+    Aplab\AplabAdminBundle\Component\InstanceEditor\InstatceEditorManager: '@aplab_admin.instatce_editor_manager'
+
+#            - '@Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository'
+#            - '@doctrine.orm.entity_manager'

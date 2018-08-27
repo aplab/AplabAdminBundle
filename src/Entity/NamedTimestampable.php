@@ -75,7 +75,9 @@ class NamedTimestampable
      * )
      * @ModuleMetadata\Property(title="Last modified", readonly=true,
      *     cell={@ModuleMetadata\Cell(order=2000, width=156, type="Datetime")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label",
+     *     options=@ModuleMetadata\Options(test={1,{"test"=4},3,"test2"=7}))}
+     * )
      */
     private $lastModified;
 

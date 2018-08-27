@@ -49,7 +49,7 @@ class ModuleMetadataRepository
 
     /**
      * @param $object
-     * @return mixed
+     * @return ModuleMetadata
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
