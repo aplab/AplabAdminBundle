@@ -9,6 +9,8 @@
 namespace Aplab\AplabAdminBundle\Component\InstanceEditor;
 
 
+use Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType\FieldTypeFactory;
+use Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType\FieldTypeInterface;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -29,9 +31,20 @@ class InstanceEditor
      */
     protected $entityManagerInterface;
 
+    /**
+     * @var \Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadata
+     */
     protected $moduleMetadata;
 
+    /**
+     * @var \Doctrine\ORM\Mapping\ClassMetadata
+     */
     protected $classMetadata;
+
+    /**
+     * @var FieldTypeInterface[]
+     */
+    protected $widget;
 
     /**
      * InstanceEditor constructor.
@@ -50,8 +63,23 @@ class InstanceEditor
         $this->configure();
     }
 
+    /**
+     *
+     */
     protected function configure()
     {
-
+        $factory = new FieldTypeFactory();
+        $this->widget = [];
+        $properties = $this->moduleMetadata->getProperties();
+        foreach ($properties as $property_name => $property_metadata) {
+            $widget_metadata_list = $property_metadata->getWidget();
+            $property = $this->classMetadata->getReflectionProperty($property_name);
+            foreach ($widget_metadata_list as $widget_metadata) {
+                $this->widget[] = new InstanceEditorField($property, $property_metadata, $widget_metadata, $factory);
+            }
+        }
+//        usort($this->widget, function (DataTableCell $a, DataTableCell $b) {
+//            return $a->getOrder() <=> $b->getOrder();
+//        });
     }
 }

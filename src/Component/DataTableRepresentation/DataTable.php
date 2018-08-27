@@ -116,7 +116,7 @@ class DataTable
      */
     private function initCell(): void
     {
-        $f = new CellTypeFactory;
+        $factory = new CellTypeFactory;
         $this->cell = [];
         $properties = $this->moduleMetadata->getProperties();
         foreach ($properties as $property_name => $property_metadata) {
@@ -124,7 +124,7 @@ class DataTable
             $property = $this->entityReflectionClass->getProperty($property_name);
             foreach ($cell_metadata_list as $cell_metadata) {
                 $this->cssWidthDefinition->add($cell_metadata->getWidth());
-                $this->cell[] = new DataTableCell($property, $property_metadata, $cell_metadata, $f);
+                $this->cell[] = new DataTableCell($property, $property_metadata, $cell_metadata, $factory);
             }
         }
         usort($this->cell, function (DataTableCell $a, DataTableCell $b) {
