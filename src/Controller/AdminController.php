@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package Aplab\AplabAdminBundle\Controller
  * @Route("/admin", name="admin_")
  */
-class AdminController extends BaseAdminController
+class AdminController extends AbstractController
 {
     /**
      * @Route("/", name="desktop")

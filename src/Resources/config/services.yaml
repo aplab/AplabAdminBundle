@@ -78,3 +78,5 @@ services:
     Aplab\AplabAdminBundle\EventListener\TerminateListener:
         tags:
             - { name: kernel.event_listener, event: kernel.terminate }
+
+

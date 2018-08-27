@@ -47,7 +47,13 @@
                 {% block workarea %}
 
 
+                    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                    test.html.twig
 
+
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
 
 
                 {% endblock %}
