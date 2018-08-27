@@ -79,9 +79,9 @@ class Widget implements Annotation
     private $type;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getTab(): int
+    public function getTab(): string
     {
         return $this->tab;
     }

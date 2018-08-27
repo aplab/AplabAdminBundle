@@ -43,6 +43,11 @@ class InstanceEditorField
     private $options;
 
     /**
+     * @var
+     */
+    private $tab;
+
+    /**
      * InstanceEditorField constructor.
      * @param \ReflectionProperty $property
      * @param Property $property_metadata
@@ -57,5 +62,6 @@ class InstanceEditorField
         $this->order = $widget_metadata->getOrder();
         $this->type = $factory->create($widget_metadata->getType());
         $this->options = $widget_metadata->getOptions();
+        $this->tab = $widget_metadata->getTab();
     }
 }
