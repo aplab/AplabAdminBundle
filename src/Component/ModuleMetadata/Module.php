@@ -186,4 +186,22 @@ class Module
         $this->label = $label;
         return $this;
     }
+
+    /**
+     * @return array
+     */
+    public function getTabOrder(): array
+    {
+        return $this->tabOrder;
+    }
+
+    /**
+     * @param array $tabOrder
+     * @return Module
+     */
+    public function setTabOrder(array $tabOrder): Module
+    {
+        $this->tabOrder = $tabOrder;
+        return $this;
+    }
 }

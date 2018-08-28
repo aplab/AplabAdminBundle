@@ -43,7 +43,6 @@ class NamedTimestampableController extends BaseAdminController
         $toolbar->addHandler('Drop selected', 'AplDataTable.getInstance().del();', 'fas fa-trash-alt');
 
         $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
-        dump($data_table->getModuleMetadata());
         $pager = $data_table->getPager();
         return $this->render('@AplabAdmin/data-table/data-table.html.twig', get_defined_vars());
     }
@@ -99,6 +98,8 @@ class NamedTimestampableController extends BaseAdminController
      * @Route("/add", name="add")
      * @param InstatceEditorManager $instatceEditorManager
      * @return Response
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
     public function addItem(InstatceEditorManager $instatceEditorManager)
     {

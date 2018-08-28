@@ -64,9 +64,18 @@ class InstanceEditor
     }
 
     /**
-     *
+     * Configrue Instance editor
      */
     protected function configure()
+    {
+        $this->configureFields();
+        $this->configureTabs();
+    }
+
+    /**
+     * First configure fields
+     */
+    protected function configureFields()
     {
         $factory = new FieldTypeFactory();
         $this->widget = [];
@@ -78,8 +87,14 @@ class InstanceEditor
                 $this->widget[] = new InstanceEditorField($property, $property_metadata, $widget_metadata, $factory);
             }
         }
-//        usort($this->widget, function (DataTableCell $a, DataTableCell $b) {
-//            return $a->getOrder() <=> $b->getOrder();
-//        });
+    }
+
+    /**
+     * configure tabs
+     */
+    protected function configureTabs()
+    {
+        $tab_order_configuration = $this->moduleMetadata->getModule()->getTabOrder();
+        dump($tab_order_configuration);
     }
 }
