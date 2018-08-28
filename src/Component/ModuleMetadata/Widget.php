@@ -87,10 +87,10 @@ class Widget implements Annotation
     }
 
     /**
-     * @param int $tab
+     * @param string $tab
      * @return Widget
      */
-    public function setTab(int $tab): Widget
+    public function setTab(string $tab): Widget
     {
         $this->tab = $tab;
         return $this;

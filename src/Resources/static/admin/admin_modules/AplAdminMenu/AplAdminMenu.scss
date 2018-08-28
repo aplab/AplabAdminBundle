@@ -1,9 +1,12 @@
+$main-menu-background-color: #3a3a3a;
+$main-menu-hover-background-color: #494949;
+$main-menu-current-background-color: #323232;
 .apl-admin-menu {
     display: block;
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #30343e none repeat scroll 0 0;
+    background: $main-menu-background-color none repeat scroll 0 0;
     overflow: hidden;
     min-width: 100px;
     font-size: 16px;
@@ -15,7 +18,7 @@
     }
     li.open {
         >span {
-            color: #6f7890;
+            color: #fff;
         }
     }
     li {
@@ -31,18 +34,18 @@
             -ms-text-overflow: ellipsis;
             text-overflow: ellipsis;
             white-space: nowrap;
-            color: #cfd2da;
+            color: #fff;
             cursor: pointer;
             position: relative;
             line-height: 20px;
         }
         >span:hover, >span:active {
             color: #fff;
-            background: #434857;
+            background: $main-menu-hover-background-color;
         }
         >a:hover, >a:active {
             color: #fff;
-            background: #434857;
+            background: $main-menu-hover-background-color;
         }
         a {
             text-decoration: none !important;
@@ -77,7 +80,7 @@
         }
     }
     li.open {
-        background: #252830;
+        background: $main-menu-current-background-color;
         > span > i.fa-chevron-down {
             -webkit-transform: rotate(179deg);
             -ms-transform: rotate(179deg);

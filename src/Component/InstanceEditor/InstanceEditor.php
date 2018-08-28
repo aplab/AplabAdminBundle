@@ -87,6 +87,9 @@ class InstanceEditor
                 $this->widget[] = new InstanceEditorField($property, $property_metadata, $widget_metadata, $factory);
             }
         }
+        usort($this->widget, function (InstanceEditorField $a, InstanceEditorField $b) {
+            return $a->getOrder() <=> $b->getOrder();
+        });
     }
 
     /**

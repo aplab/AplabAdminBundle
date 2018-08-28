@@ -43,7 +43,7 @@ class InstanceEditorField
     private $options;
 
     /**
-     * @var
+     * @var string
      */
     private $tab;
 
@@ -63,5 +63,53 @@ class InstanceEditorField
         $this->type = $factory->create($widget_metadata->getType());
         $this->options = $widget_metadata->getOptions();
         $this->tab = $widget_metadata->getTab();
+    }
+
+    /**
+     * @return string
+     */
+    public function getPropertyName(): string
+    {
+        return $this->propertyName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPropertyTitle(): string
+    {
+        return $this->propertyTitle;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder(): int
+    {
+        return $this->order;
+    }
+
+    /**
+     * @return FieldTypeInterface
+     */
+    public function getType(): FieldTypeInterface
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return Options
+     */
+    public function getOptions(): Options
+    {
+        return $this->options;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTab(): string
+    {
+        return $this->tab;
     }
 }
