@@ -10,7 +10,6 @@ namespace Aplab\AplabAdminBundle\Component\InstanceEditor;
 
 
 use Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType\FieldTypeFactory;
-use Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType\FieldTypeInterface;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -42,9 +41,14 @@ class InstanceEditor
     protected $classMetadata;
 
     /**
-     * @var FieldTypeInterface[]
+     * @var InstanceEditorField[]
      */
     protected $widget;
+
+    /**
+     * @var InstanceEditorTab[]
+     */
+    protected $tab;
 
     /**
      * InstanceEditor constructor.
@@ -98,7 +102,40 @@ class InstanceEditor
     protected function configureTabs()
     {
         $tab_order_configuration = $this->moduleMetadata->getModule()->getTabOrder();
-        $tabs = [];
-        foreach (widg)
+        $tab_names = [];
+        // find required tabs
+        foreach ($this->widget as $widget) {
+            $tab_name = $widget->getTab();
+            if (!isset($tab_names[$tab_name])) {
+                $tab_names[$tab_name] = $tab_name;
+            }
+        }
+        // create tabs
+        $number = 0;
+        foreach ($tab_names as $tab_name) {
+            $tab = new InstanceEditorTab;
+            $this->tab[] = $tab;
+            $tab->setName($tab_name);
+            $tab->setOrder($tab_order_configuration[$tab_name] ?? $number++);
+        }
+        // building tab index
+        /**
+         * @var InstanceEditorTab[]
+         */
+        $tab_index = [];
+        foreach ($this->tab as $tab) {
+            $tab_name = $tab->getName();
+            $tab_index[$tab_name] = $tab;
+        }
+        usort($this->tab, function (InstanceEditorTab $a, InstanceEditorTab $b) {
+            return $a->getOrder() <=> $b->getOrder();
+        });
+        // distribute widgets to tabs
+        foreach ($this->widget as $widget) {
+            $tab_name = $widget->getTab();
+            if (isset($tab_index[$tab_name])) {
+                $tab_index[$tab_name]->addField($widget);
+            }
+        }
     }
 }

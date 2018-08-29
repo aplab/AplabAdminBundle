@@ -34,6 +34,9 @@
     #aplab-admin-sidebar {
         max-width: $sidebar-max-width;
         width: 100%;
+        -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
     }
     @media (min-width: $sidebar-max-width) {
         #aplab-admin-sidebar {
@@ -165,7 +168,7 @@
     right: auto;
     width: $sidebar-max-width;
     max-width: 100vw;
-    background: $navbar-background-color;
+    background: $sidebar-background-color;
 }
 
 #aplab-admin-navbar {
