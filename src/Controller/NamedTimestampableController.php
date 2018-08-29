@@ -39,8 +39,8 @@ class NamedTimestampableController extends BaseAdminController
     {
         $helper = $this->adminControllerHelper;
         $toolbar = $this->adminControllerHelper->getToolbar();
-        $toolbar->addUrl('Add item', $helper->getModulePath('add'), 'fas fa-plus');
-        $toolbar->addHandler('Drop selected', 'AplDataTable.getInstance().del();', 'fas fa-times');
+        $toolbar->addUrl('New item', $helper->getModulePath('add'), 'fas fa-plus text-success');
+        $toolbar->addHandler('Delete selected', 'AplDataTable.getInstance().del();', 'fas fa-times text-warning');
 
         $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
         $pager = $data_table->getPager();
@@ -98,15 +98,25 @@ class NamedTimestampableController extends BaseAdminController
      * @Route("/add", name="add")
      * @param InstatceEditorManager $instatceEditorManager
      * @return Response
+     * @throws \Aplab\AplabAdminBundle\Component\Toolbar\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
     public function addItem(InstatceEditorManager $instatceEditorManager)
     {
+        $helper = $this->adminControllerHelper;
+        $toolbar = $this->adminControllerHelper->getToolbar();
+        $toolbar->addHandler('Save', 'alert("save");', 'fas fa-save text-success');
+        $toolbar->addUrl('Exit without saving', $helper->getModulePath(), 'fas fa-sign-out-alt text-danger flip-h');
+
+
         $entity_class_name = $this->getEntityClassName();
         $item = new $entity_class_name;
-        dump($instatceEditorManager->getInstanceEditor($item));
-        return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
+        $instatce_editor = $instatceEditorManager->getInstanceEditor($item);
+
+        dump($instatce_editor);
+
+        return $this->render('@AplabAdmin/instance-editor/instance-editor.html.twig', get_defined_vars());
     }
 
     /**

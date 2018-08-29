@@ -29,6 +29,7 @@ gulp.task('scss-dev', function () {
         './stylesheet/main.scss',
         './admin_modules/AplAdminMenu/AplAdminMenu.scss',
         './admin_modules/AplDataTable/AplDataTable.scss',
+        './admin_modules/AplInstanceEditor/AplInstanceEditor.scss',
         './admin_modules/AplActionMenu/AplActionMenu.scss',
         './admin_modules/AplAdminToolbar/AplAdminToolbar.scss',
         './admin_modules/Scrollable/CapsuleUiScrollable.scss'
@@ -95,6 +96,7 @@ gulp.task('scripts-dev', function () {
             './node_modules/clipboard/dist/clipboard.js',
             './admin_modules/AplAdminMenu/AplAdminMenu.js',
             './admin_modules/AplDataTable/AplDataTable.js',
+            './admin_modules/AplInstanceEditor/AplInstanceEditor.js',
             './admin_modules/AplActionMenu/AplActionMenu.js',
             './admin_modules/AplAdminToolbar/AplAdminToolbar.js',
             './admin_modules/Scrollable/CapsuleUiScrollable.js',
