@@ -3,93 +3,46 @@
     {{ parent() }}
     <script>
         $(document).ready(function () {
-            new AplDataTable($('#apl-data-table'));
+            new AplInstanceEditor($('#apl-instance-editor'));
         });
     </script>
 {% endblock %}
 {% block workarea %}
-    <!--data grid-->
-    <div class="apl-data-table"
-         id="apl-data-table"
-         data-base-url="{{ app.request.pathInfo }}">
-        <!--data grid body-->
-        <div class="apl-data-table-body">
-            <!--data grid content-->
-            <div class="apl-data-table-content">
-
-                <div class="apl-data-table-header">
-                    <div class="apl-data-table-header-row wExt">
-                        {% for cell_item in data_table.cell %}
-                            <div class="w{{ cell_item.width }}"
-                                 title="{{ cell_item.propertyTitle }}">
-                                {{ cell_item.propertyTitle }}
-                            </div>
-                        {% endfor %}
+    {% set prefix = 'apl-instance-editor' %}
+    <div class="{{ prefix }}" id="{{ prefix }}">
+        <div class="{{ prefix }}-head">
+            <div class="{{ prefix }}-tabs-wrapper">
+                <div class="{{ prefix }}-tabs">
+                    {% for tab in instance_editor.tab %}
+                    <div class="{{ prefix }}-tab">
+                        {{ tab.name }}
                     </div>
-                </div>
-
-                <div class="apl-data-table-sidebar">
-                    <div class="apl-data-table-sidebar-header">
-                        <input type="checkbox">
-                    </div>
-                    <div class="apl-data-table-sidebar-body">
-                        <div class="apl-data-table-sidebar-body-col"></div>
-                    </div>
-                </div>
-
-                <div class="apl-data-table-data-wrapper">
-                    <div class="apl-data-table-data wSum">
-                        {% for item in data_table.items %}
-                            <div class="wExt" data-pk="{{ data_table.helperIdentifierJson(item) }}">
-                                {% for cell_item in data_table.cell %}
-                                    {{ block(cell_item.type.type, "@AplabAdmin/data-table/cell-type.html.twig") }}
-                                {% endfor %}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-            </div>
-            <!--end of apl-data-table-content-->
-
-            <div class="apl-data-table-scroll-horizontal-wrapper">
-                <div class="apl-data-table-scroll-horizontal">
-                    <div class="apl-data-table-scroll-horizontal-content"></div>
-                </div>
-            </div>
-
-            <div class="apl-data-table-scroll-vertical-wrapper">
-                <div class="apl-data-table-scroll-vertical">
-                    <div class="apl-data-table-scroll-vertical-content"></div>
-                </div>
-            </div>
-
-        </div>
-        <!--end of data grid body-->
-        <!--data grid footer-->
-        <div class="apl-data-table-footer">
-            <div class="apl-data-table-prev{{ pager.prev ? '' : ' disabled' }}">
-                <span class="fas fa-chevron-left" aria-hidden="true"></span>
-            </div>
-            <div class="apl-data-table-page">
-                <select class="form-control">
-                    {% for p in pager.pages %}
-                        <option value="{{ p }}"{{ p == pager.currentPage ? ' selected' }}>{{ p }}</option>
                     {% endfor %}
-                </select>
+                </div>
             </div>
-            <div class="apl-data-table-next{{ pager.next ? '' : ' disabled' }}">
-                <span class="fas fa-chevron-right" aria-hidden="true"></span>
-            </div>
-            <div class="apl-data-table-limit">
-                <select class="form-control">
-                    {% for ipp in pager.itemsPerPageVariants %}
-                        <option value="{{ ipp }}"{{ ipp == pager.itemsPerPage ? ' selected' }}>{{ ipp }}</option>
-                    {% endfor %}
-                </select>
-            </div>
+            <div class="{{ prefix }}-arrow-left fas fa-caret-left"></div>
+            <div class="{{ prefix }}-arrow-right fas fa-caret-right"></div>
         </div>
-        <!--end of data grid footer-->
+        <div class="{{ prefix }}-body">
+            {#<form method="post" id="<?=$this->instance->instanceName?>-form">#}
+                {#<?php foreach ($this->instance->groups as $group) : ?>#}
+                {#<div class="{{ prefix }}-panel">#}
+                    {#<?php if ($group->ckeditor) : ?>#}
+                    {#<?php foreach ($group as $element) : ?>#}
+                    {#<?=$element?>#}
+                    {#<?php endforeach ?>#}
+                    {#<?php else : ?>#}
+                    {#<div class="{{ prefix }}-elements-wrapper">#}
+                        {#<div class="{{ prefix }}-elements">#}
+                            {#<?php foreach ($group as $element) : ?>#}
+                            {#<?=$element?>#}
+                            {#<?php endforeach ?>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<?php endif ?>#}
+                {#</div>#}
+                {#<?php endforeach ?>#}
+            {#</form>#}
+        </div>
     </div>
-    <!--end of data grid-->
 {% endblock %}

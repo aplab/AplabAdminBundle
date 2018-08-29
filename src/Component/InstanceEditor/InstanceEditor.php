@@ -138,4 +138,60 @@ class InstanceEditor
             }
         }
     }
+
+    /**
+     * @return object
+     */
+    public function getEntity(): object
+    {
+        return $this->entity;
+    }
+
+    /**
+     * @return ModuleMetadataRepository
+     */
+    public function getModuleMetadataRepository(): ModuleMetadataRepository
+    {
+        return $this->moduleMetadataRepository;
+    }
+
+    /**
+     * @return EntityManagerInterface
+     */
+    public function getEntityManagerInterface(): EntityManagerInterface
+    {
+        return $this->entityManagerInterface;
+    }
+
+    /**
+     * @return \Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadata
+     */
+    public function getModuleMetadata(): \Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadata
+    {
+        return $this->moduleMetadata;
+    }
+
+    /**
+     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     */
+    public function getClassMetadata(): \Doctrine\ORM\Mapping\ClassMetadata
+    {
+        return $this->classMetadata;
+    }
+
+    /**
+     * @return InstanceEditorField[]
+     */
+    public function getWidget(): array
+    {
+        return $this->widget;
+    }
+
+    /**
+     * @return InstanceEditorTab[]
+     */
+    public function getTab(): array
+    {
+        return $this->tab;
+    }
 }

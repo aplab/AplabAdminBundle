@@ -49,7 +49,7 @@ function AplInstanceEditor(container) {
      */
     var init = function () {
         tabs.find(prefix + 'tab').each(function (i, o) {
-            tabs_width[i] = $(o).outerWidth();
+            tabs_width[i] = $(o).outerWidth(true);
             tabs_scroll[i] = tabs_width_sum;
             tabs_width_sum += tabs_width[i];
         }).removeClass(class_prefix + 'tab-active').eq(0).addClass(class_prefix + 'tab-active');
@@ -117,24 +117,34 @@ function AplInstanceEditor(container) {
         tabs_wrapper.scrollLeft(tabs_wrapper.scrollLeft() + 50);
     });
 
-    init();
+    // workaround
+    (function() {
+        for (var i = 0; i < 100; i++) {
+            setTimeout(function () {
+                init();
+            }, (10 + i) * i);
+        }
+    })();
+
     initWidth();
 
-    /**
-     * CKEditor initialization
-     *
-     * @param config
-     */
-    CKEDITOR.editorConfig = function (config) {
-        // Define changes to default configuration here. For example:
-        // config.language = 'fr';
-        config.uiColor = 'f2f1f0';
-        config.resize_enabled = false;
-        config.toolbarCanCollapse = true;
-        config.removePlugins = 'about,maximize';
-        config.height = 10000;
-        config.allowedContent = true;
-    };
+    if (typeof(CKEDITOR) != 'undefined') {
+        /**
+         * CKEditor initialization
+         *
+         * @param config
+         */
+        CKEDITOR.editorConfig = function (config) {
+            // Define changes to default configuration here. For example:
+            // config.language = 'fr';
+            config.uiColor = 'f2f1f0';
+            config.resize_enabled = false;
+            config.toolbarCanCollapse = true;
+            config.removePlugins = 'about,maximize';
+            config.height = 10000;
+            config.allowedContent = true;
+        };
+    }
 
     /**
      * adjust editor size
@@ -313,22 +323,24 @@ function AplInstanceEditor(container) {
         this.save();
     };
 
-    /**
-     * Wrap textarea
-     */
-    $('textarea' + prefix + 'ckeditor').ckeditor(editor_config());
+    if (typeof(CKEDITOR) != 'undefined') {
+        /**
+         * Wrap textarea
+         */
+        $('textarea' + prefix + 'ckeditor').ckeditor(editor_config());
+    }
 
-    /**
-     * Datetimepicker configuration
-     */
-    $(prefix + 'datetime').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss',
-        ignoreReadonly: true,
-        allowInputToggle: true,
-        focusOnShow: true,
-        showClose: true,
-        showClear: true
-    });
+    // /**
+    //  * Datetimepicker configuration
+    //  */
+    // $(prefix + 'datetime').datetimepicker({
+    //     format: 'YYYY-MM-DD HH:mm:ss',
+    //     ignoreReadonly: true,
+    //     allowInputToggle: true,
+    //     focusOnShow: true,
+    //     showClose: true,
+    //     showClear: true
+    // });
 
     /**
      * workaround function to clear autocomplete password
