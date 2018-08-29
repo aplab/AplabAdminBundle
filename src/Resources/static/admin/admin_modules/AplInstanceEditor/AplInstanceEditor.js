@@ -48,18 +48,27 @@ function AplInstanceEditor(container) {
      * Initialization
      */
     var init = function () {
-        tabs.find(prefix + 'tab').each(function (i, o) {
+        var tabs_width_sum_tmp = 0;
+        var found_tab = tabs.find(prefix + 'tab');
+        found_tab.each(function (i, o) {
             tabs_width[i] = $(o).outerWidth(true);
-            tabs_scroll[i] = tabs_width_sum;
-            tabs_width_sum += tabs_width[i];
-        }).removeClass(class_prefix + 'tab-active').eq(0).addClass(class_prefix + 'tab-active');
-        tabs_width_sum += .1;
-        body.find(prefix + 'panel')
-            .removeClass(class_prefix + 'panel-active')
-            .eq(0).addClass(class_prefix + 'panel-active');
-        tabs.css({
-            width: tabs_width_sum
+            tabs_scroll[i] = tabs_width_sum_tmp;
+            tabs_width_sum_tmp += tabs_width[i];
         });
+        if (!tabs_width_sum) {
+            found_tab.removeClass(class_prefix + 'tab-active').eq(0).addClass(class_prefix + 'tab-active');
+        }
+        tabs_width_sum_tmp += .3;
+        if (!tabs_width_sum) {
+            // first run only
+            body.find(prefix + 'panel')
+                .removeClass(class_prefix + 'panel-active')
+                .eq(0).addClass(class_prefix + 'panel-active');
+        }
+        tabs.css({
+            width: tabs_width_sum_tmp
+        });
+        tabs_width_sum = tabs_width_sum_tmp;
     };
 
     /**
@@ -100,7 +109,6 @@ function AplInstanceEditor(container) {
         body.find(prefix + 'panel')
             .removeClass(class_prefix + 'panel-active')
             .eq(index).addClass(class_prefix + 'panel-active');
-
     });
 
     /**
@@ -122,7 +130,7 @@ function AplInstanceEditor(container) {
         for (var i = 0; i < 100; i++) {
             setTimeout(function () {
                 init();
-            }, (10 + i) * i);
+            }, (100 + i) * i);
         }
     })();
 
