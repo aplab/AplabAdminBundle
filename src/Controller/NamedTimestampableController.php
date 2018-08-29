@@ -112,7 +112,6 @@ class NamedTimestampableController extends BaseAdminController
         $entity_class_name = $this->getEntityClassName();
         $item = new $entity_class_name;
         $instance_editor = $instatceEditorManager->getInstanceEditor($item);
-
         return $this->render('@AplabAdmin/instance-editor/instance-editor.html.twig', get_defined_vars());
     }
 

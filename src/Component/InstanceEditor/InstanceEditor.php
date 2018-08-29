@@ -21,6 +21,11 @@ class InstanceEditor
     protected $entity;
 
     /**
+     * @var InstatceEditorManager
+     */
+    protected $instanceEditorManager;
+
+    /**
      * @var ModuleMetadataRepository
      */
     protected $moduleMetadataRepository;
@@ -60,6 +65,7 @@ class InstanceEditor
     public function __construct(object $entity, InstatceEditorManager $instance_editor_manager)
     {
         $this->entity = $entity;
+        $this->instanceEditorManager = $instance_editor_manager;
         $this->moduleMetadataRepository = $instance_editor_manager->getModuleMetadataRepository();
         $this->entityManagerInterface = $instance_editor_manager->getEntityManagerInterface();
         $this->moduleMetadata = $this->moduleMetadataRepository->getMetadata($this->entity);
@@ -88,7 +94,8 @@ class InstanceEditor
             $widget_metadata_list = $property_metadata->getWidget();
             $property = $this->classMetadata->getReflectionProperty($property_name);
             foreach ($widget_metadata_list as $widget_metadata) {
-                $this->widget[] = new InstanceEditorField($property, $property_metadata, $widget_metadata, $factory);
+                $this->widget[] = new InstanceEditorField($this, $property, $property_metadata,
+                    $widget_metadata, $factory);
             }
         }
         usort($this->widget, function (InstanceEditorField $a, InstanceEditorField $b) {

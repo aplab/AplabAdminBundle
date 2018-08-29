@@ -11,6 +11,12 @@ namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType;
 
 abstract class CellTypeAbstract implements CellTypeInterface
 {
+    public function __construct()
+    {
+        $tmp = explode(CellTypeFactory::PREFIX, static::class);
+        $this->type = strtolower(end($tmp));
+    }
+
     /**
      * @var string
      */
@@ -21,10 +27,6 @@ abstract class CellTypeAbstract implements CellTypeInterface
      */
     public function getType()
     {
-        if (is_null($this->type)) {
-            $tmp = explode(CellTypeFactory::PREFIX, static::class);
-            $this->type = strtolower(end($tmp));
-        }
         return $this->type;
     }
 }

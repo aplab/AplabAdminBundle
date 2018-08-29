@@ -1,0 +1,32 @@
+{% block datetime %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-<?=$this->id?>">{{ field.propertyTitle }}</label>
+        <div class="{{ prefix }}-value {{ prefix }}-value-label">
+            {{ field.type.value }}
+        </div>
+        <input type="hidden" name="<?=$this->property->name?>" value="" id="{{ prefix }}-element-<?=$this->id?>">
+    </div>
+{% endblock %}
+{% block label %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-<?=$this->id?>">{{ field.propertyTitle }}</label>
+        <div class="{{ prefix }}-value {{ prefix }}-value-label">
+            {{ field.type.value }}
+        </div>
+        <input type="hidden" name="<?=$this->property->name?>" value="" id="{{ prefix }}-element-<?=$this->id?>">
+    </div>
+{% endblock %}
+{% block text %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-<?=$this->id?>">{{ field.propertyTitle }}</label>
+        <div class="{{ prefix }}-value">
+            <input type="text" class="form-control" placeholder=""
+                   autocorrect="off" autocapitalize="none" autocomplete="off"
+                   name="{{ field.propertyName }}"
+                   id="{{ prefix }}-element-<?=$this->id?>"
+                   value="{{ field.type.value }}">
+        </div>
+    </div>
+{% endblock %}
+{% block example %}
+{% endblock %}

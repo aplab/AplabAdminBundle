@@ -18,6 +18,16 @@ use Aplab\AplabAdminBundle\Component\ModuleMetadata\Widget;
 class InstanceEditorField
 {
     /**
+     * @var InstanceEditor
+     */
+    private $instanceEditor;
+
+    /**
+     * @var object
+     */
+    private $entity;
+
+    /**
      * @var string
      */
     private $propertyName;
@@ -49,20 +59,23 @@ class InstanceEditorField
 
     /**
      * InstanceEditorField constructor.
+     * @param InstanceEditor $instance_editor
      * @param \ReflectionProperty $property
      * @param Property $property_metadata
      * @param Widget $widget_metadata
      * @param FieldTypeFactory $factory
      */
-    public function __construct(\ReflectionProperty $property, Property $property_metadata,
-                                Widget $widget_metadata, FieldTypeFactory $factory)
+    public function __construct(InstanceEditor $instance_editor, \ReflectionProperty $property,
+                                Property $property_metadata, Widget $widget_metadata, FieldTypeFactory $factory)
     {
+        $this->instanceEditor = $instance_editor;
         $this->propertyName = $property->getName();
         $this->propertyTitle = $property_metadata->getTitle();
         $this->order = $widget_metadata->getOrder();
-        $this->type = $factory->create($widget_metadata->getType());
+        $this->type = $factory->create($this, $widget_metadata->getType());
         $this->options = $widget_metadata->getOptions();
         $this->tab = $widget_metadata->getTab();
+        $this->entity = $instance_editor->getEntity();
     }
 
     /**
@@ -111,5 +124,21 @@ class InstanceEditorField
     public function getTab(): string
     {
         return $this->tab;
+    }
+
+    /**
+     * @return InstanceEditor
+     */
+    public function getInstanceEditor(): InstanceEditor
+    {
+        return $this->instanceEditor;
+    }
+
+    /**
+     * @return object
+     */
+    public function getEntity(): object
+    {
+        return $this->entity;
     }
 }

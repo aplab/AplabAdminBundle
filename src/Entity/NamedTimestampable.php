@@ -49,7 +49,7 @@ class NamedTimestampable
      * @ORM\Column(type="string")
      * @ModuleMetadata\Property(title="Name",
      *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $name;
 
@@ -62,7 +62,7 @@ class NamedTimestampable
      * )
      * @ModuleMetadata\Property(title="Created at", readonly=true,
      *     cell={@ModuleMetadata\Cell(order=2000, width=156, type="Datetime")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label")})
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="DateTime")})
      */
     private $createdAt;
 
@@ -75,7 +75,7 @@ class NamedTimestampable
      * )
      * @ModuleMetadata\Property(title="Last modified", readonly=true,
      *     cell={@ModuleMetadata\Cell(order=2000, width=156, type="Datetime")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Label",
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="DateTime",
      *     options=@ModuleMetadata\Options(test={1,{"test"=4},3,"test2"=7}))}
      * )
      */

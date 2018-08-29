@@ -11,5 +11,5 @@ namespace Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType;
 
 interface FieldTypeInterface
 {
-
+    public function getType();
 }
