@@ -158,4 +158,14 @@ $(document).ready(function () {
      * Call initialization.
      */
     AplabAdmin.init(/** test 6 */);
+
+
+
+
+    // Expand all dump levels of all sf-dumps on a page.
+    $("pre.sf-dump").each(function() {
+        $(this).find("a.sf-dump-toggle:gt(0)").each(function(i, a){
+            a.click();
+        });
+    });
 });

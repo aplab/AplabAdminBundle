@@ -109,12 +109,9 @@ class NamedTimestampableController extends BaseAdminController
         $toolbar->addHandler('Save', 'alert("save");', 'fas fa-save text-success');
         $toolbar->addUrl('Exit without saving', $helper->getModulePath(), 'fas fa-sign-out-alt text-danger flip-h');
 
-
         $entity_class_name = $this->getEntityClassName();
         $item = new $entity_class_name;
         $instance_editor = $instatceEditorManager->getInstanceEditor($item);
-
-//        dump($instance_editor);
 
         return $this->render('@AplabAdmin/instance-editor/instance-editor.html.twig', get_defined_vars());
     }
