@@ -98,6 +98,7 @@ class InstanceEditor
     protected function configureTabs()
     {
         $tab_order_configuration = $this->moduleMetadata->getModule()->getTabOrder();
-
+        $tabs = [];
+        foreach (widg)
     }
 }

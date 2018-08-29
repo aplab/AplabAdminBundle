@@ -40,7 +40,7 @@ class NamedTimestampableController extends BaseAdminController
         $helper = $this->adminControllerHelper;
         $toolbar = $this->adminControllerHelper->getToolbar();
         $toolbar->addUrl('Add item', $helper->getModulePath('add'), 'fas fa-plus');
-        $toolbar->addHandler('Drop selected', 'AplDataTable.getInstance().del();', 'fas fa-trash-alt');
+        $toolbar->addHandler('Drop selected', 'AplDataTable.getInstance().del();', 'fas fa-times');
 
         $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
         $pager = $data_table->getPager();
