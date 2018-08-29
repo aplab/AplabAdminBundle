@@ -12,6 +12,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
 use Aplab\AplabAdminBundle\Component\InstanceEditor\InstatceEditorManager;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -97,6 +98,7 @@ class NamedTimestampableController extends BaseAdminController
     /**
      * @Route("/add", name="add")
      * @param InstatceEditorManager $instatceEditorManager
+     * @param FormBuilderInterface $builder
      * @return Response
      * @throws \Aplab\AplabAdminBundle\Component\Toolbar\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -112,6 +114,8 @@ class NamedTimestampableController extends BaseAdminController
         $entity_class_name = $this->getEntityClassName();
         $item = new $entity_class_name;
         $instance_editor = $instatceEditorManager->getInstanceEditor($item);
+        $form_builder = $this->createFormBuilder($item);
+        dump($form_builder);
         return $this->render('@AplabAdmin/instance-editor/instance-editor.html.twig', get_defined_vars());
     }
 
