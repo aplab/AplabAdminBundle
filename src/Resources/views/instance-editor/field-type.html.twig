@@ -1,29 +1,31 @@
 {% block datetime %}
     <div class="{{ prefix }}-element">
-        <label class="{{ prefix }}-label" for="{{ prefix }}-element-<?=$this->id?>">{{ field.propertyTitle }}</label>
-        <div class="{{ prefix }}-value {{ prefix }}-value-label">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">
+            {{ field.propertyTitle }}
+        </label>
+        <div class="{{ prefix }}-value {{ prefix }}-value-label"
+             id="{{ prefix }}-element-{{ field.type.uniqueId }}">
             {{ field.type.value }}
         </div>
-        <input type="hidden" name="<?=$this->property->name?>" value="" id="{{ prefix }}-element-<?=$this->id?>">
     </div>
 {% endblock %}
 {% block label %}
     <div class="{{ prefix }}-element">
-        <label class="{{ prefix }}-label" for="{{ prefix }}-element-<?=$this->id?>">{{ field.propertyTitle }}</label>
-        <div class="{{ prefix }}-value {{ prefix }}-value-label">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.propertyTitle }}</label>
+        <div class="{{ prefix }}-value {{ prefix }}-value-label"
+             id="{{ prefix }}-element-{{ field.type.uniqueId }}">
             {{ field.type.value }}
         </div>
-        <input type="hidden" name="<?=$this->property->name?>" value="" id="{{ prefix }}-element-<?=$this->id?>">
     </div>
 {% endblock %}
 {% block text %}
     <div class="{{ prefix }}-element">
-        <label class="{{ prefix }}-label" for="{{ prefix }}-element-<?=$this->id?>">{{ field.propertyTitle }}</label>
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.propertyTitle }}</label>
         <div class="{{ prefix }}-value">
             <input type="text" class="form-control" placeholder=""
                    autocorrect="off" autocapitalize="none" autocomplete="off"
-                   name="{{ field.propertyName }}"
-                   id="{{ prefix }}-element-<?=$this->id?>"
+                   name="{{ form_name }}[{{ field.propertyName }}]"
+                   id="{{ prefix }}-element-{{ field.type.uniqueId }}"
                    value="{{ field.type.value }}">
         </div>
     </div>

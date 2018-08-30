@@ -96,9 +96,8 @@ class NamedTimestampableController extends BaseAdminController
     }
 
     /**
-     * @Route("/add", name="add")
+     * @Route("/add", name="add", methods={"GET"})
      * @param InstatceEditorManager $instatceEditorManager
-     * @param FormBuilderInterface $builder
      * @return Response
      * @throws \Aplab\AplabAdminBundle\Component\Toolbar\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
@@ -108,7 +107,30 @@ class NamedTimestampableController extends BaseAdminController
     {
         $helper = $this->adminControllerHelper;
         $toolbar = $this->adminControllerHelper->getToolbar();
-        $toolbar->addHandler('Save', 'alert("save");', 'fas fa-save text-success');
+        $toolbar->addHandler('Save', 'AplInstanceEditor.getInstance().save();', 'fas fa-save text-success');
+        $toolbar->addUrl('Exit without saving', $helper->getModulePath(), 'fas fa-sign-out-alt text-danger flip-h');
+
+        $entity_class_name = $this->getEntityClassName();
+        $item = new $entity_class_name;
+        $instance_editor = $instatceEditorManager->getInstanceEditor($item);
+        $form_builder = $this->createFormBuilder($item);
+        dump($form_builder);
+        return $this->render('@AplabAdmin/instance-editor/instance-editor.html.twig', get_defined_vars());
+    }
+
+    /**
+     * @Route("/add", name="create", methods={"POST"})
+     * @param InstatceEditorManager $instatceEditorManager
+     * @return Response
+     * @throws \Aplab\AplabAdminBundle\Component\Toolbar\Exception
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     */
+    public function createItem(InstatceEditorManager $instatceEditorManager)
+    {
+        $helper = $this->adminControllerHelper;
+        $toolbar = $this->adminControllerHelper->getToolbar();
+        $toolbar->addHandler('Save', 'AplInstanceEditor.getInstance().save();', 'fas fa-save text-success');
         $toolbar->addUrl('Exit without saving', $helper->getModulePath(), 'fas fa-sign-out-alt text-danger flip-h');
 
         $entity_class_name = $this->getEntityClassName();

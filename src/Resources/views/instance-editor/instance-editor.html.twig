@@ -6,9 +6,11 @@
             new AplInstanceEditor($('#apl-instance-editor'));
         });
     </script>
+    <script src="{{ asset('/static/cms/ckeditor/ckeditor.js') }}"></script>
 {% endblock %}
 {% block workarea %}
     {% set prefix = 'apl-instance-editor' %}
+    {% set form_name = 'apl-instance-editor' %}
     <div class="{{ prefix }}" id="{{ prefix }}">
         <div class="{{ prefix }}-head">
             <div class="{{ prefix }}-tabs-wrapper">

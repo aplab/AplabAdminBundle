@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -24,10 +25,10 @@ class ExampleController extends AbstractController
 {
     /**
      * @Route("/test", name="test")
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function test() {
-
+    public function test(Request $request) {
 
         $form = $this->createFormBuilder()
             ->add('task', TextType::class)

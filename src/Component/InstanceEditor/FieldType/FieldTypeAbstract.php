@@ -62,4 +62,12 @@ abstract class FieldTypeAbstract implements FieldTypeInterface
         }
         throw new \LogicException('Unable to access property ' . get_class($entity) . '::' . $property_name);
     }
+
+    /**
+     * @return string
+     */
+    public function getUniqueId()
+    {
+        return spl_object_id($this);
+    }
 }
