@@ -108,6 +108,8 @@ class NamedTimestampableController extends BaseAdminController
         $helper = $this->adminControllerHelper;
         $toolbar = $this->adminControllerHelper->getToolbar();
         $toolbar->addHandler('Save', 'AplInstanceEditor.getInstance().save();', 'fas fa-save text-success');
+        $toolbar->addHandler('Save and exit', 'AplInstanceEditor.getInstance().saveAndExit();',
+            'fas fa-save text-success');
         $toolbar->addUrl('Exit without saving', $helper->getModulePath(), 'fas fa-sign-out-alt text-danger flip-h');
 
         $entity_class_name = $this->getEntityClassName();
@@ -130,8 +132,11 @@ class NamedTimestampableController extends BaseAdminController
         $item = new $entity_class_name;
         $instance_editor = $instatceEditorManager->getInstanceEditor($item);
         $instance_editor->handleRequest($request);
-        if ($item->getId()) {
+        if ($request->request->has('saveAndExit')) {
             return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'list');
+        }
+        if ($item->getId()) {
+            return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'edit', ['id' => $item->getId()]);
         }
     }
 

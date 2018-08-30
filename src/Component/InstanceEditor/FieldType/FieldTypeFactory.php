@@ -20,7 +20,7 @@ class FieldTypeFactory
 
     public function create(InstanceEditorField $field, $type)
     {
-        $class_name = __NAMESPACE__.static::PREFIX.$type;
+        $class_name = __NAMESPACE__ . static::PREFIX . $type;
         return new $class_name($field);
     }
 }
