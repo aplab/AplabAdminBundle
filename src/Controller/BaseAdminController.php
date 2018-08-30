@@ -11,6 +11,8 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 use Aplab\AplabAdminBundle\Component\Helper\AdminControllerHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * Class BaseAdminController
@@ -24,8 +26,14 @@ abstract class BaseAdminController extends AbstractController
     protected $adminControllerHelper;
 
     /**
+     * @var Route
+     */
+    protected $routeAnnotation;
+
+    /**
      * BaseAdminController constructor.
      * @param AdminControllerHelper $adminControllerHelper
+     * @throws \ReflectionException
      */
     final public function __construct(AdminControllerHelper $adminControllerHelper)
     {
@@ -33,6 +41,8 @@ abstract class BaseAdminController extends AbstractController
         if (!isset($this->entityClassName)) {
             throw new \LogicException(get_class($this) . ' must have a protected $entityClassName = Entity::class');
         }
+        $reader = $adminControllerHelper->getAnnotationsReader();
+        $this->routeAnnotation = $reader->getClassAnnotation(new \ReflectionClass(static::class), Route::class);
     }
 
     /**
@@ -41,5 +51,13 @@ abstract class BaseAdminController extends AbstractController
     public function getEntityClassName() {
         /** @noinspection PhpUndefinedFieldInspection */
         return $this->entityClassName;
+    }
+
+    /**
+     * @return Route
+     */
+    public function getRouteAnnotation(): Route
+    {
+        return $this->routeAnnotation;
     }
 }

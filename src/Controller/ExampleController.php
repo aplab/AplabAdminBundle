@@ -9,6 +9,8 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
+use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
+use Doctrine\Common\Inflector\Inflector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,6 +40,7 @@ class ExampleController extends AbstractController
 
         $form = $form->createView();
 
+        dump(Inflector::tableize(NamedTimestampable::class));
 
         return $this->render('@AplabAdmin/admin-test.html.twig', get_defined_vars());
     }

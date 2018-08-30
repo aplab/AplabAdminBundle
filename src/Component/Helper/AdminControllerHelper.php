@@ -12,6 +12,7 @@ namespace Aplab\AplabAdminBundle\Component\Helper;
 use Aplab\AplabAdminBundle\Component\ActionMenu\ActionMenuManager;
 use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
 use Aplab\AplabAdminBundle\Component\Toolbar\ToolbarManager;
+use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class AdminControllerHelper
@@ -37,17 +38,25 @@ class AdminControllerHelper
     protected $requestStack;
 
     /**
+     * @var Reader
+     */
+    protected $annotationsReader;
+
+    /**
      * AdminControllerHelper constructor.
      * @param MenuManager $menuManager
      * @param ActionMenuManager $actionMenuManager
      * @param ToolbarManager $toolbarManager
      * @param RequestStack $requestStack
+     * @param Reader $annotations_reader
      */
     public function __construct(MenuManager $menuManager,
                                 ActionMenuManager $actionMenuManager,
                                 ToolbarManager $toolbarManager,
-                                RequestStack $requestStack)
+                                RequestStack $requestStack,
+                                Reader $annotations_reader)
     {
+        $this->annotationsReader = $annotations_reader;
         $this->menuManager = $menuManager;
         $this->actionMenuManager = $actionMenuManager;
         $this->toolbarManager = $toolbarManager;
@@ -164,5 +173,13 @@ class AdminControllerHelper
             throw new \RuntimeException('unable to get bundle path not from a bundle');
         }
         return join('/', array_slice($data, 0, 3));
+    }
+
+    /**
+     * @return Reader
+     */
+    public function getAnnotationsReader(): Reader
+    {
+        return $this->annotationsReader;
     }
 }

@@ -12,6 +12,7 @@ namespace Aplab\AplabAdminBundle\Component\InstanceEditor;
 use Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType\FieldTypeFactory;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class InstanceEditor
 {
@@ -144,6 +145,28 @@ class InstanceEditor
                 $tab_index[$tab_name]->addField($widget);
             }
         }
+    }
+
+    public function handleRequest(Request $request)
+    {
+        $data = $request->request;
+        $properties = [];
+        foreach ($this->getWidget() as $widget) {
+            $properties[] = $widget->getPropertyName();
+        }
+        $data = $request->get('apl-instance-editor', []);
+        if (empty($data)) {
+            return;
+        }
+        $entity = $this->getEntity();
+        foreach ($properties as $property) {
+            if (isset($data[$property])) {
+                $setter = 'set' . ucfirst($property);
+                $entity->$setter($data[$property]);
+            }
+        }
+        $this->getEntityManagerInterface()->persist($entity);
+        $this->getEntityManagerInterface()->flush();
     }
 
     /**

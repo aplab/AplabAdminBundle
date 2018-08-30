@@ -12,7 +12,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentation;
 use Aplab\AplabAdminBundle\Component\InstanceEditor\InstatceEditorManager;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
-use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -63,7 +63,7 @@ class NamedTimestampableController extends BaseAdminController
             $pager->setItemsPerPage($_POST['itemsPerPage']);
             $pager->setCurrentPage($_POST['pageNumber']);
         }
-        return $this->redirectToRoute('admin_named_timestampable_list');
+        return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'list');
     }
 
     /**
@@ -92,7 +92,7 @@ class NamedTimestampableController extends BaseAdminController
             $entity_manager->remove($item);
         }
         $entity_manager->flush();
-        return $this->redirectToRoute('admin_named_timestampable_list');
+        return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'list');
     }
 
     /**
@@ -113,20 +113,38 @@ class NamedTimestampableController extends BaseAdminController
         $entity_class_name = $this->getEntityClassName();
         $item = new $entity_class_name;
         $instance_editor = $instatceEditorManager->getInstanceEditor($item);
-        $form_builder = $this->createFormBuilder($item);
-        dump($form_builder);
         return $this->render('@AplabAdmin/instance-editor/instance-editor.html.twig', get_defined_vars());
     }
 
     /**
      * @Route("/add", name="create", methods={"POST"})
      * @param InstatceEditorManager $instatceEditorManager
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
+     */
+    public function createItem(InstatceEditorManager $instatceEditorManager, Request $request)
+    {
+        $entity_class_name = $this->getEntityClassName();
+        $item = new $entity_class_name;
+        $instance_editor = $instatceEditorManager->getInstanceEditor($item);
+        $instance_editor->handleRequest($request);
+        if ($item->getId()) {
+            return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'list');
+        }
+    }
+
+    /**
+     * @Route("/{id}", name="edit", methods={"GET"})
+     * @param $id
+     * @param InstatceEditorManager $instance_editor_manager
      * @return Response
      * @throws \Aplab\AplabAdminBundle\Component\Toolbar\Exception
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function createItem(InstatceEditorManager $instatceEditorManager)
+    public function editItem($id, InstatceEditorManager $instance_editor_manager)
     {
         $helper = $this->adminControllerHelper;
         $toolbar = $this->adminControllerHelper->getToolbar();
@@ -134,20 +152,32 @@ class NamedTimestampableController extends BaseAdminController
         $toolbar->addUrl('Exit without saving', $helper->getModulePath(), 'fas fa-sign-out-alt text-danger flip-h');
 
         $entity_class_name = $this->getEntityClassName();
-        $item = new $entity_class_name;
-        $instance_editor = $instatceEditorManager->getInstanceEditor($item);
-        $form_builder = $this->createFormBuilder($item);
-        dump($form_builder);
+        $item = $instance_editor_manager->getEntityManagerInterface()->find($entity_class_name, $id);
+        if (!$item) {
+            return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'list');
+        }
+        $instance_editor = $instance_editor_manager->getInstanceEditor($item);
         return $this->render('@AplabAdmin/instance-editor/instance-editor.html.twig', get_defined_vars());
     }
 
     /**
-     * @Route("/{id}", name="edit")
+     * @Route("/{id}", name="update", methods={"POST"})
      * @param $id
-     * @return Response
+     * @param InstatceEditorManager $instance_editor_manager
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \ReflectionException
      */
-    public function editItem($id)
+    public function updateItem($id, InstatceEditorManager $instance_editor_manager, Request $request)
     {
-        return new Response($id);
+        $entity_class_name = $this->getEntityClassName();
+        $item = $instance_editor_manager->getEntityManagerInterface()->find($entity_class_name, $id);
+        if (!$item) {
+            return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'list');
+        }
+        $instance_editor = $instance_editor_manager->getInstanceEditor($item);
+        $instance_editor->handleRequest($request);
+        return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'edit', ['id' => $id]);
     }
 }
