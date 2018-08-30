@@ -7,6 +7,7 @@
         });
     </script>
     <script src="{{ asset('/static/cms/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('/static/cms/ckeditor/adapters/jquery.js') }}"></script>
 {% endblock %}
 {% block workarea %}
     {% set prefix = 'apl-instance-editor' %}
@@ -29,22 +30,19 @@
             <form method="post" id="<?=$this->instance->instanceName?>-form">
                 {% for tab in instance_editor.tab %}
                 <div class="{{ prefix }}-panel">
-                    {#<?php if ($group->ckeditor) : ?>#}
-                    {#<?php foreach ($group as $element) : ?>#}
-                    {#<?=$element?>#}
-                    {#<?php endforeach ?>#}
-                    {#<?php else : ?>#}
-                    <div class="{{ prefix }}-elements-wrapper">
-                        <div class="{{ prefix }}-elements">
-                            {% for field in tab.field %}
-                                {{ block(field.type.type, "@AplabAdmin/instance-editor/field-type.html.twig") }}
-                            {% endfor %}
-                            {#<?php foreach ($group as $element) : ?>#}
-                            {#<?=$element?>#}
-                            {#<?php endforeach ?>#}
+                    {% if tab.ckeditor %}
+                        {% for field in tab.field %}
+                            {{ block(field.type.type, "@AplabAdmin/instance-editor/field-type.html.twig") }}
+                        {% endfor %}
+                    {% else %}
+                        <div class="{{ prefix }}-elements-wrapper">
+                            <div class="{{ prefix }}-elements">
+                                {% for field in tab.field %}
+                                    {{ block(field.type.type, "@AplabAdmin/instance-editor/field-type.html.twig") }}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                    <?php endif ?>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </form>

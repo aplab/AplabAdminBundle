@@ -160,19 +160,28 @@ function AplInstanceEditor(container) {
     var fitEditors = function () {
         var height = body.height();
         var width = body.width();
+        console.log(width);
         for (var o in CKEDITOR.instances) {
             if (CKEDITOR.instances.hasOwnProperty(o)) {
                 CKEDITOR.instances[o].resize(width, height);
             }
         }
     };
-
+    
     /**
      * CKEditor size adjust
      */
     this.fitEditors = function () {
         fitEditors();
     };
+    
+    this.fitEditorsSlow = function () {
+        for (var i = 0; i < 5; i++) {
+            setTimeout(function () {
+                fitEditors();
+            }, (100 + i) * i);
+        }
+    }
 
     /**
      * Init CKEditors

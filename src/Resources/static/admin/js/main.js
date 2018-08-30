@@ -42,6 +42,9 @@ $(document).ready(function () {
         if (AplDataTable.getInstance !== undefined) {
             AplDataTable.getInstance().reinit();
         }
+        if (AplInstanceEditor.getInstance !== undefined) {
+            AplInstanceEditor.getInstance().fitEditorsSlow();
+        }
     };
 
     /**
@@ -52,6 +55,9 @@ $(document).ready(function () {
         AplabAdmin.setIsSidebarOpen(false);
         if (AplDataTable.getInstance !== undefined) {
             AplDataTable.getInstance().reinit();
+        }
+        if (AplInstanceEditor.getInstance !== undefined) {
+            AplInstanceEditor.getInstance().fitEditorsSlow();
         }
     };
 
@@ -64,6 +70,9 @@ $(document).ready(function () {
         if (AplDataTable.getInstance !== undefined) {
             AplDataTable.getInstance().reinit();
         }
+        if (AplInstanceEditor.getInstance !== undefined) {
+            AplInstanceEditor.getInstance().fitEditorsSlow();
+        }
     };
 
     /**
@@ -74,6 +83,9 @@ $(document).ready(function () {
         AplabAdmin.setIsSidebarPin(false);
         if (AplDataTable.getInstance !== undefined) {
             AplDataTable.getInstance().reinit();
+        }
+        if (AplInstanceEditor.getInstance !== undefined) {
+            AplInstanceEditor.getInstance().fitEditorsSlow();
         }
     };
 

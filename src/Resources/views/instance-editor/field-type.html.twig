@@ -30,5 +30,10 @@
         </div>
     </div>
 {% endblock %}
+{% block ckeditor %}
+    <textarea class="{{ prefix }}-ckeditor"
+              name="{{ form_name }}[{{ field.propertyName }}]"
+              id="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.type.value }}</textarea>
+{% endblock %}
 {% block example %}
 {% endblock %}

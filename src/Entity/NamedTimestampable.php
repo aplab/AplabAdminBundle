@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     description="Named timestampable entity",
  *     tabOrder={
  *          "General": 1000,
+ *          "Text": 2000,
  *          "Additional": 10000418
  *     })
  */
@@ -52,6 +53,14 @@ class NamedTimestampable
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="text")
+     * @ModuleMetadata\Property(title="Name",
+     *     cell={},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="Text", type="Ckeditor")})
+     */
+    private $text;
 
     /**
      * @ORM\Column(
@@ -131,5 +140,23 @@ class NamedTimestampable
     public function getLastModified()
     {
         return $this->lastModified;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param mixed $text
+     * @return NamedTimestampable
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
     }
 }

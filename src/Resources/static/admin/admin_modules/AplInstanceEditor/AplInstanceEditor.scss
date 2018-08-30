@@ -119,7 +119,7 @@ $active-color: #17a2b8;
     height: auto;
     overflow: hidden;
     z-index: 100;
-    background: #eee;
+    background: #fff;
   }
   &-panel {
     position: absolute;
@@ -131,6 +131,7 @@ $active-color: #17a2b8;
     width: auto;
     overflow: hidden;
     display: none;
+    background: #fff;
   }
   &-panel-active {
     display: block;
@@ -144,6 +145,7 @@ $active-color: #17a2b8;
     height: auto;
     width: auto;
     overflow: auto;
+    background: #eee;
   }
   &-elements {
     //overflow: hidden;

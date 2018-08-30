@@ -84,10 +84,39 @@ class InstanceEditorTab
      */
     public function addField(InstanceEditorField $field): InstanceEditorTab
     {
+        if ('ckeditor' === $field->getType()->getType()) {
+            if (sizeof($this->field)) {
+                throw new \LogicException('CKEditor field type requires a separate group. Check configuration.');
+            }
+            $this->setCkeditor();
+        }
         $this->field[] = $field;
         usort($this->field, function (InstanceEditorField $a, InstanceEditorField $b) {
             return $a->getOrder() <=> $b->getOrder();
         });
+        return $this;
+    }
+
+    /**
+     * @var bool
+     */
+    protected $ckeditor = false;
+
+    /**
+     * @return bool
+     */
+    public function getCkeditor(): bool
+    {
+        return $this->ckeditor;
+    }
+
+    /**
+     * @param bool $ckeditor
+     * @return InstanceEditorTab
+     */
+    public function setCkeditor(bool $ckeditor = true): InstanceEditorTab
+    {
+        $this->ckeditor = $ckeditor;
         return $this;
     }
 }
