@@ -48,6 +48,7 @@ class NamedTimestampable
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      * @ModuleMetadata\Property(title="Name",
      *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})

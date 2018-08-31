@@ -20,7 +20,9 @@
         "symfony/orm-pack": "^1.0",
         "symfony/filesystem": "^4.1",
         "respect/validation": "^1.1",
-        "symfony/form": "^4.1"
+        "symfony/form": "^4.1",
+        "symfony/validator": "^4.1",
+        "doctrine/annotations": "^1.6"
     },
     "autoload": {
         "psr-4": {
