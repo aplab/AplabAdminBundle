@@ -22,7 +22,8 @@
         "respect/validation": "^1.1",
         "symfony/form": "^4.1",
         "symfony/validator": "^4.1",
-        "doctrine/annotations": "^1.6"
+        "doctrine/annotations": "^1.6",
+        "symfony/security-bundle": "^4.1"
     },
     "autoload": {
         "psr-4": {
