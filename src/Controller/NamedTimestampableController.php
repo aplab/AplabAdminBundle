@@ -15,6 +15,7 @@ use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Class NamedTimestampableController
@@ -126,12 +127,18 @@ class NamedTimestampableController extends BaseAdminController
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function createItem(InstatceEditorManager $instatceEditorManager, Request $request)
+    public function createItem(InstatceEditorManager $instatceEditorManager, Request $request,
+                               ValidatorInterface $validator)
     {
         $entity_class_name = $this->getEntityClassName();
         $item = new $entity_class_name;
         $instance_editor = $instatceEditorManager->getInstanceEditor($item);
         $instance_editor->handleRequest($request);
+        $errors = $validator->validate($item);
+        dump($errors);
+//        return $this->forward(
+//            $this->routeToControllerName($this->getRouteAnnotation()->getName() . 'add')
+//        );
         if ($request->request->has('saveAndExit')) {
             return $this->redirectToRoute($this->getRouteAnnotation()->getName() . 'list');
         }

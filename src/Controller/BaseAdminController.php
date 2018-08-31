@@ -60,4 +60,13 @@ abstract class BaseAdminController extends AbstractController
     {
         return $this->routeAnnotation;
     }
+
+    /**
+     * @param $routename
+     * @return mixed
+     */
+    protected function routeToControllerName($routename) {
+        $routes = $this->get('router')->getRouteCollection();
+        return $routes->get($routename)->getDefaults()['_controller'];
+    }
 }
