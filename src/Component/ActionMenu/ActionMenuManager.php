@@ -66,6 +66,9 @@ class ActionMenuManager
         $menu->addItem((new MenuItem('toggle_fullscreen', 'Toggle fullscreen'))
             ->setAction(new Handler('screenfull.toggle();'))
             ->addIcon(new Icon('far fa-window-maximize')));
+        $menu->addItem((new MenuItem('admin_logout', 'Logout'))
+            ->setAction(new Route('security_logout'))
+            ->addIcon(new Icon('fas fa-sign-out-alt')));
     }
 
     /**
