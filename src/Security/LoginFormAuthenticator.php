@@ -9,8 +9,15 @@
 namespace Aplab\AplabAdminBundle\Security;
 
 
+use Aplab\AplabAdminBundle\Entity\SystemUser;
+use Aplab\AplabAdminBundle\Form\LoginForm;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -20,13 +27,42 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
     /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    /**
+     * @var EntityManager|EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
+    /**
+     * LoginFormAuthenticator constructor.
+     * @param FormFactoryInterface $formFactory
+     * @param EntityManager $entityManager
+     * @param RouterInterface $router
+     */
+    public function __construct(FormFactoryInterface $formFactory, EntityManagerInterface $entityManager,
+                                RouterInterface $router)
+    {
+        $this->formFactory = $formFactory;
+        $this->entityManager = $entityManager;
+        $this->router = $router;
+    }
+
+    /**
      * Return the URL to the login page.
      *
      * @return string
      */
     protected function getLoginUrl()
     {
-        // TODO: Implement getLoginUrl() method.
+        return $this->router->generate('security_login');
     }
 
     /**
@@ -62,13 +98,21 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      *
      * @param Request $request
      *
-     * @return mixed Any non-null value
+     * @return mixed|void Any non-null value
      *
      * @throws \UnexpectedValueException If null is returned
      */
     public function getCredentials(Request $request)
     {
-        // TODO: Implement getCredentials() method.
+        $isLoginSubmit = $request->getPathInfo() == '/login' && $request->isMethod('POST');
+        if (!$isLoginSubmit) {
+            // skip authentication
+            return;
+        }
+        $form = $this->formFactory->create(LoginForm::class);
+        $form->handleRequest($request);
+        $data = $form->getData();
+        return $data;
     }
 
     /**
@@ -88,7 +132,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        // TODO: Implement getUser() method.
+        $username = $credentials['_username'];
+        return $this->entityManager->getRepository(SystemUser::class)->findOneBy([
+            'username' => $username
+        ]);
     }
 
     /**
@@ -109,7 +156,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        // TODO: Implement checkCredentials() method.
+        $password = $credentials['_password'];
+        if ($password == 'test') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -129,7 +180,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        // TODO: Implement onAuthenticationSuccess() method.
+        return new RedirectResponse($this->router->generate('admin_desktop'));
     }
 
 }

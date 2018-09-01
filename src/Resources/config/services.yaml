@@ -99,3 +99,7 @@ services:
 
 #            - '@Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository'
 #            - '@doctrine.orm.entity_manager'
+
+    aplab_aplab_admin.security.login_form_authenticator:
+        class: Aplab\AplabAdminBundle\Security\LoginFormAuthenticator
+        autowire: true

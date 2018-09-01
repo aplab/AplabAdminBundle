@@ -15,6 +15,9 @@ security:
 
         main:
             anonymous: ~
+            guard:
+                authenticators:
+                - aplab_aplab_admin.security.login_form_authenticator
             # activate different ways to authenticate
 
             # http_basic: ~
