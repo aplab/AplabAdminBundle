@@ -8,10 +8,7 @@
 
 namespace Aplab\AplabAdminBundle\Controller;
 
-use Aplab\AplabAdminBundle\Component\Helper\AdminControllerHelper;
-use Aplab\AplabAdminBundle\Component\Menu\MenuManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**

@@ -13,7 +13,6 @@ use Aplab\AplabAdminBundle\Entity\SystemUser;
 use Aplab\AplabAdminBundle\Form\LoginForm;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -51,11 +51,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     /**
      * LoginFormAuthenticator constructor.
      * @param FormFactoryInterface $formFactory
-     * @param EntityManager $entityManager
+     * @param EntityManagerInterface $entityManager
      * @param RouterInterface $router
+     * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(FormFactoryInterface $formFactory, EntityManagerInterface $entityManager,
-                                RouterInterface $router, UserPasswordEncoder $passwordEncoder)
+                                RouterInterface $router, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->formFactory = $formFactory;
         $this->entityManager = $entityManager;
@@ -106,7 +107,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      *
      * @param Request $request
      *
-     * @return mixed|void Any non-null value
+     * @return mixed Any non-null value
      *
      * @throws \UnexpectedValueException If null is returned
      */
