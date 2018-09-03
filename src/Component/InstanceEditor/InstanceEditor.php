@@ -91,8 +91,6 @@ class InstanceEditor
         $factory = new FieldTypeFactory();
         $this->widget = [];
         $properties = $this->moduleMetadata->getProperties();
-        dump($this->getClassMetadata());
-
         foreach ($properties as $property_name => $property_metadata) {
             $widget_metadata_list = $property_metadata->getWidget();
             $property = $this->classMetadata->getReflectionClass()->getProperty($property_name);

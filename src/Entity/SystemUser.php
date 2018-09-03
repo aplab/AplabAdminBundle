@@ -9,6 +9,7 @@
 namespace Aplab\AplabAdminBundle\Entity;
 
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata as ModuleMetadata;
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @package Aplab\AplabAdminBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="system_user")
+ * @UniqueEntity(fields={"username"}, message="It looks like your already have an account!")
  * @ModuleMetadata\Module(
  *     title="System user",
  *     description="System user entity",
@@ -50,7 +52,7 @@ class SystemUser implements UserInterface
      * A non-persisted field that's used to create the encoded password.
      *
      * @var string
-     * @Assert\NotBlank(message="Name should be not blank")
+     * @Assert\NotBlank(message="Password should be not blank")
      * @ModuleMetadata\Property(title="Password",
      *     cell={},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
@@ -70,6 +72,9 @@ class SystemUser implements UserInterface
      */
     public function setPlainPassword($plainPassword)
     {
+        if (!$plainPassword) {
+            return;
+        }
         $this->plainPassword = $plainPassword;
         // forces the object to look "dirty" to Doctrine. Avoids
         // Doctrine *not* saving this entity, if only plainPassword changes
@@ -77,7 +82,7 @@ class SystemUser implements UserInterface
     }
 
     /**
-     *
+     * @return array
      */
     public function getRoles()
     {
