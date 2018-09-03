@@ -11,18 +11,31 @@ namespace Aplab\AplabAdminBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Aplab\AplabAdminBundle\Component\ModuleMetadata as ModuleMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class SystemUser
  * @package Aplab\AplabAdminBundle\Entity
  * @ORM\Entity
  * @ORM\Table(name="system_user")
+ * @ModuleMetadata\Module(
+ *     title="System user",
+ *     description="System user entity",
+ *     tabOrder={
+ *          "General": 1000,
+ *          "Additional": 10000418
+ *     })
  */
 class SystemUser implements UserInterface
 {
     /**
      * @var string
      * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank(message="Username should be not blank")
+     * @ModuleMetadata\Property(title="Name",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $username;
 
@@ -37,6 +50,10 @@ class SystemUser implements UserInterface
      * A non-persisted field that's used to create the encoded password.
      *
      * @var string
+     * @Assert\NotBlank(message="Name should be not blank")
+     * @ModuleMetadata\Property(title="Password",
+     *     cell={},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $plainPassword;
 
@@ -121,6 +138,21 @@ class SystemUser implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="bigint", options={"unsigned"=true})
+     * @ModuleMetadata\Property(title="ID", readonly=true,
+     *     cell={
+     *         @ModuleMetadata\Cell(order=1000, width=80, type="EditId")
+     *     },
+     *     widget={
+     *         @ModuleMetadata\Widget(order=1000, tab="Additional", type="Label")
+     *     })
      */
     private $id;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 }
