@@ -35,7 +35,7 @@ abstract class ReferenceAdminController extends BaseAdminController
         $helper = $this->adminControllerHelper;
         $toolbar = $this->adminControllerHelper->getToolbar();
         $toolbar->addUrl('New item', $helper->getModulePath('add'), 'fas fa-plus text-success');
-        $toolbar->addHandler('Delete selected', 'AplDataTable.getInstance().del();', 'fas fa-times text-warning');
+        $toolbar->addHandler('Delete selected', 'AplDataTable.getInstance().del();', 'fas fa-times text-danger');
 
         $data_table = $data_table_representation->getDataTable($this->getEntityClassName());
         $pager = $data_table->getPager();

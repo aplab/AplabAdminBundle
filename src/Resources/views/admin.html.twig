@@ -14,6 +14,13 @@
     {{ render(controller(
         'Aplab\\AplabAdminBundle\\Controller\\MenuController::toolbar'
     )) }}
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <script>alert('{{ label }}: {{ message }}');</script>
+        {% endfor %}
+    {% endfor %}
+
 {% endblock %}
 {% block body_classes %}{{ UiDataTransmitter.getBodyClasses() }}{% endblock %}
 {% block body %}
@@ -45,11 +52,6 @@
             </div>
             <div id="aplab-admin-workarea">
                 {% block workarea %}
-
-
-
-
-
                 {% endblock %}
             </div>
         {% endblock %}
