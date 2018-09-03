@@ -13,12 +13,14 @@ use Aplab\AplabAdminBundle\Entity\SystemUser;
 use Aplab\AplabAdminBundle\Form\LoginForm;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Tests\Fixtures\User;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -42,17 +44,23 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     private $router;
 
     /**
+     * @var UserPasswordEncoder
+     */
+    private $passwordEncoder;
+
+    /**
      * LoginFormAuthenticator constructor.
      * @param FormFactoryInterface $formFactory
      * @param EntityManager $entityManager
      * @param RouterInterface $router
      */
     public function __construct(FormFactoryInterface $formFactory, EntityManagerInterface $entityManager,
-                                RouterInterface $router)
+                                RouterInterface $router, UserPasswordEncoder $passwordEncoder)
     {
         $this->formFactory = $formFactory;
         $this->entityManager = $entityManager;
         $this->router = $router;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -152,7 +160,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function checkCredentials($credentials, UserInterface $user)
     {
         $password = $credentials['_password'];
-        if ($password == 'test') {
+        if ($this->passwordEncoder->isPasswordValid($user, $password)) {
             return true;
         }
         return false;

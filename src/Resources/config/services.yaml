@@ -103,3 +103,11 @@ services:
     aplab_aplab_admin.security.login_form_authenticator:
         class: Aplab\AplabAdminBundle\Security\LoginFormAuthenticator
         autowire: true
+
+
+    aplab_aplab_admin.doctrine.hash_password_listener:
+        class: Aplab\AplabAdminBundle\Doctrine\HashPasswordListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber }
+
