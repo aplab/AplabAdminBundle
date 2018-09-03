@@ -9,18 +9,18 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
-use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
+use Aplab\AplabAdminBundle\Entity\SystemUser;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class NamedTimestampableController
  * @package Aplab\AplabAdminBundle\Controller
- * @Route("/admin/named-timestampable", name="admin_named_timestampable_")
+ * @Route("/admin/system-user", name="admin_system_user_")
  */
-class NamedTimestampableController extends ReferenceAdminController
+class SystemUserController extends ReferenceAdminController
 {
     /**
      * @var string
      */
-    protected $entityClassName = NamedTimestampable::class;
+    protected $entityClassName = SystemUser::class;
 }

@@ -15,8 +15,15 @@
                 "icon": "fas fa-clock",
                 "disabled": false,
                 "target": "_self",
-                "class": "additional-css-class",
                 "route": "admin_named_timestampable_list"
+            },
+            {
+                "id": "system-user",
+                "name": "System user",
+                "icon": "fas fa-users-cog",
+                "disabled": false,
+                "target": "_self",
+                "route": "admin_system_user_list"
             },
             {
                 "id": "test",
