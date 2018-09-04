@@ -32,6 +32,7 @@ gulp.task('scss-dev', function () {
         './admin_modules/AplInstanceEditor/AplInstanceEditor.scss',
         './admin_modules/AplActionMenu/AplActionMenu.scss',
         './admin_modules/AplAdminToolbar/AplAdminToolbar.scss',
+        './admin_modules/AplAdminDialog/AplAdminDialog.scss',
         './admin_modules/Scrollable/CapsuleUiScrollable.scss'
     ])
         .pipe(plumber())
@@ -100,6 +101,7 @@ gulp.task('scripts-dev', function () {
             './admin_modules/AplActionMenu/AplActionMenu.js',
             './admin_modules/AplAdminToolbar/AplAdminToolbar.js',
             './admin_modules/Scrollable/CapsuleUiScrollable.js',
+            './admin_modules/AplAdminDialog/AplAdminDialog.js',
             './js/main.js'
         ])
         .pipe(plumber())

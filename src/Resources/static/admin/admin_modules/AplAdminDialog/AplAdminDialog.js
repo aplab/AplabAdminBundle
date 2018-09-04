@@ -378,14 +378,14 @@ $(document).ready(function ()
     //     width: 400,
     //     height: 400,
     //     button: [
-    //         $('<button type="button" class="btn btn-success capsule-cms-dialog-close">Close</button>')
+    //         $('<button type="button" class="btn btn-success apl-admin-dialog-close">Close</button>')
     //     ]
-    // });
+    // }).show();
     // AplAdminDialog.createElement('test1', {
     //     width: 500,
     //     height: 300,
     //     button: [
-    //         $('<button type="button" class="btn btn-info capsule-cms-dialog-purge">Close</button>')
+    //         $('<button type="button" class="btn btn-info apl-admin-dialog-purge">Close</button>')
     //     ]
-    // });
+    // }).show();
 });
