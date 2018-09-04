@@ -9,8 +9,24 @@
 namespace Aplab\AplabAdminBundle\Component\Uploader;
 
 
+use Aplab\AplabAdminBundle\Component\FileStorage\LocalStorage;
+
 class ImageUploader
 {
+    /**
+     * @var LocalStorage
+     */
+    private $storage;
+
+    /**
+     * ImageUploader constructor.
+     * @param LocalStorage $storage
+     */
+    public function __construct(LocalStorage $storage)
+    {
+        $this->storage = $storage;
+    }
+
     /**
      *
      */
@@ -25,25 +41,13 @@ class ImageUploader
     const THUMBNAIL_JPEG_QUALITY = 59;
 
     /**
-     * @throws \Exception
-     */
-    public function handle()
-    {
-        $url = $this->receive();
-        print json_encode([
-            'status' => 'ok',
-            'url' => $url
-        ]);
-    }
-
-    /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
-    protected function receive()
+    public function receive()
     {
         if (!isset($_FILES[static::FILES_VAR_NAME])) {
-            throw new \Exception('the variable is not passed');
+            throw new Exception('the variable is not passed');
         }
         $file = $_FILES[static::FILES_VAR_NAME];
         $name = $file['name'];
@@ -53,11 +57,11 @@ class ImageUploader
         $error = $file['error'];
 
         if ($error) {
-            throw new \Exception('Upload error: ' . Msg::msg($error));
+            throw new Exception('Upload error: ' . Msg::msg($error));
         }
 
         if (!is_uploaded_file($path)) {
-            throw new \Exception('File was not uploaded');
+            throw new Exception('File was not uploaded');
         }
 
         $extension = strtolower(substr(strrchr($name, "."), 1));
@@ -81,7 +85,7 @@ class ImageUploader
                 $img_info = getimagesize($tmp_path);
                 break;
             default :
-                throw new \Exception('unsupported file type');
+                throw new Exception('unsupported file type');
                 break;
         }
 
@@ -98,25 +102,25 @@ class ImageUploader
 //            }
 
             if (!is_resource($image)) {
-                throw new \Exception('Unable to create image from source data');
+                throw new Exception('Unable to create image from source data');
             }
         }
         if (false === $img_info) {
-            throw new \Exception('Unable to get image size from source data');
+            throw new Exception('Unable to get image size from source data');
         }
         $width = imagesx($image);
         $height = imagesy($image);
         if ($width !== $img_info[0]) {
-            throw new \Exception('Wrong width');
+            throw new Exception('Wrong width');
         }
         if ($height !== $img_info[1]) {
-            throw new \Exception('Wrong height');
+            throw new Exception('Wrong height');
         }
         if (!$width) {
-            throw new \Exception('Empty width');
+            throw new Exception('Empty width');
         }
         if (!$height) {
-            throw new \Exception('Empty height');
+            throw new Exception('Empty height');
         }
         switch (strtolower($img_info['mime'])) {
             case 'image/jpeg' :
@@ -129,7 +133,7 @@ class ImageUploader
                 $extension = 'gif';
                 break;
             default :
-                throw new \Exception('Unsupported mime');
+                throw new Exception('Unsupported mime');
         }
         imagealphablending($image, false);
         imagesavealpha($image, true);
@@ -182,34 +186,34 @@ class ImageUploader
                 break;
         }
         if (!$result) {
-            throw new \Exception('Unable to create image');
+            throw new Exception('Unable to create image');
         }
         try {
-            $result = Storage::getInstance()->addFile($path, $image['extension']);
-        } catch (\Exception $e) {
-            throw new \Exception('Unable to store image: ' . $e->getMessage() . '[' . $e->getLine() . ']');
+            $result = $this->storage->addFile($path, $image['extension']);
+        } catch (\Throwable $e) {
+            throw new Exception('Unable to store image: ' . $e->getMessage() . '[' . $e->getLine() . ']');
         }
         $image = array_replace($image, $result);
         imagedestroy($image['image']);
         unset($image['image']);
-        $history = new HistoryUploadImage();
-        foreach ($image as $k => $v) {
-            $history->$k = $v;
-        }
-        $history->path = $history->url;
-        $history->storage = Storage::getInstanceName(Storage::getInstance());
-        HistoryUploadImage::deleteSamePath($history);
-        $history->store();
-        if ('Gallery' === Ajax::getInstance()->cmd) {
-            $param = Ajax::getInstance()->param;
-            $container_id = array_shift($param);
-            if (Validator::digit()->validate($container_id)) {
-                $p = new Photo();
-                $p->image = $history->url;
-                $p->containerId = $container_id;
-                $p->store();
-            }
-        }
+//        $history = new HistoryUploadImage();
+//        foreach ($image as $k => $v) {
+//            $history->$k = $v;
+//        }
+//        $history->path = $history->url;
+//        $history->storage = Storage::getInstanceName(Storage::getInstance());
+//        HistoryUploadImage::deleteSamePath($history);
+//        $history->store();
+//        if ('Gallery' === Ajax::getInstance()->cmd) {
+//            $param = Ajax::getInstance()->param;
+//            $container_id = array_shift($param);
+//            if (Validator::digit()->validate($container_id)) {
+//                $p = new Photo();
+//                $p->image = $history->url;
+//                $p->containerId = $container_id;
+//                $p->store();
+//            }
+//        }
         return $image['url'];
     }
 
@@ -219,7 +223,7 @@ class ImageUploader
      * @param $max_width
      * @param $max_height
      * @return array
-     * @throws \Exception
+     * @throws Exception
      */
     protected static function calcResize($width, $height, $max_width, $max_height)
     {
@@ -279,13 +283,13 @@ class ImageUploader
                 );
             }
         }
-        throw new \Exception('unable to calc resize');
+        throw new Exception('unable to calc resize');
     }
 
     /**
      * @param array $image_data
-     * @return bool|string
-     * @throws \Exception
+     * @return array
+     * @throws Exception
      */
     private function makeThumbnail(array $image_data)
     {
@@ -336,12 +340,12 @@ class ImageUploader
                 break;
         }
         if (!$result) {
-            throw new \Exception('Unable to create image');
+            throw new Exception('Unable to create image');
         }
         try {
-            $result = Storage::getInstance()->addFile($path, $image['extension']);
-        } catch (\Exception $e) {
-            throw new \Exception('Unable to store image: ' . $e->getMessage() . '[' . $e->getLine() . ']');
+            $result = $this->storage->addFile($path, $image['extension']);
+        } catch (\Throwable $e) {
+            throw new Exception('Unable to store image: ' . $e->getMessage() . '[' . $e->getLine() . ']');
         }
         return $result;
     }

@@ -12,7 +12,7 @@ namespace Aplab\AplabAdminBundle\Component\FileStorage;
 use Aplab\AplabAdminBundle\Util\Path;
 use Symfony\Component\Filesystem\Filesystem;
 
-class FileStorage
+class LocalStorage
 {
     /**
      * @var Path

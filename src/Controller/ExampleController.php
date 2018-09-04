@@ -9,7 +9,7 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
-use Aplab\AplabAdminBundle\Component\FileStorage\FileStorage;
+use Aplab\AplabAdminBundle\Component\FileStorage\LocalStorage;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Doctrine\Common\Inflector\Inflector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,13 +28,13 @@ class ExampleController extends AbstractController
 {
     /**
      * @Route("/test", name="test")
-     * @param FileStorage $fileStorage
+     * @param LocalStorage $localStorage
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Aplab\AplabAdminBundle\Component\FileStorage\Exception
      */
-    public function test(FileStorage $fileStorage) {
+    public function test(LocalStorage $localStorage) {
 
-        dump($fileStorage->addFile(__FILE__));
+        dump($localStorage->addFile(__FILE__));
 //        $form = $this->createFormBuilder()
 //            ->add('task', TextType::class)
 //            ->add('dueDate', DateType::class)
