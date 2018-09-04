@@ -375,11 +375,11 @@ function AplInstanceEditor(container) {
         var previewer = o.find('.preview');
         var btn_upload = o.find('.fa-upload').closest('button');
         btn_upload.click(function () {
-            var uploader = CapsuleCmsFileUploader.getInstance();
+            var uploader = AplAdminFileUploader.getInstance();
             uploader.setTitle('Upload images only');
             uploader.setUrl('/ajax/uploadImage/');
             uploader.done = function () {
-                CapsuleCmsFileUploader.getInstance().purgeWindow();
+                AplAdminFileUploader.getInstance().purgeWindow();
                 CapsuleCmsImageHistory.getInstance().showWindow();
             };
             uploader.showWindow();

@@ -5,7 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    aplab_admin_public_dir: '%kernel.project_dir%/public/'
     aplab_admin_data_dir: '%kernel.project_dir%/var/aplab-admin/data/'
+    aplab_admin_file_storage_path: '%kernel.project_dir%/public/aplab/filestorage/'
 
 services:
     # default configuration for services in *this* file
@@ -111,3 +113,10 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    aplab_aplab_admin.file_storage:
+        class: Aplab\AplabAdminBundle\Component\FileStorage\FileStorage
+        arguments:
+            - {$file_storage_path: '%aplab_admin_file_storage_path%'}
+            - {$public_dir: '%aplab_admin_public_dir%'}
+
+    Aplab\AplabAdminBundle\Component\FileStorage\FileStorage: '@aplab_aplab_admin.file_storage'

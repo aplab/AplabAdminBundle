@@ -26,22 +26,13 @@
                 "route": "admin_system_user_list"
             },
             {
-                "id": "test",
-                "name": "Test",
-                "icon": "fas fa-vial",
-                "disabled": false,
-                "target": "_self",
-                "class": "additional-css-class",
-                "route": "admin_test"
-            },
-            {
-                "name": "Пункт 2",
-                "icon": "fas fa-ban text-warning, fas fa-pencil-alt",
+                "name": "Files",
+                "icon": "fas fa-file-upload",
                 "items": [
                     {
-                        "name": "Пункт 2.1",
-                        "icon": "fas fa-pencil-alt",
-                        "handler": "alert('handler action');"
+                        "name": "Upload images",
+                        "icon": "far fa-images",
+                        "handler": "AplabAdmin.showImageUploader()"
                     },
                     {
                         "name": "Пункт 2.2",
@@ -54,6 +45,15 @@
                         "route": "admin_desktop"
                     }
                 ]
+            },
+            {
+                "id": "test",
+                "name": "Test",
+                "icon": "fas fa-vial",
+                "disabled": false,
+                "target": "_self",
+                "class": "additional-css-class",
+                "route": "admin_test"
             }
         ]
     }

@@ -452,7 +452,7 @@ function AplDataTable(container) {
     });
 
     this.batchAddFilesPlugin = function () {
-        var uploader = CapsuleCmsFileUploader.getInstance();
+        var uploader = AplAdminFileUploader.getInstance();
         uploader.setTitle('Upload files');
         uploader.setUrl('/ajax/uploadFile/');
         uploader.done = function () {

@@ -45,17 +45,17 @@
             </div>
             <div id="aplab-admin-workarea">
                 {% block workarea %}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col py-3">
-                                {% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
-                                {{ form_start(form) }}
-                                {{ form_widget(form) }}
-                                {{ csrf_token('test') }}
-                                {{ form_end(form) }}
-                            </div>
-                        </div>
-                    </div>
+                    {#<div class="container-fluid">#}
+                        {#<div class="row">#}
+                            {#<div class="col py-3">#}
+                                {#{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}#}
+                                {#{{ form_start(form) }}#}
+                                {#{{ form_widget(form) }}#}
+                                {#{{ csrf_token('test') }}#}
+                                {#{{ form_end(form) }}#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
                 {% endblock %}
             </div>
         {% endblock %}

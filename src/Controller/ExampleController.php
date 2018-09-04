@@ -9,6 +9,7 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
+use Aplab\AplabAdminBundle\Component\FileStorage\FileStorage;
 use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
 use Doctrine\Common\Inflector\Inflector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,20 +28,22 @@ class ExampleController extends AbstractController
 {
     /**
      * @Route("/test", name="test")
-     * @param Request $request
+     * @param FileStorage $fileStorage
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Aplab\AplabAdminBundle\Component\FileStorage\Exception
      */
-    public function test(Request $request) {
+    public function test(FileStorage $fileStorage) {
 
-        $form = $this->createFormBuilder()
-            ->add('task', TextType::class)
-            ->add('dueDate', DateType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create Task'))
-            ->getForm();
-
-        $form = $form->createView();
-
-        dump(Inflector::tableize(NamedTimestampable::class));
+        dump($fileStorage->addFile(__FILE__));
+//        $form = $this->createFormBuilder()
+//            ->add('task', TextType::class)
+//            ->add('dueDate', DateType::class)
+//            ->add('save', SubmitType::class, array('label' => 'Create Task'))
+//            ->getForm();
+//
+//        $form = $form->createView();
+//
+//        dump(Inflector::tableize(NamedTimestampable::class));
 
         return $this->render('@AplabAdmin/admin-test.html.twig', get_defined_vars());
     }

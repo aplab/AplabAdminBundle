@@ -33,6 +33,7 @@ gulp.task('scss-dev', function () {
         './admin_modules/AplActionMenu/AplActionMenu.scss',
         './admin_modules/AplAdminToolbar/AplAdminToolbar.scss',
         './admin_modules/AplAdminDialog/AplAdminDialog.scss',
+        './admin_modules/AplAdminFileUploader/AplAdminFileUploader.scss',
         './admin_modules/Scrollable/CapsuleUiScrollable.scss'
     ])
         .pipe(plumber())
@@ -94,7 +95,7 @@ gulp.task('scripts-dev', function () {
             './node_modules/popper.js/dist/umd/popper.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
             './node_modules/screenfull/dist/screenfull.js',
-            './node_modules/clipboard/dist/clipboard.js',
+            './node_modules/clipboard/dist/clipboard.min.js',
             './admin_modules/AplAdminMenu/AplAdminMenu.js',
             './admin_modules/AplDataTable/AplDataTable.js',
             './admin_modules/AplInstanceEditor/AplInstanceEditor.js',
@@ -102,6 +103,7 @@ gulp.task('scripts-dev', function () {
             './admin_modules/AplAdminToolbar/AplAdminToolbar.js',
             './admin_modules/Scrollable/CapsuleUiScrollable.js',
             './admin_modules/AplAdminDialog/AplAdminDialog.js',
+            './admin_modules/AplAdminFileUploader/AplAdminFileUploader.js',
             './js/main.js'
         ])
         .pipe(plumber())

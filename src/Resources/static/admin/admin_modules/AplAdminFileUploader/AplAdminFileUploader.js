@@ -1,35 +1,35 @@
 /**
  * Created by polyanin on 19.01.2017.
  */
-function CapsuleCmsFileUploader()
+function AplAdminFileUploader()
 {
-    if (CapsuleCmsFileUploader.hasOwnProperty('instance')) {
+    if (AplAdminFileUploader.hasOwnProperty('instance')) {
         var m = 'Instance already exists. Only one instance allowed!';
         console.log(m);
         throw new Error(m);
     } else {
-        CapsuleCmsFileUploader.instance = this;
+        AplAdminFileUploader.instance = this;
     }
 
-    var url = '/ajax/uploadImage/';
+    var url = '/admin/xhr/uploadImage/';
 
     /**
      * Class prefix
      *
      * @type {string}
      */
-    var class_prefix = 'capsule-cms-file-uploader-';
+    var class_prefix = 'apl-admin-file-uploader-';
 
     /**
      * Button wrapper class
      *
-     * @see CapsuleCmsDialog
+     * @see AplAdminDialog
      * @type {string}
      */
-    var button_wrapper_class_prefix = 'capsule-cms-dialog-footer-button-';
+    var button_wrapper_class_prefix = 'apl-admin-dialog-footer-button-';
 
     /**
-     * var CapsuleCmsDialog
+     * var AplAdminDialog
      */
     var dialog_window;
 
@@ -125,8 +125,8 @@ function CapsuleCmsFileUploader()
      */
     var create_window = function ()
     {
-        dialog_window = CapsuleCmsDialog.createElement(
-            'capsule-cms-file-uploader',
+        dialog_window = AplAdminDialog.createElement(
+            'apl-admin-file-uploader',
             {
                 maximxze: 1,
                 title: 'Upload files',
@@ -202,7 +202,7 @@ function CapsuleCmsFileUploader()
 
         button_cancel.click(function ()
         {
-            CapsuleCmsFileUploader.getInstance().purgeWindow();
+            AplAdminFileUploader.getInstance().purgeWindow();
         });
 
         button_done.click(function ()
@@ -210,7 +210,7 @@ function CapsuleCmsFileUploader()
             if (process_running) {
                 return;
             }
-            CapsuleCmsFileUploader.getInstance().done();
+            AplAdminFileUploader.getInstance().done();
         });
 
         button_more.click(function ()
@@ -218,8 +218,8 @@ function CapsuleCmsFileUploader()
             if (process_running) {
                 return;
             }
-            CapsuleCmsFileUploader.getInstance().purgeWindow();
-            CapsuleCmsFileUploader.getInstance().showWindow();
+            AplAdminFileUploader.getInstance().purgeWindow();
+            AplAdminFileUploader.getInstance().showWindow();
         });
 
         button_upload.click(function ()
@@ -287,8 +287,8 @@ function CapsuleCmsFileUploader()
      */
     this.done = function ()
     {
-        CapsuleCmsFileUploader.getInstance().purgeWindow();
-        CapsuleCmsImageHistory.getInstance().showWindow();
+        AplAdminFileUploader.getInstance().purgeWindow();
+        AplAdminImageHistory.getInstance().showWindow();
     };
 
     /**
@@ -440,13 +440,13 @@ function CapsuleCmsFileUploader()
                     if (data.status === 'ok') {
                         item.progress.hide();
                         item.status.show().addClass(class_prefix + 'success').text('Ok');
-                        var clipb = $('<span class="capsule-cms-file-uploader-clipboard">');
+                        var clipb = $('<span class="apl-admin-file-uploader-clipboard">');
                         clipb.attr('data-clipboard-text', data.url);
                         clipb.text(item.name.text());
                         clipb.prepend('<i class="fa fa-link"> ');
                         item.name.empty();
                         item.name.append(clipb);
-                        var c = new Clipboard(clipb.get(0));
+                        var c = new ClipboardJS(clipb.get(0));
                     } else {
                         item.progress.hide();
                         item.status.show().addClass(class_prefix + 'fail').text(data.message);
@@ -480,10 +480,10 @@ function CapsuleCmsFileUploader()
 /**
  * Static method
  */
-CapsuleCmsFileUploader.getInstance = function ()
+AplAdminFileUploader.getInstance = function ()
 {
-    if (CapsuleCmsFileUploader.hasOwnProperty('instance')) {
-        return CapsuleCmsFileUploader.instance;
+    if (AplAdminFileUploader.hasOwnProperty('instance')) {
+        return AplAdminFileUploader.instance;
     }
-    return new CapsuleCmsFileUploader();
+    return new AplAdminFileUploader();
 };

@@ -167,6 +167,22 @@ $(document).ready(function () {
     });
 
     /**
+     * Show image uploader
+     */
+    AplabAdmin.showImageUploader = function ()
+    {
+        var uploader = AplAdminFileUploader.getInstance();
+        uploader.setTitle('Upload images only');
+        uploader.setUrl('/admin/xhr/uploadImage/');
+        uploader.done = function ()
+        {
+            AplAdminFileUploader.getInstance().purgeWindow();
+            AplAdminImageHistory.getInstance().showWindow();
+        };
+        uploader.showWindow();
+    };
+
+    /**
      * Call initialization.
      */
     AplabAdmin.init(/** test 6 */);

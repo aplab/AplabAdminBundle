@@ -23,7 +23,7 @@ class AdminController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function desktop() {
-        $this->addFlash('notice', 'test message');
+        //$this->addFlash('notice', 'test message');
         return $this->render('@AplabAdmin/admin.html.twig', get_defined_vars());
     }
 }
