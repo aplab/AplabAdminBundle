@@ -34,7 +34,7 @@ class ExampleController extends AbstractController
      */
     public function test(LocalStorage $localStorage) {
 
-        dump($localStorage->addFile(__FILE__));
+//        dump($localStorage->addFile(__FILE__));
 //        $form = $this->createFormBuilder()
 //            ->add('task', TextType::class)
 //            ->add('dueDate', DateType::class)

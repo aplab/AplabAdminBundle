@@ -144,28 +144,28 @@ $footer-height: 65px;
       display: block;
       float: right;
       max-width: 99.95%;
-      overflow: hidden;
+      //overflow: hidden;
       @include b;
     }
     &-button-2 {
       display: block;
       float: right;
       max-width: 49.95%;
-      overflow: hidden;
+      //overflow: hidden;
       @include b;
     }
     &-button-3 {
       display: block;
       float: right;
       max-width: 33.33333333%;
-      overflow: hidden;
+      //overflow: hidden;
       @include b;
     }
     &-button-4 {
       display: block;
       float: right;
       max-width: 24.95%;
-      overflow: hidden;
+      //overflow: hidden;
       @include b;
     }
   }
