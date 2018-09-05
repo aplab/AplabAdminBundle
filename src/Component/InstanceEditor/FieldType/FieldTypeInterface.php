@@ -12,4 +12,6 @@ namespace Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType;
 interface FieldTypeInterface
 {
     public function getType();
+    public function getValue();
+    public function getUniqueId();
 }

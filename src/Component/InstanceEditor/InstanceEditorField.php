@@ -35,7 +35,22 @@ class InstanceEditorField
     /**
      * @var string
      */
-    private $propertyTitle;
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $label;
+
+    /**
+     * @var string
+     */
+    private $comment;
+
+    /**
+     * @var string
+     */
+    private $help;
 
     /**
      * @var int
@@ -70,7 +85,15 @@ class InstanceEditorField
     {
         $this->instanceEditor = $instance_editor;
         $this->propertyName = $property->getName();
-        $this->propertyTitle = $property_metadata->getTitle();
+        $title = $widget_metadata->getTitle();
+        if ($title) {
+            $this->title = $title;
+        } else {
+            $this->title = $property_metadata->getTitle();
+        }
+        $this->label = $widget_metadata->getLabel();
+        $this->comment = $widget_metadata->getComment();
+        $this->help = $widget_metadata->getHelp();
         $this->order = $widget_metadata->getOrder();
         $this->type = $factory->create($this, $widget_metadata->getType());
         $this->options = $widget_metadata->getOptions();
@@ -84,14 +107,6 @@ class InstanceEditorField
     public function getPropertyName(): string
     {
         return $this->propertyName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPropertyTitle(): string
-    {
-        return $this->propertyTitle;
     }
 
     /**
@@ -140,5 +155,37 @@ class InstanceEditorField
     public function getEntity(): object
     {
         return $this->entity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment(): string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHelp(): string
+    {
+        return $this->help;
     }
 }

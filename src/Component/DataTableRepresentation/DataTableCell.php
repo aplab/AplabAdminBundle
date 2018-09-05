@@ -25,7 +25,22 @@ class DataTableCell
     /**
      * @var string
      */
-    private $propertyTitle;
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $label;
+
+    /**
+     * @var string
+     */
+    private $comment;
+
+    /**
+     * @var string
+     */
+    private $help;
 
     /**
      * @var int
@@ -54,13 +69,22 @@ class DataTableCell
      * @param Cell $cell_metadata
      * @param CellTypeFactory $factory
      */
-    public function __construct(\ReflectionProperty $property, Property $property_metadata, Cell $cell_metadata, CellTypeFactory $factory)
+    public function __construct(\ReflectionProperty $property, Property $property_metadata,
+                                Cell $cell_metadata, CellTypeFactory $factory)
     {
         $this->propertyName = $property->getName();
-        $this->propertyTitle = $property_metadata->getTitle();
+        $title = $cell_metadata->getTitle();
+        if ($title) {
+            $this->title = $title;
+        } else {
+            $this->title = $property_metadata->getTitle();
+        }
+        $this->label = $cell_metadata->getLabel();
+        $this->comment = $cell_metadata->getComment();
+        $this->help = $cell_metadata->getHelp();
         $this->width = $cell_metadata->getWidth();
         $this->order = $cell_metadata->getOrder();
-        $this->type = $factory->create($cell_metadata->getType());
+        $this->type = $factory->create($this, $cell_metadata->getType());
         $this->options = $cell_metadata->getOptions();
     }
 
@@ -99,9 +123,9 @@ class DataTableCell
     /**
      * @return string
      */
-    public function getPropertyTitle(): string
+    public function getTitle(): string
     {
-        return $this->propertyTitle;
+        return $this->title;
     }
 
     /**

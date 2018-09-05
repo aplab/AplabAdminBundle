@@ -42,10 +42,10 @@ class Widget implements Annotation
         $this->order = $values['order'];
         $this->type = $values['type'];
         $this->options = $values['options'] ?? new Options;
-        $this->label = $values['label'] ?? null;
-        $this->title = $values['title'] ?? null;
-        $this->help = $values['help'] ?? null;
-        $this->comment = $values['comment'] ?? null;
+        $this->label = $values['label'] ?? '';
+        $this->title = $values['title'] ?? '';
+        $this->help = $values['help'] ?? '';
+        $this->comment = $values['comment'] ?? '';
     }
 
     /**

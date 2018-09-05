@@ -1,7 +1,7 @@
 {% block datetime %}
     <div class="{{ prefix }}-element">
         <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">
-            {{ field.propertyTitle }}
+            {{ field.title }}
         </label>
         <div class="{{ prefix }}-value {{ prefix }}-value-label"
              id="{{ prefix }}-element-{{ field.type.uniqueId }}">
@@ -11,7 +11,7 @@
 {% endblock %}
 {% block label %}
     <div class="{{ prefix }}-element">
-        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.propertyTitle }}</label>
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
         <div class="{{ prefix }}-value {{ prefix }}-value-label"
              id="{{ prefix }}-element-{{ field.type.uniqueId }}">
             {{ field.type.value }}
@@ -20,7 +20,7 @@
 {% endblock %}
 {% block text %}
     <div class="{{ prefix }}-element">
-        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.propertyTitle }}</label>
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
         <div class="{{ prefix }}-value">
             <input type="text" class="form-control" placeholder=""
                    autocorrect="off" autocapitalize="none" autocomplete="off"

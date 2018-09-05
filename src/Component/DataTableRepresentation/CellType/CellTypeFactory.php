@@ -8,6 +8,8 @@
 
 namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType;
 
+use Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableCell;
+
 /**
  * Class CellTypeFactory
  * @package Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType
@@ -16,9 +18,9 @@ class CellTypeFactory
 {
     const PREFIX = '\\CellType';
 
-    public function create($type)
+    public function create(DataTableCell $cell, $type)
     {
         $class_name = __NAMESPACE__.static::PREFIX.$type;
-        return new $class_name();
+        return new $class_name($cell);
     }
 }
