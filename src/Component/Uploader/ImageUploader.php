@@ -214,7 +214,7 @@ class ImageUploader
             ->setComment('');
         $this->entityManager->persist($history);
         $this->entityManager->flush();
-//        HistoryUploadImage::deleteSamePath($history);
+        $this->entityManager->getRepository(HistoryUploadImage::class)->deleteSamePath($history);
 //        if ('Gallery' === Ajax::getInstance()->cmd) {
 //            $param = Ajax::getInstance()->param;
 //            $container_id = array_shift($param);

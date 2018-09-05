@@ -11,6 +11,7 @@ namespace Aplab\AplabAdminBundle\Repository;
 
 use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class HistoryUploadImageRepository extends ServiceEntityRepository
@@ -18,5 +19,17 @@ class HistoryUploadImageRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, HistoryUploadImage::class);
+    }
+
+    public function deleteSamePath(HistoryUploadImage $item)
+    {
+        $db = $this->getEntityManager()->createQueryBuilder()
+            ->delete(HistoryUploadImage::class, 'h')
+            ->where('h.path = :path')
+            ->andWhere('h.favorites != 1')
+            ->andWhere('h.id != :id')
+            ->setParameter('path', $item->getPath())
+            ->setParameter('id', $item->getId());
+        $db->getQuery()->execute();
     }
 }
