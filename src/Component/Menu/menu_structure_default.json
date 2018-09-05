@@ -43,6 +43,14 @@
                         "name": "Favorite images",
                         "icon": "far fa-star",
                         "handler": "AplAdminImageHistory.getInstance().showWindow({favorites: true})"
+                    },
+                    {
+                        "id": "user-files",
+                        "name": "User files",
+                        "icon": "fas fa-file-upload",
+                        "disabled": false,
+                        "target": "_self",
+                        "route": "admin_user_files_list"
                     }
                 ]
             },
