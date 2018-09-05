@@ -60,7 +60,7 @@ class File
      * @ORM\Column(type="string")
      * @ModuleMetadata\Property(title="Filename",
      *     cell={@ModuleMetadata\Cell(order=2000, width=400, type="Label")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
+     *     widget={})
      */
     private $filename;
 
@@ -69,7 +69,7 @@ class File
      * @Assert\NotBlank(message="Name should be not blank")
      * @ModuleMetadata\Property(title="Content type",
      *     cell={@ModuleMetadata\Cell(order=2000, width=160, type="Label")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
+     *     widget={})
      */
     private $contentType;
 

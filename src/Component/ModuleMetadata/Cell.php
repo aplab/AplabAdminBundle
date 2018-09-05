@@ -23,6 +23,10 @@ use Doctrine\ORM\Mapping\Annotation;
  *      @Attribute("width", type="integer", required=true),
  *      @Attribute("order", type="integer", required=true),
  *      @Attribute("type", type="string", required=true),
+ *      @Attribute("label", type="string", required=false),
+ *      @Attribute("title", type="string", required=false),
+ *      @Attribute("help", type="string", required=false),
+ *      @Attribute("comment", type="string", required=false),
  *      @Attribute("options", type="Aplab\AplabAdminBundle\Component\ModuleMetadata\Options", required=false),
  *     })
  */
@@ -38,6 +42,10 @@ class Cell implements Annotation
         $this->order = $values['order'];
         $this->type = $values['type'];
         $this->options = $values['options'] ?? new Options;
+        $this->label = $values['label'] ?? null;
+        $this->title = $values['title'] ?? null;
+        $this->help = $values['help'] ?? null;
+        $this->comment = $values['comment'] ?? null;
     }
 
     /**
@@ -77,6 +85,26 @@ class Cell implements Annotation
      * @var string
      */
     private $type;
+
+    /**
+     * @var string
+     */
+    private $label;
+
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $help;
+
+    /**
+     * @var string
+     */
+    private $comment;
 
     /**
      * @return int
@@ -129,6 +157,78 @@ class Cell implements Annotation
     public function setType(string $type): Cell
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    /**
+     * @param string $label
+     * @return Cell
+     */
+    public function setLabel(string $label): Cell
+    {
+        $this->label = $label;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Cell
+     */
+    public function setTitle(string $title): Cell
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHelp(): string
+    {
+        return $this->help;
+    }
+
+    /**
+     * @param string $help
+     * @return Cell
+     */
+    public function setHelp(string $help): Cell
+    {
+        $this->help = $help;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment(): string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     * @return Cell
+     */
+    public function setComment(string $comment): Cell
+    {
+        $this->comment = $comment;
         return $this;
     }
 }
