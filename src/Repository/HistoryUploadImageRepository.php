@@ -1,0 +1,22 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: polyanin
+ * Date: 04.09.2018
+ * Time: 16:39
+ */
+
+namespace Aplab\AplabAdminBundle\Repository;
+
+
+use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+
+class HistoryUploadImageRepository extends ServiceEntityRepository
+{
+    public function __construct(RegistryInterface $registry)
+    {
+        parent::__construct($registry, HistoryUploadImage::class);
+    }
+}
