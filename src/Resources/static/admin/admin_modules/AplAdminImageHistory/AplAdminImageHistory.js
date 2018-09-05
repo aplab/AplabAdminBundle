@@ -301,7 +301,7 @@ function AplAdminImageHistory()
                     });
                 }
                 load_offset += i;
-                new Clipboard('.' + class_prefix + 'button.' + class_prefix + 'link.glyphicon.glyphicon-link');
+                new ClipboardJS('.' + class_prefix + 'button.' + class_prefix + 'link.glyphicon.glyphicon-link');
                 load_in_progress = false;
             },
             'json'

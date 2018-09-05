@@ -55,12 +55,11 @@ class XhrController extends Controller
      */
     public function historyUploadImageListItems($offset)
     {
-        $data = $this->getDoctrine()->getRepository(HistoryUploadImage::class)->findBy(
+        $items = $this->getDoctrine()->getRepository(HistoryUploadImage::class)->findBy(
             [],
             ['favorites' => 'DESC', 'id' => 'desc'],
             103, $offset
         );
-        var_dump($data);
-        return new JsonResponse($data);
+        return new JsonResponse($items);
     }
 }
