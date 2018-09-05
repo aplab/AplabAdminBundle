@@ -11,7 +11,6 @@ namespace Aplab\AplabAdminBundle\Repository;
 
 use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class HistoryUploadImageRepository extends ServiceEntityRepository
