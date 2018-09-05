@@ -23,7 +23,7 @@ class HistoryUploadImage
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="bigint", options={"unsigned"=true})
+     * @ORM\Column(type="bigint", options={"unsigned":true})
      */
     private $id;
 
@@ -43,22 +43,22 @@ class HistoryUploadImage
     private $thumbnail;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", options={"default":""})
      */
     private $comment;
 
     /**
-     * @ORM\Column(type="integer", options={"unsigned"=true})
+     * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $width;
 
     /**
-     * @ORM\Column(type="integer", options={"unsigned"=true})
+     * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $height;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default":0})
      */
     private $favorites;
 
@@ -77,6 +77,7 @@ class HistoryUploadImage
     public function __construct()
     {
         $this->createdAt = new \DateTime;
+        $this->favorites = 0;
     }
 
     /**

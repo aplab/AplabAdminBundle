@@ -10,6 +10,8 @@ namespace Aplab\AplabAdminBundle\Component\Uploader;
 
 
 use Aplab\AplabAdminBundle\Component\FileStorage\LocalStorage;
+use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ImageUploader
 {
@@ -19,12 +21,19 @@ class ImageUploader
     private $storage;
 
     /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
      * ImageUploader constructor.
      * @param LocalStorage $storage
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(LocalStorage $storage)
+    public function __construct(LocalStorage $storage, EntityManagerInterface $entityManager)
     {
         $this->storage = $storage;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -196,14 +205,16 @@ class ImageUploader
         $image = array_replace($image, $result);
         imagedestroy($image['image']);
         unset($image['image']);
-//        $history = new HistoryUploadImage();
-//        foreach ($image as $k => $v) {
-//            $history->$k = $v;
-//        }
-//        $history->path = $history->url;
-//        $history->storage = Storage::getInstanceName(Storage::getInstance());
+        $history = (new HistoryUploadImage)
+            ->setName($image['name'])
+            ->setWidth($image['width'])
+            ->setHeight($image['height'])
+            ->setThumbnail($image['thumbnail'])
+            ->setPath($image['url'])
+            ->setComment('');
+        $this->entityManager->persist($history);
+        $this->entityManager->flush();
 //        HistoryUploadImage::deleteSamePath($history);
-//        $history->store();
 //        if ('Gallery' === Ajax::getInstance()->cmd) {
 //            $param = Ajax::getInstance()->param;
 //            $container_id = array_shift($param);

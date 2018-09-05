@@ -34,6 +34,7 @@ gulp.task('scss-dev', function () {
         './admin_modules/AplAdminToolbar/AplAdminToolbar.scss',
         './admin_modules/AplAdminDialog/AplAdminDialog.scss',
         './admin_modules/AplAdminFileUploader/AplAdminFileUploader.scss',
+        './admin_modules/AplAdminImageHistory/AplAdminImageHistory.scss',
         './admin_modules/Scrollable/CapsuleUiScrollable.scss'
     ])
         .pipe(plumber())
@@ -104,6 +105,7 @@ gulp.task('scripts-dev', function () {
             './admin_modules/Scrollable/CapsuleUiScrollable.js',
             './admin_modules/AplAdminDialog/AplAdminDialog.js',
             './admin_modules/AplAdminFileUploader/AplAdminFileUploader.js',
+            './admin_modules/AplAdminImageHistory/AplAdminImageHistory.js',
             './js/main.js'
         ])
         .pipe(plumber())

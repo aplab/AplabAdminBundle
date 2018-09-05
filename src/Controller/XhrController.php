@@ -11,6 +11,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 use Aplab\AplabAdminBundle\Component\FileStorage\LocalStorage;
 use Aplab\AplabAdminBundle\Component\Uploader\ImageUploader;
+use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +30,8 @@ class XhrController extends Controller
      */
     public function uploadImage(LocalStorage $localStorage)
     {
-        $uploader = new ImageUploader($localStorage);
+        $entity_manager = $this->getDoctrine()->getManager();
+        $uploader = new ImageUploader($localStorage, $entity_manager);
         try {
             $url = $uploader->receive();
             return new JsonResponse([
@@ -42,5 +44,23 @@ class XhrController extends Controller
                 'code' => $exception->getCode()
             ]);
         }
+    }
+
+    /**
+     * @Route("/historyUploadImage/listItems/{offset}/",
+     *     name="history_upload_image_list_items", methods="GET",
+     *     requirements={"offset"="^\d+$"})
+     * @param int $offset
+     * @return JsonResponse
+     */
+    public function historyUploadImageListItems($offset)
+    {
+        $data = $this->getDoctrine()->getRepository(HistoryUploadImage::class)->findBy(
+            [],
+            ['favorites' => 'DESC', 'id' => 'desc'],
+            103, $offset
+        );
+        var_dump($data);
+        return new JsonResponse($data);
     }
 }

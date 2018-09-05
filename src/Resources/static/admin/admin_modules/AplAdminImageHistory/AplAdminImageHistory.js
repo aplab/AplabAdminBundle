@@ -1,14 +1,14 @@
 /**
  * Created by polyanin on 19.01.2017.
  */
-function CapsuleCmsImageHistory()
+function AplAdminImageHistory()
 {
-    if (CapsuleCmsImageHistory.hasOwnProperty('instance')) {
+    if (AplAdminImageHistory.hasOwnProperty('instance')) {
         var m = 'Instance already exists. Only one instance allowed!';
         console.log(m);
         throw new Error(m);
     } else {
-        CapsuleCmsImageHistory.instance = this;
+        AplAdminImageHistory.instance = this;
     }
 
     /**
@@ -24,18 +24,18 @@ function CapsuleCmsImageHistory()
      *
      * @type {string}
      */
-    var class_prefix = 'capsule-cms-image-history-';
+    var class_prefix = 'apl-admin-image-history-';
 
     /**
      * Button wrapper class
      *
-     * @see CapsuleCmsDialog
+     * @see AplAdminDialog
      * @type {string}
      */
-    var button_wrapper_class_prefix = 'capsule-cms-dialog-footer-button-';
+    var button_wrapper_class_prefix = 'apl-admin-dialog-footer-button-';
 
     /**
-     * var CapsuleCmsDialog
+     * var AplAdminDialog
      */
     var dialog_window;
 
@@ -92,8 +92,8 @@ function CapsuleCmsImageHistory()
      */
     var create_window = function ()
     {
-        dialog_window = CapsuleCmsDialog.createElement(
-            'capsule-cms-image-history',
+        dialog_window = AplAdminDialog.createElement(
+            'apl-admin-image-history',
             {
                 maximxze: 1,
                 title: 'Browse history'
@@ -136,16 +136,16 @@ function CapsuleCmsImageHistory()
 
         button_cancel.click(function ()
         {
-            CapsuleCmsImageHistory.getInstance().purgeWindow();
+            AplAdminImageHistory.getInstance().purgeWindow();
         });
 
         button_done.click(function ()
         {
-            var o = CapsuleCmsImageHistory.getInstance();
+            var o = AplAdminImageHistory.getInstance();
             if (typeof o.beforeDone === 'function') {
                 o.beforeDone();
             }
-            CapsuleCmsImageHistory.getInstance().purgeWindow();
+            AplAdminImageHistory.getInstance().purgeWindow();
         });
         button_group.show();
         dialog_window_exists = true;
@@ -228,9 +228,9 @@ function CapsuleCmsImageHistory()
             return;
         }
         load_in_progress = true;
-        var url = '/ajax/historyUploadImage/listItems/' + load_offset + '/';
+        var url = '/admin/xhr/historyUploadImage/listItems/' + load_offset + '/';
         if (favorites) {
-            url = '/ajax/historyUploadImage/listFavorites/' + load_offset + '/';
+            url = '/admin/xhr/historyUploadImage/listFavorites/' + load_offset + '/';
         }
         $.get(
             url, {}, function (data, status, jqXHR)
@@ -412,7 +412,7 @@ function CapsuleCmsImageHistory()
      */
     this.getSelectedItems = function()
     {
-        var obj = list_items.find('.capsule-cms-image-history-item').has('.capsule-cms-image-history-select.selected');
+        var obj = list_items.find('.apl-admin-image-history-item').has('.apl-admin-image-history-select.selected');
         var ret = [];
         obj.each(function (i, o)
         {
@@ -425,10 +425,10 @@ function CapsuleCmsImageHistory()
 /**
  * Static method
  */
-CapsuleCmsImageHistory.getInstance = function ()
+AplAdminImageHistory.getInstance = function ()
 {
-    if (CapsuleCmsImageHistory.hasOwnProperty('instance')) {
-        return CapsuleCmsImageHistory.instance;
+    if (AplAdminImageHistory.hasOwnProperty('instance')) {
+        return AplAdminImageHistory.instance;
     }
-    return new CapsuleCmsImageHistory();
+    return new AplAdminImageHistory();
 };

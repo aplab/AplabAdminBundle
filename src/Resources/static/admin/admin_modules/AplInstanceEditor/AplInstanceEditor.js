@@ -380,11 +380,11 @@ function AplInstanceEditor(container) {
             uploader.setUrl('/ajax/uploadImage/');
             uploader.done = function () {
                 AplAdminFileUploader.getInstance().purgeWindow();
-                CapsuleCmsImageHistory.getInstance().showWindow();
+                AplAdminImageHistory.getInstance().showWindow();
             };
             uploader.showWindow();
-            CapsuleCmsImageHistory.getInstance().beforeDone = function () {
-                var items = CapsuleCmsImageHistory.getInstance().getSelectedItems();
+            AplAdminImageHistory.getInstance().beforeDone = function () {
+                var items = AplAdminImageHistory.getInstance().getSelectedItems();
                 if (!items.length) {
                     return;
                 }
@@ -396,9 +396,9 @@ function AplInstanceEditor(container) {
         });
         var btn_history = o.find('.fa-history').closest('button');
         btn_history.click(function () {
-            CapsuleCmsImageHistory.getInstance().showWindow();
-            CapsuleCmsImageHistory.getInstance().beforeDone = function () {
-                var items = CapsuleCmsImageHistory.getInstance().getSelectedItems();
+            AplAdminImageHistory.getInstance().showWindow();
+            AplAdminImageHistory.getInstance().beforeDone = function () {
+                var items = AplAdminImageHistory.getInstance().getSelectedItems();
                 if (!items.length) {
                     return;
                 }
@@ -410,11 +410,11 @@ function AplInstanceEditor(container) {
         });
         var btn_favorites = o.find('.fa-star').closest('button');
         btn_favorites.click(function () {
-            CapsuleCmsImageHistory.getInstance().showWindow({
+            AplAdminImageHistory.getInstance().showWindow({
                 favorites: true
             });
-            CapsuleCmsImageHistory.getInstance().beforeDone = function () {
-                var items = CapsuleCmsImageHistory.getInstance().getSelectedItems();
+            AplAdminImageHistory.getInstance().beforeDone = function () {
+                var items = AplAdminImageHistory.getInstance().getSelectedItems();
                 if (!items.length) {
                     return;
                 }
