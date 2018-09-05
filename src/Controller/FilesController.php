@@ -41,9 +41,13 @@ class FilesController extends Controller
                 'File not found'
             );
         }
+        if ($file->getName() !== $name) {
+            throw $this->createNotFoundException(
+                'File not found'
+            );
+        }
         $path_part = '/' . join('/', array_slice(str_split($file->getFilename(), 3), 0, 3));
         $dir = dirname($this->get('kernel')->getRootDir(), 1);
-        $name = $file->getName();
         $mime = $file->getContentType();
         $path = new Path(
             $dir,
