@@ -51,7 +51,9 @@ class File
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Name should be not blank")
      * @ModuleMetadata\Property(title="Name",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
+     *     cell={
+     *         @ModuleMetadata\Cell(order=2000, width=200, type="Label"),
+     *         @ModuleMetadata\Cell(order=3000, width=200, type="UserFileLink", title="Link")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $name;
@@ -59,7 +61,7 @@ class File
     /**
      * @ORM\Column(type="string")
      * @ModuleMetadata\Property(title="Filename",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=400, type="Label")},
+     *     cell={@ModuleMetadata\Cell(order=4000, width=560, type="UserFileDirectLink", title="Direct link")},
      *     widget={})
      */
     private $filename;
@@ -68,7 +70,7 @@ class File
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Name should be not blank")
      * @ModuleMetadata\Property(title="Content type",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=160, type="Label")},
+     *     cell={@ModuleMetadata\Cell(order=5000, width=160, type="Label")},
      *     widget={})
      */
     private $contentType;
@@ -81,7 +83,7 @@ class File
      *     options={"default"="CURRENT_TIMESTAMP"}
      * )
      * @ModuleMetadata\Property(title="Created at", readonly=true,
-     *     cell={@ModuleMetadata\Cell(order=2000, width=156, type="Datetime")},
+     *     cell={@ModuleMetadata\Cell(order=6000, width=156, type="Datetime")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="Additional", type="DateTime")})
      */
     private $createdAt;
@@ -94,7 +96,7 @@ class File
      *     options={"default"="CURRENT_TIMESTAMP"}
      * )
      * @ModuleMetadata\Property(title="Last modified", readonly=true,
-     *     cell={@ModuleMetadata\Cell(order=2000, width=156, type="Datetime")},
+     *     cell={@ModuleMetadata\Cell(order=7000, width=156, type="Datetime")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="Additional", type="DateTime")})
      */
     private $lastModified;
@@ -175,31 +177,5 @@ class File
     {
         $this->contentType = $contentType;
         return $this;
-    }
-
-
-
-    /**
-     * @return string
-     */
-    protected function getDirectLink()
-    {
-        $path_part = '/' . join('/', array_slice(str_split($this->filename, 3), 0, 3));
-        $path = new Path(
-            $this->config()->directLinkPrefix,
-            $path_part,
-            $this->filename
-        );
-        return (string)$path;
-    }
-
-    protected function getLink()
-    {
-        $path = new Path(
-            $this->config()->linkPrefix,
-            $this->id,
-            $this->name
-        );
-        return (string)$path;
     }
 }

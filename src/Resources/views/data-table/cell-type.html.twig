@@ -8,6 +8,26 @@
         {% endif %}
     </div>
 {% endblock %}
+{% block userfiledirectlink %}
+    <div class="w{{ cell_item.width }}">
+        {% set tmp = cell_item.type.getValue(item) %}
+        {% if tmp is null %}
+            <span class="text-muted">undefined</span>
+        {% else %}
+            <a href="{{ tmp }}" target="_blank">{{ tmp }}</a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block userfilelink %}
+    <div class="w{{ cell_item.width }}">
+        {% set tmp = cell_item.type.getValue(item) %}
+        {% if tmp is null %}
+            <span class="text-muted">undefined</span>
+        {% else %}
+            <a href="{{ tmp }}" target="_blank">{{ tmp }}</a>
+        {% endif %}
+    </div>
+{% endblock %}
 {% block label %}
     <div class="w{{ cell_item.width }}">
         {{ cell_item.type.getValue(item) }}
