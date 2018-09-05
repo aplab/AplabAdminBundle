@@ -16,11 +16,18 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 
 class HistoryUploadImageRepository extends ServiceEntityRepository
 {
+    /**
+     * HistoryUploadImageRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, HistoryUploadImage::class);
     }
 
+    /**
+     * @param HistoryUploadImage $item
+     */
     public function deleteSamePath(HistoryUploadImage $item)
     {
         $db = $this->getEntityManager()->createQueryBuilder()
