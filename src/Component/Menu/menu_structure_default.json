@@ -35,14 +35,14 @@
                         "handler": "AplabAdmin.showImageUploader()"
                     },
                     {
-                        "name": "Пункт 2.2",
-                        "icon": "fas fa-pencil-alt"
+                        "name": "Images history",
+                        "icon": "fas fa-history",
+                        "handler": "AplAdminImageHistory.getInstance().showWindow()"
                     },
                     {
-                        "name": "Пункт 2.3",
-                        "icon": "fas fa-pencil-alt",
-                        "id": "some-id-2",
-                        "route": "admin_desktop"
+                        "name": "Favorite images",
+                        "icon": "far fa-star",
+                        "handler": "AplAdminImageHistory.getInstance().showWindow({favorites: true})"
                     }
                 ]
             },

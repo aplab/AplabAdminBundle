@@ -62,4 +62,71 @@ class XhrController extends Controller
         );
         return new JsonResponse($items);
     }
+
+    /**
+     * @Route("/historyUploadImage/listFavorites/{offset}/",
+     *     name="history_upload_image_list_favorites", methods="GET",
+     *     requirements={"offset"="^\d+$"})
+     * @param int $offset
+     * @return JsonResponse
+     */
+    public function historyUploadImageListFavorites($offset)
+    {
+        $items = $this->getDoctrine()->getRepository(HistoryUploadImage::class)->findBy(
+            ['favorites' => 1],
+            ['favorites' => 'DESC', 'id' => 'desc'],
+            103, $offset
+        );
+        return new JsonResponse($items);
+    }
+
+    /**
+     * @Route("/historyUploadImage/favItem/{id}/",
+     *     name="history_upload_image_fav_item", methods="POST",
+     *     requirements={"id"="^\d+$"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function favoriteImage($id)
+    {
+        $entity_manager = $this->getDoctrine()->getManager();
+        $repository = $entity_manager->getRepository(HistoryUploadImage::class);
+        $item = $repository->find($id);
+        if (!($item instanceof HistoryUploadImage)) {
+            return new JsonResponse([]);
+        }
+        if ($item->getFavorites()) {
+            $item->setFavorites(false);
+        } else {
+            $item->setFavorites(true);
+        }
+        $entity_manager->persist($item);
+        $entity_manager->flush();
+        return new JsonResponse([
+            'status' => 'ok',
+            'value' => $item->getFavorites()
+        ]);
+    }
+
+    /**
+     * @Route("/historyUploadImage/dropItem/{id}/",
+     *     name="history_upload_image_drop_item", methods="POST",
+     *     requirements={"id"="^\d+$"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function dropImage($id)
+    {
+        $entity_manager = $this->getDoctrine()->getManager();
+        $repository = $entity_manager->getRepository(HistoryUploadImage::class);
+        $item = $repository->find($id);
+        if (!($item instanceof HistoryUploadImage)) {
+            return new JsonResponse([]);
+        }
+        $entity_manager->remove($item);
+        $entity_manager->flush();
+        return new JsonResponse([
+            'status' => 'ok'
+        ]);
+    }
 }

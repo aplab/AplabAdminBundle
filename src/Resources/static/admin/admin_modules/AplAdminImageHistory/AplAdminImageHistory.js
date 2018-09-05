@@ -260,23 +260,23 @@ function AplAdminImageHistory()
                     });
                     item.append(buttons);
                     var select = ce().addClass(class_prefix + 'button ' +
-                        class_prefix + 'select glyphicon glyphicon-ok');
+                        class_prefix + 'select fas fa-check');
                     buttons.append(select);
                     var fav = ce().addClass(class_prefix + 'button ' +
-                        class_prefix + 'fav glyphicon glyphicon-star');
+                        class_prefix + 'fav far fa-star');
                     if (1 == o.favorites) {
                         fav.addClass('selected');
                     }
                     buttons.append(fav);
                     var comment = ce().addClass(class_prefix + 'button ' +
-                        class_prefix + 'comment glyphicon glyphicon-pencil');
+                        class_prefix + 'comment fas fa-pencil-alt');
                     buttons.append(comment);
                     var link = ce().addClass(class_prefix + 'button ' +
-                        class_prefix + 'link glyphicon glyphicon-link');
+                        class_prefix + 'link fas fa-link');
                     link.attr('data-clipboard-text', o.path);
                     buttons.append(link);
                     var drop = ce().addClass(class_prefix + 'button ' +
-                        class_prefix + 'drop glyphicon glyphicon-remove');
+                        class_prefix + 'drop far fa-trash-alt');
                     buttons.append(drop);
 
                     select.click(function ()
@@ -301,7 +301,7 @@ function AplAdminImageHistory()
                     });
                 }
                 load_offset += i;
-                new ClipboardJS('.' + class_prefix + 'button.' + class_prefix + 'link.glyphicon.glyphicon-link');
+                new ClipboardJS('.' + class_prefix + 'button.' + class_prefix + 'link.fas.fa-link');
                 load_in_progress = false;
             },
             'json'
@@ -344,7 +344,7 @@ function AplAdminImageHistory()
         }
         var id = $(o).parent().data('itemId');
         $.post(
-            '/ajax/historyUploadImage/dropItem/' + id + '/', {},
+            '/admin/xhr/historyUploadImage/dropItem/' + id + '/', {},
             function (data, status, jqXHR)
             {
                 if (!data.hasOwnProperty('status')) {
@@ -371,7 +371,7 @@ function AplAdminImageHistory()
         }
         var id = $(o).parent().data('itemId');
         $.post(
-            '/ajax/historyUploadImage/favItem/' + id + '/', {},
+            '/admin/xhr/historyUploadImage/favItem/' + id + '/', {},
             function (data, status, jqXHR)
             {
                 if (!data.hasOwnProperty('status')) {
@@ -390,7 +390,7 @@ function AplAdminImageHistory()
         $(o).addClass('selected');
         prompt('Enter new name:');
         $(o).removeClass('selected');
-    }
+    };
 
     /**
      * Copy link handler
@@ -405,7 +405,7 @@ function AplAdminImageHistory()
         {
             o.removeClass('selected');
         }, 300);
-    }
+    };
 
     /**
      * Returns selected items
