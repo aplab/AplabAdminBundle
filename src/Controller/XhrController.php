@@ -10,6 +10,7 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Aplab\AplabAdminBundle\Component\FileStorage\LocalStorage;
+use Aplab\AplabAdminBundle\Component\Uploader\FileUploader;
 use Aplab\AplabAdminBundle\Component\Uploader\ImageUploader;
 use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,6 +33,29 @@ class XhrController extends Controller
     {
         $entity_manager = $this->getDoctrine()->getManager();
         $uploader = new ImageUploader($localStorage, $entity_manager);
+        try {
+            $url = $uploader->receive();
+            return new JsonResponse([
+                'status' => 'ok',
+                'url' => $url
+            ]);
+        } catch (\Throwable $exception) {
+            return new JsonResponse([
+                'message' => $exception->getMessage(),
+                'code' => $exception->getCode()
+            ]);
+        }
+    }
+
+    /**
+     * @Route("/uploadFile/", name="upload_file", methods="POST")
+     * @param LocalStorage $localStorage
+     * @return JsonResponse
+     */
+    public function uploadFile(LocalStorage $localStorage)
+    {
+        $entity_manager = $this->getDoctrine()->getManager();
+        $uploader = new FileUploader($localStorage, $entity_manager);
         try {
             $url = $uploader->receive();
             return new JsonResponse([

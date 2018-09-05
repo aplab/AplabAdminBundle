@@ -454,7 +454,7 @@ function AplDataTable(container) {
     this.batchAddFilesPlugin = function () {
         var uploader = AplAdminFileUploader.getInstance();
         uploader.setTitle('Upload files');
-        uploader.setUrl('/ajax/uploadFile/');
+        uploader.setUrl('/admin/xhr/uploadFile/');
         uploader.done = function () {
             uploader.purgeWindow();
             location = location;

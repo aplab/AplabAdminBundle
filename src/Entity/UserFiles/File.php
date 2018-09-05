@@ -9,6 +9,7 @@
 namespace Aplab\AplabAdminBundle\Entity\UserFiles;
 
 use Aplab\AplabAdminBundle\Component\ModuleMetadata as ModuleMetadata;
+use Aplab\AplabAdminBundle\Util\Path;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -50,7 +51,7 @@ class File
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Name should be not blank")
      * @ModuleMetadata\Property(title="Name",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
+     *     cell={@ModuleMetadata\Cell(order=2000, width=200, type="Label")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $name;
@@ -58,7 +59,7 @@ class File
     /**
      * @ORM\Column(type="string")
      * @ModuleMetadata\Property(title="Filename",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
+     *     cell={@ModuleMetadata\Cell(order=2000, width=400, type="Label")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $filename;
@@ -67,7 +68,7 @@ class File
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Name should be not blank")
      * @ModuleMetadata\Property(title="Content type",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
+     *     cell={@ModuleMetadata\Cell(order=2000, width=160, type="Label")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $contentType;
@@ -174,5 +175,31 @@ class File
     {
         $this->contentType = $contentType;
         return $this;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    protected function getDirectLink()
+    {
+        $path_part = '/' . join('/', array_slice(str_split($this->filename, 3), 0, 3));
+        $path = new Path(
+            $this->config()->directLinkPrefix,
+            $path_part,
+            $this->filename
+        );
+        return (string)$path;
+    }
+
+    protected function getLink()
+    {
+        $path = new Path(
+            $this->config()->linkPrefix,
+            $this->id,
+            $this->name
+        );
+        return (string)$path;
     }
 }
