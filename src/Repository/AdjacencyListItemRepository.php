@@ -1,16 +1,21 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: polyanin
+ * Date: 04.09.2018
+ * Time: 16:39
+ */
 
 namespace Aplab\AplabAdminBundle\Repository;
+
 
 use Aplab\AplabAdminBundle\Entity\AdjacencyList\ListItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ListItem|null find($id, $lockMode = null, $lockVersion = null)
- * @method ListItem|null findOneBy(array $criteria, array $orderBy = null)
- * @method ListItem[]    findAll()
- * @method ListItem[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * Class AdjacencyListItemRepository
+ * @package Aplab\AplabAdminBundle\Repository
  */
 class AdjacencyListItemRepository extends ServiceEntityRepository
 {

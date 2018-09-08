@@ -10,6 +10,8 @@ namespace Aplab\AplabAdminBundle\Controller;
 
 
 use Aplab\AplabAdminBundle\Entity\AdjacencyList\ListItem;
+use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
+use Aplab\AplabAdminBundle\Repository\AdjacencyListItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,14 +29,16 @@ class ExampleController extends AbstractController
     public function test() {
 
         $em = $this->getDoctrine()->getManager();
-        $repo = $this->getDoctrine()->getRepository(ListItem::class);
-//        $root = $repo->find(2);
-        $child = $repo->find(1);
+        $repo = $em->getRepository(ListItem::class);
+        $root = $repo->find(1);
+        $child = $repo->find(2);
 //        $root->addChild($child);
+
 //
-//        $em->flush();
+        $em->flush();
+        dump($root);
         dump($child);
-        dump($child->getParent()->getChildren()->first()->getParent());
+
 
 
 

@@ -13,6 +13,10 @@ use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
+/**
+ * Class HistoryUploadImageRepository
+ * @package Aplab\AplabAdminBundle\Repository
+ */
 class HistoryUploadImageRepository extends ServiceEntityRepository
 {
     /**

@@ -7,7 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="\Aplab\AplabAdminBundle\Repository\AdjacencyListItemRepository")
+ * Class ListItem
+ * @package Aplab\AplabAdminBundle\Entity\AdjacencyList
+ * @ORM\Entity(repositoryClass="Aplab\AplabAdminBundle\Repository\AdjacencyListItemRepository")
+ * @ORM\Table(name="adjacency_list", indexes={
+ *      @ORM\Index(name="parent_id", columns={"parent_id"})
+ *     })
  */
 class ListItem
 {
@@ -50,6 +55,9 @@ class ListItem
 
     public function addChild(ListItem $child): self
     {
+        if ($child === $this) {
+            throw new \LogicException('Unable to set object as child of itself.');
+        }
         if (!$this->children->contains($child)) {
             $this->children[] = $child;
             $child->setParent($this);
@@ -73,6 +81,9 @@ class ListItem
 
     public function setParent(?ListItem $parent): self
     {
+        if ($parent === $this) {
+            throw new \LogicException('Unable to set object as parent of itself.');
+        }
         $this->parent = $parent;
         return $this;
     }
