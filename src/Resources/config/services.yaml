@@ -35,6 +35,8 @@ services:
 
     Aplab\AplabAdminBundle\Repository\:
         resource: '../../Repository'
+        autowire: true
+        tags: ['doctrine.repository_service']
 
     Aplab\AplabAdminBundle\Component\Menu\MenuManager:
         arguments:

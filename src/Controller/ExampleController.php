@@ -9,15 +9,9 @@
 namespace Aplab\AplabAdminBundle\Controller;
 
 
-use Aplab\AplabAdminBundle\Component\FileStorage\LocalStorage;
-use Aplab\AplabAdminBundle\Entity\NamedTimestampable;
-use Doctrine\Common\Inflector\Inflector;
+use Aplab\AplabAdminBundle\Entity\AdjacencyList\ListItem;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Class ExampleController
@@ -28,22 +22,22 @@ class ExampleController extends AbstractController
 {
     /**
      * @Route("/test", name="test")
-     * @param LocalStorage $localStorage
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Aplab\AplabAdminBundle\Component\FileStorage\Exception
      */
-    public function test(LocalStorage $localStorage) {
+    public function test() {
 
-//        dump($localStorage->addFile(__FILE__));
-//        $form = $this->createFormBuilder()
-//            ->add('task', TextType::class)
-//            ->add('dueDate', DateType::class)
-//            ->add('save', SubmitType::class, array('label' => 'Create Task'))
-//            ->getForm();
+        $em = $this->getDoctrine()->getManager();
+        $repo = $this->getDoctrine()->getRepository(ListItem::class);
+//        $root = $repo->find(2);
+        $child = $repo->find(1);
+//        $root->addChild($child);
 //
-//        $form = $form->createView();
-//
-//        dump(Inflector::tableize(NamedTimestampable::class));
+//        $em->flush();
+        dump($child);
+        dump($child->getParent()->getChildren()->first()->getParent());
+
+
+
 
         return $this->render('@AplabAdmin/admin-test.html.twig', get_defined_vars());
     }
