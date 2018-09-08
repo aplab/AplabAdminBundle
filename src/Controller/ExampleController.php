@@ -30,14 +30,20 @@ class ExampleController extends AbstractController
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(ListItem::class);
-        $root = $repo->find(1);
-        $child = $repo->find(2);
-//        $root->addChild($child);
-
+//        $items = $repo->findAll();
+//        foreach ($items as $item) {
+//            $item->setName(bin2hex(random_bytes(10)));
+//            $em->persist($item);
+//        }
+//        $root = $repo->find(1);
+//        $child = $repo->find(2);
+////        $root->addChild($child);
 //
-        $em->flush();
-        dump($root);
-        dump($child);
+////
+//        $em->flush();
+
+//        $roots = $repo->getRoots();
+
 
 
 
