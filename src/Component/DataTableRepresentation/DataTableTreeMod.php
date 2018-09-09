@@ -20,7 +20,6 @@ class DataTableTreeMod extends DataTable
         if (is_null($this->count)) {
             $this->count = $this->entityManager->getRepository($this->entityClassName)->getRootsCount([]);
         }
-        dump($this->count);
         return $this->count;
     }
 
@@ -31,7 +30,6 @@ class DataTableTreeMod extends DataTable
     public function getItems()
     {
         $pager = $this->getPager();
-        dump($pager);
         return $this->entityManager->getRepository($this->entityClassName)->rootPage(
             $pager->getItemsPerPage(),
             $pager->getOffset()

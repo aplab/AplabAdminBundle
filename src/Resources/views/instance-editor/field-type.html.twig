@@ -42,6 +42,7 @@
             <select class="form-control"
                     name="{{ form_name }}[{{ field.propertyName }}]"
                     id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                <option value="0"></option>
                 {% for option in field.type.optionsDataList %}
                     <option value="{{ option.value }}">{{ option.text }}</option>
                 {% endfor %}
