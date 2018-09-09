@@ -35,5 +35,19 @@
               name="{{ form_name }}[{{ field.propertyName }}]"
               id="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.type.value }}</textarea>
 {% endblock %}
+{% block tree %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
+        <div class="{{ prefix }}-value">
+            <select class="form-control"
+                    name="{{ form_name }}[{{ field.propertyName }}]"
+                    id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                {% for option in field.type.optionsDataList %}
+                    <option value="{{ option.value }}">{{ option.text }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+{% endblock %}
 {% block example %}
 {% endblock %}

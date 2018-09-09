@@ -48,13 +48,17 @@ class ListItem
      * Many Categories have One Category.
      * @ORM\ManyToOne(targetEntity="\Aplab\AplabAdminBundle\Entity\AdjacencyList\ListItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ModuleMetadata\Property(title="Parent",
+     *     cell={@ModuleMetadata\Cell(order=3000, width=320, type="Object")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Tree",
+     *     options=@ModuleMetadata\Options(test={"a":234}))})
      */
     private $parent;
 
     /**
      * @ORM\Column(type="bigint")
      * @ModuleMetadata\Property(title="Order",
-     *     cell={@ModuleMetadata\Cell(order=3000, width=120, type="Rtext")},
+     *     cell={@ModuleMetadata\Cell(order=4000, width=120, type="Rtext")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $order;

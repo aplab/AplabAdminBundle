@@ -3,45 +3,14 @@
  * Created by PhpStorm.
  * User: polyanin
  * Date: 02.08.2018
- * Time: 10:58
+ * Time: 10:59
  */
 
 namespace Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType;
 
 
-use Aplab\AplabAdminBundle\Component\InstanceEditor\InstanceEditorField;
-
-abstract class FieldTypeAbstract implements FieldTypeInterface
+class FieldTypeTree extends FieldTypeAbstract
 {
-    /**
-     * FieldTypeAbstract constructor.
-     * @param InstanceEditorField $field
-     */
-    public function __construct(InstanceEditorField $field)
-    {
-        $tmp = explode(FieldTypeFactory::PREFIX, static::class);
-        $this->type = strtolower(end($tmp));
-        $this->field = $field;
-    }
-
-    /**
-     * @var InstanceEditorField
-     */
-    protected $field;
-
-    /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
     /**
      * @return mixed
      */
@@ -55,6 +24,7 @@ abstract class FieldTypeAbstract implements FieldTypeInterface
             'isser' => 'is' . $property_name_ucfirst,
             'hasser' => 'has' . $property_name_ucfirst
         ];
+        return 'stub';
         foreach ($accessors as $accessor) {
             if (method_exists($entity, $accessor)) {
                 return $entity->$accessor();
@@ -63,11 +33,12 @@ abstract class FieldTypeAbstract implements FieldTypeInterface
         throw new \LogicException('Unable to access property ' . get_class($entity) . '::' . $property_name);
     }
 
-    /**
-     * @return string
-     */
-    public function getUniqueId()
+    public function getOptionsDataList()
     {
-        return spl_object_id($this);
+        $field_options = $this->field->getOptions();
+        $class = $field_options->class ?? get_class($this->field->getEntity());
+        $em = $this->field->getInstanceEditor()->getEntityManagerInterface();
+        $repository = $em->getRepository($class);
+        return $repository->getOptionsDataList();
     }
 }

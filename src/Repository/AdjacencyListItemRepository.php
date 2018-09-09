@@ -154,6 +154,22 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
         return $result;
     }
 
+    /**
+     *
+     */
+    public function getOptionsDataList()
+    {
+        $tmp = $this->getTree();
+        array_walk($tmp, function ($v, $k) use (& $tmp) {
+            $tmp[$k] = array(
+                'value' => $k,
+                'text' => str_repeat('. ', $v->level) . $v->getName(),
+                'selectd' => false
+            );
+        });
+        return $tmp;
+    }
+
     //    /**
 //     * @return ListItem[] Returns an array of ListItem objects
 //     */

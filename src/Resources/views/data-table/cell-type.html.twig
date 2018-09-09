@@ -33,9 +33,14 @@
         {{ cell_item.type.getValue(item) }}
     </div>
 {% endblock %}
-{% block tree %}
+{% block object %}
     <div class="w{{ cell_item.width }}">
-        {{ cell_item.type.getPrefix(item)|raw }}{{ cell_item.type.getValue(item) }}
+        {{ cell_item.type.getValue(item) }}
+    </div>
+{% endblock %}
+{% block tree %}
+    <div class="w{{ cell_item.width }} text-nowrap">
+        <span class="text-info">{{ cell_item.type.getPrefix(item)|raw }}</span>{{ cell_item.type.getValue(item) }}
     </div>
 {% endblock %}
 {% block text %}
