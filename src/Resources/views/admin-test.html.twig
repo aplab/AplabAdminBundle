@@ -85,7 +85,7 @@
                         {#</div>#}
                     {#{% endif %}#}
 
-                    {% for item in repo.tree %}
+                    {% for item in repo.rootPage(1, 4) %}
                         <p class="pl-5">
                             {% for i in range(0, item.level) %}
                                 .

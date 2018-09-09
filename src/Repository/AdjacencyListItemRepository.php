@@ -29,35 +29,6 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
         parent::__construct($registry, ListItem::class);
     }
 
-//    /**
-//     * @return ListItem[] Returns an array of ListItem objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ListItem
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
     /**
      * @return array
      */
@@ -85,6 +56,65 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @param $limit
+     * @param $offset
+     * @return ListItem[]
+     */
+    public function rootPage($limit, $offset)
+    {
+        $children = $this->findBy(
+            ['parent' => null],
+            ['order' => 'ASC', 'id' => 'ASC'], $limit, $offset);
+        $level = 0;
+        $tmp = [];
+        while ($children) {
+            foreach ($children as $child) {
+                $child->level = $level;
+                $tmp[] = $child;
+            }
+            $children = $this->getChildrenOf($children);
+            $level++;
+        }
+        $tmp = $this->to2d($tmp);
+        $ret = array();
+        $level = 0;
+        $to_list = function ($from_key = 0) use (& $ret, $tmp, & $to_list, & $level) {
+            if (!isset($tmp[$from_key])) return;
+            foreach ($tmp[$from_key] as $k => $v) {
+                $v->levelCheck = $level;
+                $ret[$k] = $v;
+                if (isset($tmp[$k])) {
+                    $level++;
+                    $to_list($k);
+                    $level--;
+                }
+            }
+        };
+        $to_list(0);
+        return $ret;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRootsCount()
+    {
+        return $this->count(['parent' => null]);
+    }
+
+    /**
+     * @param ListItem[] $items
+     * @return ListItem[]
+     */
+    public function getChildrenOf(array $items)
+    {
+        return $this->findBy(['parent' => $items], ['order' => 'ASC', 'id' => 'ASC']);
+    }
+
+    /**
+     * @return array|mixed
+     */
     public function getTree()
     {
         $tmp = $this->get2d();
@@ -109,4 +139,47 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
         $to_list(0);
         return $ret;
     }
+
+    /**
+     * @param ListItem[] $items
+     * @return ListItem[]
+     */
+    public function to2d(array $items)
+    {
+        $result = [];
+        foreach ($items as $item) {
+            $parent = $item->getParent();
+            $result[$parent ? $parent->getId() : 0][$item->getId()] = $item;
+        }
+        return $result;
+    }
+
+    //    /**
+//     * @return ListItem[] Returns an array of ListItem objects
+//     */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('t.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?ListItem
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
 }
