@@ -33,6 +33,21 @@
         {{ cell_item.type.getValue(item) }}
     </div>
 {% endblock %}
+{% block tree %}
+    <div class="w{{ cell_item.width }}">
+        {{ cell_item.type.getPrefix(item)|raw }}{{ cell_item.type.getValue(item) }}
+    </div>
+{% endblock %}
+{% block text %}
+    <div class="w{{ cell_item.width }}">
+        {{ cell_item.type.getValue(item) }}
+    </div>
+{% endblock %}
+{% block rtext %}
+    <div class="w{{ cell_item.width }} text-right">
+        {{ cell_item.type.getValue(item) }}
+    </div>
+{% endblock %}
 {% block editid %}
     <div class="w{{ cell_item.width }} text-right">
         <a href="{{ app.request.pathInfo }}{{ attribute(item, cell_item.propertyName) }}">

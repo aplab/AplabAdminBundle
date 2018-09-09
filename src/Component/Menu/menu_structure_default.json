@@ -55,6 +55,14 @@
                 ]
             },
             {
+                "id": "tree",
+                "name": "Tree",
+                "icon": "fas fa-tree",
+                "disabled": false,
+                "target": "_self",
+                "route": "admin_tree_list"
+            },
+            {
                 "id": "test",
                 "name": "Test",
                 "icon": "fas fa-vial",

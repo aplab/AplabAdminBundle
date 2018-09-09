@@ -56,6 +56,11 @@ services:
             - '@Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository'
             - '@doctrine.orm.entity_manager'
 
+    Aplab\AplabAdminBundle\Component\DataTableRepresentation\DataTableRepresentationTreeMod:
+        arguments:
+        - '@Aplab\AplabAdminBundle\Component\ModuleMetadata\ModuleMetadataRepository'
+        - '@doctrine.orm.entity_manager'
+
     Aplab\AplabAdminBundle\Component\SystemState\SystemStateManager:
         arguments:
             $aplab_admin_data_dir: '%aplab_admin_data_dir%'

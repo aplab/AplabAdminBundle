@@ -17,6 +17,14 @@ use Aplab\AplabAdminBundle\Component\ModuleMetadata as ModuleMetadata;
  *      @ORM\Index(name="order", columns={"order"}),
  *      @ORM\Index(name="order_id", columns={"order", "id"})
  *     })
+ * @ModuleMetadata\Module(
+ *     title="Tree",
+ *     description="Tree",
+ *     tabOrder={
+ *          "General": 1000,
+ *          "Text": 2000,
+ *          "Additional": 10000418
+ *     })
  */
 class ListItem
 {
@@ -24,6 +32,9 @@ class ListItem
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @ModuleMetadata\Property(title="ID", readonly=true,
+     *     cell={@ModuleMetadata\Cell(order=1000, width=80, type="EditId")},
+     *     widget={@ModuleMetadata\Widget(order=1000, tab="Additional", type="Label")})
      */
     private $id;
 
@@ -42,6 +53,9 @@ class ListItem
 
     /**
      * @ORM\Column(type="bigint")
+     * @ModuleMetadata\Property(title="Order",
+     *     cell={@ModuleMetadata\Cell(order=3000, width=120, type="Rtext")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $order;
 
@@ -49,7 +63,7 @@ class ListItem
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Name should be not blank")
      * @ModuleMetadata\Property(title="Name",
-     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
+     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Tree")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $name;

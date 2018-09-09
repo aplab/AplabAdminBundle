@@ -20,37 +20,37 @@ class DataTable
     /**
      * @var string
      */
-    private $entityClassName;
+    protected $entityClassName;
 
     /**
      * @var \ReflectionClass
      */
-    private $entityReflectionClass;
+    protected $entityReflectionClass;
 
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      * @var ModuleMetadata
      */
-    private $moduleMetadata;
+    protected $moduleMetadata;
 
     /**
      * @var DataTableCell[];
      */
-    private $cell;
+    protected $cell;
 
     /**
      * @var CssWidthDefinition
      */
-    private $cssWidthDefinition;
+    protected $cssWidthDefinition;
 
     /**
      * @var \Aplab\AplabAdminBundle\Component\SystemState\SystemState
      */
-    private $systemState;
+    protected $systemState;
 
     /**
      * READ-ONLY: The field names of all fields that are part of the identifier/primary key
@@ -58,7 +58,7 @@ class DataTable
      *
      * @var array
      */
-    private $identifier;
+    protected $identifier;
 
     /**
      * @return array
@@ -68,6 +68,10 @@ class DataTable
         return $this->identifier;
     }
 
+    /**
+     * @param $item
+     * @return false|string
+     */
     public function helperIdentifierJson($item)
     {
         $data = [];
@@ -114,7 +118,7 @@ class DataTable
     /**
      * Data table cell initialization
      */
-    private function initCell(): void
+    protected function initCell(): void
     {
         $factory = new CellTypeFactory;
         $this->cell = [];
@@ -150,7 +154,7 @@ class DataTable
     /**
      * @var int
      */
-    private $count;
+    protected $count;
 
     /**
      * @param void
@@ -167,7 +171,7 @@ class DataTable
     /**
      * @var Pager
      */
-    private $pager;
+    protected $pager;
 
     /**
      * @return Pager

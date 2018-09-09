@@ -19,32 +19,32 @@ class DataTableRepresentation
     /**
      * @var ModuleMetadataRepository
      */
-    private $moduleMetadataRepository;
+    protected $moduleMetadataRepository;
 
     /**
      * @var EntityManagerInterface
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      * @var \ReflectionClass[]
      */
-    private $entityReflectionClass = [];
+    protected $entityReflectionClass = [];
 
     /**
      * @var DataTable[]
      */
-    private $dataTable = [];
+    protected $dataTable = [];
 
     /**
      * @var CssWidthDefinition
      */
-    private $cssWidthDefinition;
+    protected $cssWidthDefinition;
 
     /**
      * @var SystemStateManager
      */
-    private $systemStateManager;
+    protected $systemStateManager;
 
     /**
      * DataTable constructor.
@@ -84,17 +84,22 @@ class DataTableRepresentation
 
     /**
      * @param string $entity_class_name
+     * @param null|string $type
      * @return DataTable
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \ReflectionException
      */
-    public function getDataTable(string $entity_class_name):DataTable
+    public function getDataTable(string $entity_class_name, ?string $type = null):DataTable
     {
         $entity_reflection_class = new \ReflectionClass($entity_class_name);
         $entity_class_name = $entity_reflection_class->getName();
         if (!isset($this->dataTable[$entity_class_name])) {
             $this->entityReflectionClass[$entity_class_name] = $entity_reflection_class;
-            $this->dataTable[$entity_class_name] = new DataTable($entity_reflection_class, $this);
+            if (is_null($type)) {
+                $this->dataTable[$entity_class_name] = new DataTable($entity_reflection_class, $this);
+            } else {
+                $this->dataTable[$entity_class_name] = new $type($entity_reflection_class, $this);
+            }
         }
         return $this->dataTable[$entity_class_name];
     }
