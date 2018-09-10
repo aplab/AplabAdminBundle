@@ -9,7 +9,7 @@
 namespace Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType;
 
 
-class FieldTypeTree extends FieldTypeAbstract
+class FieldTypeEntity extends FieldTypeAbstract
 {
     /**
      * @return mixed
@@ -24,7 +24,6 @@ class FieldTypeTree extends FieldTypeAbstract
             'isser' => 'is' . $property_name_ucfirst,
             'hasser' => 'has' . $property_name_ucfirst
         ];
-        return 'stub';
         foreach ($accessors as $accessor) {
             if (method_exists($entity, $accessor)) {
                 return $entity->$accessor();
@@ -36,9 +35,10 @@ class FieldTypeTree extends FieldTypeAbstract
     public function getOptionsDataList()
     {
         $field_options = $this->field->getOptions();
-        $class = $field_options->class ?? get_class($this->field->getEntity());
+        $class = $field_options->data_class ?? get_class($this->field->getEntity());
         $em = $this->field->getInstanceEditor()->getEntityManagerInterface();
         $repository = $em->getRepository($class);
+        $value = $this->getValue();
         return $repository->getOptionsDataList();
     }
 }

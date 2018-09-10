@@ -27,12 +27,12 @@ abstract class CellTypeAbstract implements CellTypeInterface
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var DataTableCell
      */
-    private $cell;
+    protected $cell;
 
     /**
      * @return string

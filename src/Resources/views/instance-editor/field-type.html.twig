@@ -35,7 +35,7 @@
               name="{{ form_name }}[{{ field.propertyName }}]"
               id="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.type.value }}</textarea>
 {% endblock %}
-{% block tree %}
+{% block entity %}
     <div class="{{ prefix }}-element">
         <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
         <div class="{{ prefix }}-value">
@@ -44,7 +44,7 @@
                     id="{{ prefix }}-element-{{ field.type.uniqueId }}">
                 <option value="0"></option>
                 {% for option in field.type.optionsDataList %}
-                    <option value="{{ option.value }}">{{ option.text }}</option>
+                    <option value="{{ option.value }}"{{ option.selected ? ' selected' }}>{{ option.text }}</option>
                 {% endfor %}
             </select>
         </div>

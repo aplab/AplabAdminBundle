@@ -9,7 +9,7 @@
 namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType;
 
 
-class CellTypeObject extends CellTypeAbstract
+class CellTypeEntity extends CellTypeAbstract
 {
     /**
      * @param object $entity
@@ -19,7 +19,9 @@ class CellTypeObject extends CellTypeAbstract
     {
         $value = parent::getValue($entity);
         if ($value) {
-            return $value->getName();
+            $options = $this->cell->getOptions();
+            $accessor = $options->accessor ?? 'getName';
+            return $value->$accessor();
         }
         return null;
     }

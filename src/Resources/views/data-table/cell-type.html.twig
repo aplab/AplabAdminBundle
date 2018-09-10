@@ -29,13 +29,15 @@
     </div>
 {% endblock %}
 {% block label %}
+    {% set empty_cell_data = '<span class="text-muted">empty</span>' %}
     <div class="w{{ cell_item.width }}">
-        {{ cell_item.type.getValue(item) }}
+        {{ cell_item.type.getValue(item) ?: empty_cell_data|raw }}
     </div>
 {% endblock %}
-{% block object %}
+{% block entity %}
+    {% set empty_cell_data = '<span class="text-muted">empty</span>' %}
     <div class="w{{ cell_item.width }}">
-        {{ cell_item.type.getValue(item) }}
+        {{ cell_item.type.getValue(item) ?: empty_cell_data|raw }}
     </div>
 {% endblock %}
 {% block tree %}

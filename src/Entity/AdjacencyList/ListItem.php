@@ -49,9 +49,10 @@ class ListItem
      * @ORM\ManyToOne(targetEntity="\Aplab\AplabAdminBundle\Entity\AdjacencyList\ListItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
      * @ModuleMetadata\Property(title="Parent",
-     *     cell={@ModuleMetadata\Cell(order=3000, width=320, type="Object")},
-     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Tree",
-     *     options=@ModuleMetadata\Options(test={"a":234}))})
+     *     cell={@ModuleMetadata\Cell(order=3000, width=320, type="Entity",
+     *     options=@ModuleMetadata\Options(accessor="getName"))},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Entity",
+     *     options=@ModuleMetadata\Options(data_class="\Aplab\AplabAdminBundle\Entity\AdjacencyList\ListItem"))})
      */
     private $parent;
 

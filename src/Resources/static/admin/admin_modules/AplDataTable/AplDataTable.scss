@@ -210,9 +210,9 @@ $border-color: #ddd;
                 font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
                 text-align: center;
             }
-            > div:after {
-                content: '\00A0';
-            }
+            //> div:after {
+            //    content: '\00A0';
+            //}
         }
         > div.fat-row {
             > div {
