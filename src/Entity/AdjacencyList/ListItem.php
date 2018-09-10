@@ -8,14 +8,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Aplab\AplabAdminBundle\Component\ModuleMetadata as ModuleMetadata;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
+
 /**
  * Class ListItem
  * @package Aplab\AplabAdminBundle\Entity\AdjacencyList
  * @ORM\Entity(repositoryClass="Aplab\AplabAdminBundle\Repository\AdjacencyListItemRepository")
  * @ORM\Table(name="adjacency_list", indexes={
  *      @ORM\Index(name="parent_id", columns={"parent_id"}),
- *      @ORM\Index(name="order", columns={"order"}),
- *      @ORM\Index(name="order_id", columns={"order", "id"})
+ *      @ORM\Index(name="sort_order", columns={"sort_order"}),
+ *      @ORM\Index(name="order_id", columns={"sort_order", "id"})
  *     })
  * @ModuleMetadata\Module(
  *     title="Tree",
@@ -58,11 +61,11 @@ class ListItem
 
     /**
      * @ORM\Column(type="bigint")
-     * @ModuleMetadata\Property(title="Order",
+     * @ModuleMetadata\Property(title="Sort order",
      *     cell={@ModuleMetadata\Cell(order=4000, width=120, type="Rtext")},
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
-    private $order;
+    private $sortOrder;
 
     /**
      * @ORM\Column(type="string")
@@ -79,7 +82,7 @@ class ListItem
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->order = 0;
+        $this->sortOrder = 0;
     }
 
     /**
@@ -138,10 +141,13 @@ class ListItem
         if ($parent === $this) {
             throw new \LogicException('Unable to set object as parent of itself.');
         }
-        $parent_of_parent = $parent->getParent();
-        while($parent_of_parent) {
-            if ($parent_of_parent === $this) {
-                throw new \LogicException('Unable to set descendant as parent.');
+        if (!is_null($parent)) {
+            $parent_of_parent = $parent->getParent();
+            while($parent_of_parent) {
+                if ($parent_of_parent === $this) {
+                    throw new \LogicException('Unable to set descendant as parent.');
+                }
+                $parent_of_parent = $parent_of_parent->getParent();
             }
         }
         $this->parent = $parent;
@@ -168,18 +174,18 @@ class ListItem
     /**
      * @return mixed
      */
-    public function getOrder()
+    public function getSortOrder()
     {
-        return $this->order;
+        return $this->sortOrder;
     }
 
     /**
-     * @param mixed $order
+     * @param mixed $sortOrder
      * @return ListItem
      */
-    public function setOrder($order)
+    public function setSortOrder($sortOrder)
     {
-        $this->order = $order;
+        $this->sortOrder = $sortOrder;
         return $this;
     }
 
@@ -198,6 +204,38 @@ class ListItem
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+
+
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 }

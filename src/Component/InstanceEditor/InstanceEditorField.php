@@ -128,7 +128,7 @@ class InstanceEditorField
     /**
      * @return Options
      */
-    public function getOptions(): Options
+    public function getOptions(): ?Options
     {
         return $this->options;
     }

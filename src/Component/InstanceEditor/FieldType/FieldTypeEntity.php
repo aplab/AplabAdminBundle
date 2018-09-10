@@ -9,8 +9,15 @@
 namespace Aplab\AplabAdminBundle\Component\InstanceEditor\FieldType;
 
 
+use Aplab\AplabAdminBundle\Component\InstanceEditor\InstanceEditorField;
+
 class FieldTypeEntity extends FieldTypeAbstract
 {
+    /**
+     * @var string
+     */
+    protected $entityClass;
+
     /**
      * @return mixed
      */
@@ -39,6 +46,25 @@ class FieldTypeEntity extends FieldTypeAbstract
         $em = $this->field->getInstanceEditor()->getEntityManagerInterface();
         $repository = $em->getRepository($class);
         $value = $this->getValue();
-        return $repository->getOptionsDataList();
+        return $repository->getOptionsDataList($value);
+    }
+
+    /**
+     * @return InstanceEditorField
+     */
+    public function getField(): InstanceEditorField
+    {
+        return $this->field;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEntityClass(): string
+    {
+        if (is_null($this->entityClass)) {
+            $this->entityClass = $field_options->data_class ?? get_class($this->field->getEntity());
+        }
+        return $this->entityClass;
     }
 }

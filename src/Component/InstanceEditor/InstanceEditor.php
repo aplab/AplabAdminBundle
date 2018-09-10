@@ -147,22 +147,37 @@ class InstanceEditor
         }
     }
 
+    /**
+     * @param Request $request
+     */
     public function handleRequest(Request $request)
     {
         $data = $request->request;
-        $properties = [];
-        foreach ($this->getWidget() as $widget) {
-            $properties[] = $widget->getPropertyName();
-        }
         $data = $request->get('apl-instance-editor', []);
         if (empty($data)) {
             return;
         }
         $entity = $this->getEntity();
-        foreach ($properties as $property) {
-            if (isset($data[$property])) {
-                $setter = 'set' . ucfirst($property);
-                $entity->$setter($data[$property]);
+
+
+        $properties = [];
+        foreach ($this->getWidget() as $widget) {
+            $property_name = $widget->getPropertyName();
+            if (!array_key_exists($property_name, $data)) {
+                continue;
+            }
+            $type = $widget->getType()->getType();
+            if ('entity' === $type) {
+                $class = $widget->getType()->getEntityClass();
+                $repository = $this->entityManagerInterface->getRepository($class);
+                $value = $repository->find($data[$property_name]);
+
+            } else {
+                $value = $data[$property_name];
+            }
+            $setter = 'set' . ucfirst($property_name);
+            if (method_exists($entity, $setter)) {
+                $entity->$setter($value);
             }
         }
         $this->getEntityManagerInterface()->persist($entity);

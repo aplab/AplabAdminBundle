@@ -34,7 +34,7 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
      */
     public function get2d()
     {
-        $items = $this->findBy([], ['order' => 'ASC', 'id' => 'ASC']);
+        $items = $this->findBy([], ['sortOrder' => 'ASC', 'id' => 'ASC']);
         $result = [];
         foreach ($items as $item) {
             $parent = $item->getParent();
@@ -50,7 +50,7 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('t')
             ->where('t.parent is null')
-            ->orderBy('t.order', 'ASC')
+            ->orderBy('t.sortOrder', 'ASC')
             ->addOrderBy('t.id', 'ASC')
             ->getQuery()
             ->getResult();
@@ -65,7 +65,7 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
     {
         $children = $this->findBy(
             ['parent' => null],
-            ['order' => 'ASC', 'id' => 'ASC'], $limit, $offset);
+            ['sortOrder' => 'ASC', 'id' => 'ASC'], $limit, $offset);
         $level = 0;
         $tmp = [];
         while ($children) {
@@ -109,7 +109,7 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
      */
     public function getChildrenOf(array $items)
     {
-        return $this->findBy(['parent' => $items], ['order' => 'ASC', 'id' => 'ASC']);
+        return $this->findBy(['parent' => $items], ['sortOrder' => 'ASC', 'id' => 'ASC']);
     }
 
     /**
@@ -155,16 +155,17 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
     }
 
     /**
-     *
+     * @param null $selected
+     * @return array|mixed
      */
-    public function getOptionsDataList()
+    public function getOptionsDataList($selected = null)
     {
         $tmp = $this->getTree();
-        array_walk($tmp, function ($v, $k) use (& $tmp) {
+        array_walk($tmp, function ($v, $k) use (& $tmp, $selected) {
             $tmp[$k] = array(
                 'value' => $k,
                 'text' => str_repeat('. ', $v->level) . $v->getName(),
-                'selectd' => false
+                'selected' => $v === $selected
             );
         });
         return $tmp;
