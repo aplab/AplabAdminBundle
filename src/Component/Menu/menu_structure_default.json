@@ -55,6 +55,28 @@
                 ]
             },
             {
+                "name": "Bind",
+                "icon": "fas fa-box-open",
+                "items": [
+                    {
+                        "id": "container",
+                        "name": "Container",
+                        "icon": "fas fa-box-open",
+                        "disabled": false,
+                        "target": "_self",
+                        "route": "admin_bind_container_list"
+                    },
+                    {
+                        "id": "contained",
+                        "name": "Contained",
+                        "icon": "fas fa-boxes",
+                        "disabled": false,
+                        "target": "_self",
+                        "route": "admin_bind_contained_list"
+                    }
+                ]
+            },
+            {
                 "id": "tree",
                 "name": "Tree",
                 "icon": "fas fa-tree",

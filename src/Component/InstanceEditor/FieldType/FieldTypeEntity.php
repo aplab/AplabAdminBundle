@@ -41,10 +41,8 @@ class FieldTypeEntity extends FieldTypeAbstract
 
     public function getOptionsDataList()
     {
-        $field_options = $this->field->getOptions();
-        $class = $field_options->data_class ?? get_class($this->field->getEntity());
         $em = $this->field->getInstanceEditor()->getEntityManagerInterface();
-        $repository = $em->getRepository($class);
+        $repository = $em->getRepository($this->getEntityClass());
         $value = $this->getValue();
         return $repository->getOptionsDataList($value);
     }
@@ -63,7 +61,7 @@ class FieldTypeEntity extends FieldTypeAbstract
     public function getEntityClass(): string
     {
         if (is_null($this->entityClass)) {
-            $this->entityClass = $field_options->data_class ?? get_class($this->field->getEntity());
+            $this->entityClass = $this->getField()->getOptions()->data_class ?? get_class($this->field->getEntity());
         }
         return $this->entityClass;
     }
