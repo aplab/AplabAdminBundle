@@ -20,7 +20,7 @@ class FieldTypeDateTime extends FieldTypeAbstract
         if (!$value) {
             return null;
         }
-        $value = $value->getTimestamp();
+        $value = $value->format('Y-m-d H:i:s');
         return $value;
     }
 }

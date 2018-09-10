@@ -17,7 +17,7 @@
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
-            <script>alert('{{ label }}: {{ message }}');</script>
+            <script>alert('{{ label }}: {{ message|e('js') }}');</script>
         {% endfor %}
     {% endfor %}
 

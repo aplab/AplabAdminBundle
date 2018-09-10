@@ -43,7 +43,7 @@ class ListItem
 
     /**
      * @ORM\OneToMany(targetEntity="\Aplab\AplabAdminBundle\Entity\AdjacencyList\ListItem", mappedBy="parent")
-     * @ORM\OrderBy({"order" = "ASC", "id" = "ASC"})
+     * @ORM\OrderBy({"sortOrder" = "ASC", "id" = "ASC"})
      */
     private $children;
 
@@ -207,32 +207,53 @@ class ListItem
         return $this;
     }
 
-
-
-
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     * @ModuleMetadata\Property(title="Created at", readonly=true,
+     *     cell={@ModuleMetadata\Cell(order=5000, width=156, type="Datetime")},
+     *     widget={@ModuleMetadata\Widget(order=1000000, tab="Additional", type="DateTime")})
      */
     private $createdAt;
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
+     * @ModuleMetadata\Property(title="Last modified", readonly=true,
+     *     cell={@ModuleMetadata\Cell(order=6000, width=156, type="Datetime")},
+     *     widget={@ModuleMetadata\Widget(order=1000000, tab="Additional", type="DateTime")})
      */
     private $updatedAt;
+
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
+
+    /**
+     * @param \DateTimeInterface|null $createdAt
+     * @return ListItem
+     */
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @param \DateTimeInterface|null $updatedAt
+     * @return ListItem
+     */
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;

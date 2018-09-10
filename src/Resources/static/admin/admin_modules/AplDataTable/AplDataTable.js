@@ -406,6 +406,43 @@ function AplDataTable(container) {
         f.submit();
     };
 
+    this.duplicate = function () {
+        AplabAdmin.collapseActionMenu();
+        var items;
+        items = this.getCheckedRows();
+        if (!items.length) {
+            items = this.getCurrentRow();
+        }
+        if (!items.length) {
+            alert('Nothing selected');
+            return;
+        }
+        if (!confirm('Confifm duplicate items: ' + items.length)) {
+            return;
+        }
+        var post_data = {};
+        for (var i = 0; i < items.length; i++) {
+            var pk = items.items[i].data.pk;
+            for (var p in pk) {
+                if (undefined === post_data[p]) {
+                    post_data[p] = [];
+                }
+                post_data[p].push(pk[p]);
+            }
+        }
+        var f = $('<form method="post">');
+        f.prop({
+            action: (base_url + '/duplicate').replace(/\/{2,}/, '/')
+        });
+        for (var p in post_data) {
+            var input = $('<input type="hidden" name="' + p + '">')
+                .val(JSON.stringify(post_data[p]));
+            f.append(input);
+        }
+        container.append(f);
+        f.submit();
+    };
+
     /**
      * Touch device detector
      *

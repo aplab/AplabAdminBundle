@@ -152,15 +152,11 @@ class InstanceEditor
      */
     public function handleRequest(Request $request)
     {
-        $data = $request->request;
-        $data = $request->get('apl-instance-editor', []);
+        $data = $request->request->get('apl-instance-editor', []);
         if (empty($data)) {
             return;
         }
         $entity = $this->getEntity();
-
-
-        $properties = [];
         foreach ($this->getWidget() as $widget) {
             $property_name = $widget->getPropertyName();
             if (!array_key_exists($property_name, $data)) {

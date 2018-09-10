@@ -41,6 +41,7 @@ class TreeController extends ReferenceAdminController
         $toolbar = $this->adminControllerHelper->getToolbar();
         $toolbar->addUrl('New item', $helper->getModulePath('add'), 'fas fa-plus text-success');
         $toolbar->addHandler('Delete selected', 'AplDataTable.getInstance().del();', 'fas fa-times text-danger');
+        $toolbar->addHandler('Clone selected', 'AplDataTable.getInstance().duplicate();', 'far fa-clone text-warning');
 
         $data_table = $data_table_representation->getDataTable($this->getEntityClassName(), DataTableTreeMod::class);
         $pager = $data_table->getPager();
