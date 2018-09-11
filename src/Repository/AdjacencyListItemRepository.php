@@ -164,7 +164,7 @@ class AdjacencyListItemRepository extends ServiceEntityRepository
         array_walk($tmp, function ($v, $k) use (& $tmp, $selected) {
             $tmp[$k] = array(
                 'value' => $k,
-                'text' => str_repeat('. ', $v->level) . $v->getName(),
+                'text' => str_repeat(html_entity_decode('&bull;') . ' ', $v->level) . '[' . $k . '] ' . $v->getName(),
                 'selected' => $v === $selected
             );
         });
