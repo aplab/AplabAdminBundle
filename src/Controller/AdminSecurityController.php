@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminSecurityController extends Controller
 {
     /**
-     * @Route("/login", name="security_login")
+     * @Route("/admin/login", name="security_login")
      */
     public function loginAction()
     {
@@ -39,7 +39,7 @@ class AdminSecurityController extends Controller
     }
 
     /**
-     * @Route("/logout", name="security_logout")
+     * @Route("/admin/logout", name="security_logout")
      * @throws \Exception
      */
     public function logoutAction()
