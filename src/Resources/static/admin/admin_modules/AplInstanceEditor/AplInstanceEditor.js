@@ -347,17 +347,35 @@ function AplInstanceEditor(container) {
         $('textarea' + prefix + 'ckeditor').ckeditor(editor_config());
     }
 
-    // /**
-    //  * Datetimepicker configuration
-    //  */
+    /**
+     * Datetimepicker configuration
+     */
+    $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+        icons: {
+            time: 'far fa-clock',
+            date: 'far fa-calendar',
+            up: 'fas fa-arrow-up',
+            down: 'fas fa-arrow-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'far fa-calendar-check',
+            clear: 'fas fa-trash',
+            close: 'fas fa-times'
+        }
+    });
     // $(prefix + 'datetime').datetimepicker({
-    //     format: 'YYYY-MM-DD HH:mm:ss',
-    //     ignoreReadonly: true,
-    //     allowInputToggle: true,
-    //     focusOnShow: true,
-    //     showClose: true,
-    //     showClear: true
-    // });
+    $('.aplab-admin-field-type-datetimepicker').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm:ss',
+        ignoreReadonly: true,
+        allowInputToggle: true,
+        focusOnShow: true,
+        buttons: {
+            showToday: true,
+            showClear: true,
+            showClose: true
+        }
+        // inline: true,
+    });console.log('test');
 
     /**
      * workaround function to clear autocomplete password

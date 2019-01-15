@@ -69,7 +69,8 @@ gulp.task('css-dev', function () {
     return gulp.src([
         './node_modules/opensans-webkit/src/css/open-sans.css',
         './node_modules/bootstrap/dist/css/bootstrap.css',
-        './node_modules/@fortawesome/fontawesome-free/css/all.css'
+        './node_modules/@fortawesome/fontawesome-free/css/all.css',
+        './node_modules/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.css'
     ]/**, {since: gulp.lastRun('css')}*/)
         .pipe(plumber())
         .pipe(sourcemaps.init())
@@ -97,6 +98,8 @@ gulp.task('scripts-dev', function () {
             './node_modules/bootstrap/dist/js/bootstrap.js',
             './node_modules/screenfull/dist/screenfull.js',
             './node_modules/clipboard/dist/clipboard.min.js',
+            './node_modules/moment/min/moment.min.js',
+            './node_modules/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.js',
             './admin_modules/AplAdminMenu/AplAdminMenu.js',
             './admin_modules/AplDataTable/AplDataTable.js',
             './admin_modules/AplInstanceEditor/AplInstanceEditor.js',
