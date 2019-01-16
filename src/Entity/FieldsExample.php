@@ -13,23 +13,23 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class NamedTimestampable
+ * Class FieldsExample
  * @package Aplab\AplabAdminBundle\Entity
- * @ORM\Entity(repositoryClass="Aplab\AplabAdminBundle\Repository\NamedTimestampableRepository")
- * @ORM\Table(name="named_timestampable")
+ * @ORM\Entity(repositoryClass="Aplab\AplabAdminBundle\Repository\FieldsExampleRepository")
+ * @ORM\Table(name="fields_example")
  * @ModuleMetadata\Module(
- *     title="Named timestampable",
- *     description="Named timestampable entity",
+ *     title="Fields example",
+ *     description="Fields example entity",
  *     tabOrder={
  *          "General": 1000,
  *          "Text": 2000,
  *          "Additional": 10000418
  *     })
  */
-class NamedTimestampable
+class FieldsExample
 {
     /**
-     * NamedTimestampable constructor.
+     * FieldsExample constructor.
      * @throws \Exception
      */
     public function __construct()
@@ -55,6 +55,32 @@ class NamedTimestampable
      *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Text")})
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string")
+     * @ModuleMetadata\Property(title="Textarea",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Textarea")})
+     */
+    private $textarea;
+
+    /**
+     * @return mixed
+     */
+    public function getTextarea()
+    {
+        return $this->textarea;
+    }
+
+    /**
+     * @param mixed $textarea
+     * @return FieldsExample
+     */
+    public function setTextarea($textarea)
+    {
+        $this->textarea = $textarea;
+        return $this;
+    }
 
     /**
      * @ORM\Column(type="text")
@@ -102,7 +128,7 @@ class NamedTimestampable
 
     /**
      * @param mixed $id
-     * @return NamedTimestampable
+     * @return FieldsExample
      */
     public function setId($id)
     {
@@ -120,7 +146,7 @@ class NamedTimestampable
 
     /**
      * @param mixed $name
-     * @return NamedTimestampable
+     * @return FieldsExample
      */
     public function setName($name)
     {
@@ -154,7 +180,7 @@ class NamedTimestampable
 
     /**
      * @param mixed $text
-     * @return NamedTimestampable
+     * @return FieldsExample
      */
     public function setText($text)
     {

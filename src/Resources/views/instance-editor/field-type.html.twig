@@ -30,6 +30,45 @@
         </div>
     </div>
 {% endblock %}
+{% block textarea %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
+        <div class="{{ prefix }}-value">
+            {#<input type="text" class="form-control" placeholder=""#}
+                   {#autocorrect="off" autocapitalize="none" autocomplete="off"#}
+                   {#name="{{ form_name }}[{{ field.propertyName }}]"#}
+                   {#id="{{ prefix }}-element-{{ field.type.uniqueId }}"#}
+                   {#value="{{ field.type.value }}">#}
+
+            <textarea class="form-control" rows="3"
+                      name="{{ form_name }}[{{ field.propertyName }}]"
+                      id="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.type.value }}</textarea>
+        </div>
+    </div>
+{% endblock %}
+{% block datetimepicker %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
+        <div class="{{ prefix }}-value">
+            <div class="input-group date aplab-admin-field-type-datetimepicker"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}-wrapper"
+                 data-target-input="nearest">
+                <input type="text" placeholder=""
+                       autocorrect="off" autocapitalize="none" autocomplete="off"
+                       class="form-control datetimepicker-input"
+                       data-target="#{{ prefix }}-element-{{ field.type.uniqueId }}-wrapper"
+                       name="{{ form_name }}[{{ field.propertyName }}]"
+                       id="{{ prefix }}-element-{{ field.type.uniqueId }}"
+                       value="{{ field.type.value }}">
+                <div class="input-group-append"
+                     data-target="#{{ prefix }}-element-{{ field.type.uniqueId }}-wrapper"
+                     data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 {% block ckeditor %}
     <textarea class="{{ prefix }}-ckeditor"
               name="{{ form_name }}[{{ field.propertyName }}]"

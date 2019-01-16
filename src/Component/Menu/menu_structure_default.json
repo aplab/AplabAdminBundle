@@ -18,6 +18,14 @@
                 "route": "admin_named_timestampable_list"
             },
             {
+                "id": "fields-example",
+                "name": "Fields example",
+                "icon": "fas fa-flask",
+                "disabled": false,
+                "target": "_self",
+                "route": "admin_fields_example_list"
+            },
+            {
                 "id": "system-user",
                 "name": "System user",
                 "icon": "fas fa-users-cog",
