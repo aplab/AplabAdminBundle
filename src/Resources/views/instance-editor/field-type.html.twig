@@ -34,12 +34,6 @@
     <div class="{{ prefix }}-element">
         <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
         <div class="{{ prefix }}-value">
-            {#<input type="text" class="form-control" placeholder=""#}
-                   {#autocorrect="off" autocapitalize="none" autocomplete="off"#}
-                   {#name="{{ form_name }}[{{ field.propertyName }}]"#}
-                   {#id="{{ prefix }}-element-{{ field.type.uniqueId }}"#}
-                   {#value="{{ field.type.value }}">#}
-
             <textarea class="form-control" rows="3"
                       name="{{ form_name }}[{{ field.propertyName }}]"
                       id="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.type.value }}</textarea>
@@ -90,4 +84,41 @@
     </div>
 {% endblock %}
 {% block example %}
+{% endblock %}
+{% block image %}
+    {#<div class="{{ prefix }}-element">#}
+        {#<label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>#}
+        {#<div class="{{ prefix }}-value">#}
+            {#<textarea class="form-control" rows="3"#}
+                      {#name="{{ form_name }}[{{ field.propertyName }}]"#}
+                      {#id="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.type.value }}</textarea>#}
+        {#</div>#}
+    {#</div>#}
+
+    <div class="{{ prefix }}-element {{ prefix }}-element-image">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
+        <div class="{{ prefix }}-value">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary btn-light" type="button">
+                        <span class="fas fa-upload"></span>
+                    </button>
+                </div>
+                <input type="text" class="form-control" placeholder=""
+                       autocorrect="off" autocapitalize="none" autocomplete="off"
+                       name="{{ form_name }}[{{ field.propertyName }}]"
+                       id="{{ prefix }}-element-{{ field.type.uniqueId }}"
+                       value="{{ field.type.value }}">
+                <span class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-light" type="button">
+                        <span class="fas fa-star"></span>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-light" type="button">
+                        <span class="fas fa-history"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="img-thumbnail"><div class="preview"></div></div>
+        </div>
+    </div>
 {% endblock %}

@@ -65,6 +65,58 @@ class FieldsExample
     private $textarea;
 
     /**
+     * @ORM\Column(type="string")
+     * @ModuleMetadata\Property(title="Image",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=48, type="Image")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Image")})
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="string")
+     * @ModuleMetadata\Property(title="Image 2",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=48, type="Image")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Image")})
+     */
+    private $image2;
+
+    /**
+     * @return mixed
+     */
+    public function getImage2()
+    {
+        return $this->image2;
+    }
+
+    /**
+     * @param mixed $image2
+     * @return FieldsExample
+     */
+    public function setImage2($image2)
+    {
+        $this->image2 = $image2;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     * @return FieldsExample
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    /**
      * @return mixed
      */
     public function getTextarea()

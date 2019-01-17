@@ -48,6 +48,9 @@
         {{ cell_item.type.getValue(item) }}
     </div>
 {% endblock %}
+{% block image %}
+    <div class="w{{ cell_item.width }} i" style="background-image: url('{{ cell_item.type.getValue(item) }}')">&nbsp;</div>
+{% endblock %}
 {% block rtext %}
     <div class="w{{ cell_item.width }} text-right">
         {{ cell_item.type.getValue(item) }}
