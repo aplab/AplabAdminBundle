@@ -132,9 +132,15 @@ $border-color: #ddd;
             top: 0;
             right: 0;
             height: $header-height;
-            padding: 8px;
-            text-align: center;
+            padding: 8px 0;
+            text-align: left;
             background: $panel-color;
+            overflow: hidden;
+            .custom-checkbox {
+                label {
+                    left: 10px;
+                }
+            }
         }
         &-body {
             position: absolute;
@@ -152,12 +158,17 @@ $border-color: #ddd;
                     border: 1px solid $border-color;
                     border-top: 0;
                     padding: 8px 0;
-                    text-align: center;
+                    text-align: left;
                     overflow: hidden;
-                    white-space: nowrap;
                     -ms-text-overflow: ellipsis;
-                    text-overflow: ellipsis;
+                    //text-overflow: ellipsis;
                     background: $panel-color;
+                    position: relative;
+                    .custom-checkbox {
+                        label {
+                            left: 10px;
+                        }
+                    }
                 }
             }
         }
@@ -227,37 +238,6 @@ $border-color: #ddd;
         }
         > div.apl-data-table-active:hover {
             background-color: rgba(0, 0, 0, 0.125);
-        }
-        input[type=checkbox] {
-            display: none;
-        }
-        input[type=checkbox] + label {
-            display: block;
-            margin: 0 auto;
-            margin-top: 2px;
-            height: 16px;
-            width: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        }
-        input[type=checkbox]:checked + label:before {
-            display: block;
-            height: 16px;
-            width: 16px;
-            content: "\e013";
-            font-family: 'Glyphicons Halflings';
-            font-style: normal;
-            font-weight: 400;
-            line-height: 15px;
-            text-align: left;
-            font-size: 12px;
-        }
-        input[type=checkbox]:hover + label {
-            border-color: #66afe9;
-            outline: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
         }
     }
     // footer

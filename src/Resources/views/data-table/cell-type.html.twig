@@ -65,3 +65,18 @@
 {% endblock %}
 {% block example %}
 {% endblock %}
+{% block active %}
+    <div class="w{{ cell_item.width }}">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox"
+                    {{ cell_item.type.getValue(item) ? ' checked="checked"' }}
+                   class="custom-control-input"
+                   data-class="{{ cell_item.type.getClass(item) }}"
+                   name="{{ cell_item.propertyName }}"
+                   id="c{{ cell_item.type.uniqueId }}{% if ___global_cell_counter is defined %}-{{ ___global_cell_counter }}{% endif %}">
+            <label class="custom-control-label"
+                   for="c{{ cell_item.type.uniqueId }}{% if ___global_cell_counter is defined %}-{{ ___global_cell_counter }}{% endif %}"></label>
+        </div>
+
+    </div>
+{% endblock %}

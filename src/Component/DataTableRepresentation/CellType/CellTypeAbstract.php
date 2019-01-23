@@ -70,4 +70,13 @@ abstract class CellTypeAbstract implements CellTypeInterface
         }
         throw new \LogicException('Unable to access property ' . get_class($entity) . '::' . $property_name);
     }
+
+    /**
+     * @param $entity
+     * @return string
+     */
+    public function getClass($entity)
+    {
+        return get_class($entity);
+    }
 }

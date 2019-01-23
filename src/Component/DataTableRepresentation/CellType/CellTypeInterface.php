@@ -12,6 +12,10 @@ namespace Aplab\AplabAdminBundle\Component\DataTableRepresentation\CellType;
 interface CellTypeInterface
 {
     public function getType();
+
     public function getValue($entity);
+
     public function getUniqueId();
+
+    public function getClass($entity);
 }

@@ -57,6 +57,32 @@ class FieldsExample
     private $name;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @ModuleMetadata\Property(title="Flag",
+     *     cell={@ModuleMetadata\Cell(order=2000, width=48, type="Active")},
+     *     widget={@ModuleMetadata\Widget(order=2000, tab="General", type="Flag")})
+     */
+    private $flag;
+
+    /**
+     * @return mixed
+     */
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+
+    /**
+     * @param mixed $flag
+     * @return FieldsExample
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = !!$flag;
+        return $this;
+    }
+
+    /**
      * @ORM\Column(type="string")
      * @ModuleMetadata\Property(title="Textarea",
      *     cell={@ModuleMetadata\Cell(order=2000, width=320, type="Label")},
