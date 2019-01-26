@@ -3,10 +3,18 @@
         <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">
             {{ field.title }}
         </label>
-        <div class="{{ prefix }}-value {{ prefix }}-value-label"
-             id="{{ prefix }}-element-{{ field.type.uniqueId }}">
-            {{ field.type.value }}
-        </div>
+        {% set tmp = attribute(item, field.propertyName) %}
+        {% if tmp is null %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                <span class="text-muted">undefined</span>
+            </div>
+        {% else %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                {{ field.type.value }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block label %}
@@ -16,6 +24,23 @@
              id="{{ prefix }}-element-{{ field.type.uniqueId }}">
             {{ field.type.value }}
         </div>
+    </div>
+{% endblock %}
+{% block id %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
+        {% set tmp = attribute(item, field.propertyName) %}
+        {% if tmp is null %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                <span class="text-muted">undefined</span>
+            </div>
+        {% else %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                {{ field.type.value }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block text %}
