@@ -3,10 +3,18 @@
         <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">
             {{ field.title }}
         </label>
-        <div class="{{ prefix }}-value {{ prefix }}-value-label"
-             id="{{ prefix }}-element-{{ field.type.uniqueId }}">
-            {{ field.type.value }}
-        </div>
+        {% set tmp = attribute(item, field.propertyName) %}
+        {% if tmp is null %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                <span class="text-muted">undefined</span>
+            </div>
+        {% else %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                {{ field.type.value }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block label %}
@@ -16,6 +24,23 @@
              id="{{ prefix }}-element-{{ field.type.uniqueId }}">
             {{ field.type.value }}
         </div>
+    </div>
+{% endblock %}
+{% block id %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
+        {% set tmp = attribute(item, field.propertyName) %}
+        {% if tmp is null %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                <span class="text-muted">undefined</span>
+            </div>
+        {% else %}
+            <div class="{{ prefix }}-value {{ prefix }}-value-label"
+                 id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                {{ field.type.value }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 {% block text %}
@@ -86,15 +111,6 @@
 {% block example %}
 {% endblock %}
 {% block image %}
-    {#<div class="{{ prefix }}-element">#}
-        {#<label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>#}
-        {#<div class="{{ prefix }}-value">#}
-            {#<textarea class="form-control" rows="3"#}
-                      {#name="{{ form_name }}[{{ field.propertyName }}]"#}
-                      {#id="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.type.value }}</textarea>#}
-        {#</div>#}
-    {#</div>#}
-
     <div class="{{ prefix }}-element {{ prefix }}-element-image">
         <label class="{{ prefix }}-label" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
         <div class="{{ prefix }}-value">
@@ -119,6 +135,27 @@
                 </span>
             </div>
             <div class="img-thumbnail"><div class="preview"></div></div>
+        </div>
+    </div>
+{% endblock %}
+{% block flag %}
+    <div class="{{ prefix }}-element">
+        <label class="{{ prefix }}-label-checkbox" for="{{ prefix }}-element-{{ field.type.uniqueId }}">{{ field.title }}</label>
+        <div class="{{ prefix }}-value-checkbox">
+            <input type="hidden" name="{{ form_name }}[{{ field.propertyName }}]" value="0">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" value="1"
+                        {{ field.type.value ? 'checked="checked"' }}
+                       name="{{ form_name }}[{{ field.propertyName }}]"
+                       id="{{ prefix }}-element-{{ field.type.uniqueId }}">
+                <label class="custom-control-label"
+                       for="{{ prefix }}-element-{{ field.type.uniqueId }}"></label>
+            </div>
+            {#<input type="checkbox"#}
+                   {#{{ field.type.value ?: 'checked="checked"' }}#}
+                   {#name="{{ form_name }}[{{ field.propertyName }}]"#}
+                   {#id="{{ prefix }}-element-{{ field.type.uniqueId }}"#}
+                   {#value="1"><label for="{{ prefix }}-element-{{ field.type.uniqueId }}"></label>#}
         </div>
     </div>
 {% endblock %}

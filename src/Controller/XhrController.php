@@ -13,8 +13,10 @@ use Aplab\AplabAdminBundle\Component\FileStorage\LocalStorage;
 use Aplab\AplabAdminBundle\Component\Uploader\FileUploader;
 use Aplab\AplabAdminBundle\Component\Uploader\ImageUploader;
 use Aplab\AplabAdminBundle\Entity\HistoryUploadImage;
+use Respect\Validation\Validator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -149,6 +151,45 @@ class XhrController extends Controller
         }
         $entity_manager->remove($item);
         $entity_manager->flush();
+        return new JsonResponse([
+            'status' => 'ok'
+        ]);
+    }
+
+    /**
+     * @Route("/aplDataTable/editProperty/",
+     *     name="apl_data_table_edit_property", methods="POST")
+     * @return JsonResponse
+     */
+    public function editProperty(Request $request)
+    {
+        try {
+            $post = $request->request;
+            $class = $post->get('class');
+            if (!class_exists($class)) {
+                throw new \Exception('Unknown entity type');
+            }
+            $pk = $post->get('pk');
+            $id = $pk['id'];
+            Validator::digit()->check($id);
+            $name = $post->get('name');
+            $value = $post->get('value');
+            $entity_manager = $this->getDoctrine()->getManager();
+            $repository = $entity_manager->getRepository($class);
+            $item = $repository->find($id);
+            if (!($item instanceof $class)) {
+                throw new \Exception('Object not found');
+            }
+            $setter = 'set' . ucfirst($name);
+            $item->$setter($value);
+            $entity_manager->persist($item);
+            $entity_manager->flush();
+        } catch (\Throwable $exception) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => $exception->getMessage()
+            ]);
+        }
         return new JsonResponse([
             'status' => 'ok'
         ]);

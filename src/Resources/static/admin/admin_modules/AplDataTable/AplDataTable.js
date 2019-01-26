@@ -70,13 +70,18 @@ function AplDataTable(container) {
     });
 
     data.children('div').each(function (i, o) {
+        var checkbox_code = '<div class="custom-control custom-checkbox">\n' +
+            '  <input type="checkbox" class="custom-control-input" id="%%PLACEHOLDER%%">\n' +
+            '  <label class="custom-control-label" for="%%PLACEHOLDER%%"></label>\n' +
+            '</div>'
         var div = $('<div>');
         var o = $(o);
         div.css({
             height: o.height()
         });
         sidebar_body_col.append(div);
-        div.append('<input type="checkbox">');
+        // div.append('<input type="checkbox">');
+        div.append($(checkbox_code.replace(/%%PLACEHOLDER%%/g, 'apl-data-table-sidebar-header-check-' + i)));
     });
 
     /**
@@ -155,7 +160,7 @@ function AplDataTable(container) {
         hcalc();
         vcalc();
         setTimeout(function () {
-            var sidebar_body_col_divs = sidebar_body_col.find('div');
+            var sidebar_body_col_divs = sidebar_body_col.children('div');
             data.children('div').each(function (i, o) {
                 sidebar_body_col_divs.eq(i).css({
                     height: $(o).height()
@@ -470,7 +475,7 @@ function AplDataTable(container) {
             value: value,
             class: data_class
         };
-        var url = '/ajax/' + '/editProperty/';
+        var url = '/admin/xhr/' + '/aplDataTable/editProperty/';
         url = url.replace(/\/{2,}/, '/');
         $.post(
             url,
@@ -479,6 +484,15 @@ function AplDataTable(container) {
                 try {
                     if ('ok' == data.status) {
                         o.prop('checked', value);
+                        return;
+                    }
+                } catch (e) {
+                    alert('error: ' + e.message);
+                }
+                try {
+                    if ('error' == data.status) {
+                        alert('error: ' + data.message);
+                        return;
                     }
                 } catch (e) {
                     alert('error: ' + e.message);
