@@ -96,13 +96,6 @@ class FileUploader
 
         $filename = pathinfo($result['pathname'], PATHINFO_BASENAME);
 
-//        $db = Db::getInstance();
-//        $sql = 'DELETE FROM `' . File::config()->table->name . '`
-//                WHERE `filename` =  ' . $db->qt($filename);
-//        $db->query($sql);
-
-
-
         $o_file = new File();
         $o_file->setName($name);
         $o_file->setFilename($filename);

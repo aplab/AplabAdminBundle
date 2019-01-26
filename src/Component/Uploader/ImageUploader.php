@@ -53,24 +53,33 @@ class ImageUploader
      * @return string
      * @throws Exception
      */
-    public function receive()
+    public function receive(?string $local_path = null)
     {
-        if (!isset($_FILES[static::FILES_VAR_NAME])) {
-            throw new Exception('the variable is not passed');
-        }
-        $file = $_FILES[static::FILES_VAR_NAME];
-        $name = $file['name'];
-        $type = $file['type'];
-        $size = $file['size'];
-        $path = $file['tmp_name'];
-        $error = $file['error'];
+        if (is_null($local_path)) {
+            if (!isset($_FILES[static::FILES_VAR_NAME])) {
+                throw new Exception('the variable is not passed');
+            }
+            $file = $_FILES[static::FILES_VAR_NAME];
+            $name = $file['name'];
+            $type = $file['type'];
+            $size = $file['size'];
+            $path = $file['tmp_name'];
+            $error = $file['error'];
 
-        if ($error) {
-            throw new Exception('Upload error: ' . Msg::msg($error));
-        }
+            if ($error) {
+                throw new Exception('Upload error: ' . Msg::msg($error));
+            }
 
-        if (!is_uploaded_file($path)) {
-            throw new Exception('File was not uploaded');
+            if (!is_uploaded_file($path)) {
+                throw new Exception('File was not uploaded');
+            }
+        } else {
+            $fileinfo = new \SplFileInfo($local_path);
+            $name = $fileinfo->getFilename();
+            $type = $fileinfo->getMTime();
+            $size = $fileinfo->getSize();
+            $path = $fileinfo->getRealPath();
+            $error = 0;
         }
 
         $extension = strtolower(substr(strrchr($name, "."), 1));
