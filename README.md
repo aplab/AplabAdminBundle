@@ -1,5 +1,5 @@
 # AplabAdminBundle
-Admin panel symfony-bundle.
+Admin panel symfony-bundle
 ## Installation
 
 Package is available on [Packagist](https://packagist.org/packages/aplab/aplab-admin-bundle),
