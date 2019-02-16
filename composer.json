@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^7.2.0",
+        "php": "^7.3.0",
         "symfony/framework-bundle": "^4.1",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/yaml": "^4.1",
