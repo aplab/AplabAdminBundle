@@ -395,7 +395,7 @@ function AplInstanceEditor(container) {
         btn_upload.click(function () {
             var uploader = AplAdminFileUploader.getInstance();
             uploader.setTitle('Upload images only');
-            uploader.setUrl('/ajax/uploadImage/');
+            uploader.setUrl('/admin/xhr/uploadImage/');
             uploader.done = function () {
                 AplAdminFileUploader.getInstance().purgeWindow();
                 AplAdminImageHistory.getInstance().showWindow();
